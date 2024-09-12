@@ -180,16 +180,27 @@ html, body {
   
 
   
-
-  /* Recipe Cart Background - Full screen background */
-.recipe-cart-background {
-  width: 100vw;
-  height: 100vh;
-   /*background-color: green; You can change the color or use a background image */
-   height: 100vh;
+  .recipe-cart-background {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/images/recipe4.jpg'); /* Path to your background image */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image in the background */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
     display: flex;
-    background-color: #67cf6c;
-  box-sizing: border-box;
+    background-color: #67cf6c; /* Fallback color if the image doesn't load */
+    box-sizing: border-box;
+    overflow-y: auto;
+  }s
+
+
+.cart-search-bar {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap */
+  justify-content: space-between; /* Spread items across the row */
+  align-items: flex-start; /* Align items to the top of the flex container */
+  gap: 20px; /* Add space between each card */
+  margin: 20px;
 }
 
 /* Search form container (within cart-search-bar) */
@@ -210,6 +221,7 @@ html, body {
   width: 100%; /* Set initial width to 50% of the container */
   max-width: 700px; /* Set a maximum width */
 }
+
 
 /* Search button styles */
 .cart-search-bar .searchButton {
@@ -250,3 +262,18 @@ html, body {
     width: 100px; /* Ensure button is a reasonable size */
   }
 }
+
+
+  .all-carts {
+    display: flex;
+    flex-wrap: wrap; /* Allows the cards to wrap to the next line if necessary */
+    justify-content: space-between; /* Spreads the cards evenly across the row */
+    gap: 20px; /* Adds space between cards */
+    margin-top: 20px; /* Pushes the cards down a bit from the search bar */
+  }
+  
+  /* Styling for each card */
+  .card {
+    margin: 10px; /* Adds margin around each card */
+    flex: 1 1 300px; /* Ensures cards take a minimum width of 300px */
+  }
