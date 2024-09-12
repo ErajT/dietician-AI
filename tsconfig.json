@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/components/searchbar.js", "app/recipegenerator/page.js"  ],
   "exclude": [
     "node_modules"
   ]
