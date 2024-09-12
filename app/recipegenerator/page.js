@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import SearchBar from '../components/searchbar';
 import '../styling/recipegenerator.css'; 
-import CarouselRecipe from '../components/carousal'
 
 
 export default function RecipeGeneratorPage() {

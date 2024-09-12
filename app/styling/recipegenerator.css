@@ -178,3 +178,75 @@ html, body {
     z-index: 1; /* Ensure overlay is above the background */
   }
   
+
+  
+
+  /* Recipe Cart Background - Full screen background */
+.recipe-cart-background {
+  width: 100vw;
+  height: 100vh;
+   /*background-color: green; You can change the color or use a background image */
+   height: 100vh;
+    display: flex;
+    background-color: #67cf6c;
+  box-sizing: border-box;
+}
+
+/* Search form container (within cart-search-bar) */
+.cart-search-bar .searchForm {
+  display: flex;
+  justify-content: flex-start; /* Move search bar to the left */
+  width: 200%; /* Ensure it takes the full width */
+  max-width: 200vw; /* Responsive full width */
+  margin-left: 34vw;
+}
+
+/* Input box styles with larger width */
+.cart-search-bar .searchInput {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  width: 100%; /* Set initial width to 50% of the container */
+  max-width: 700px; /* Set a maximum width */
+}
+
+/* Search button styles */
+.cart-search-bar .searchButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #154b18;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+/* Hover effect for button */
+.cart-search-bar .searchButton:hover {
+  background-color: #45a049;
+}
+
+/* Media queries to make the search bar responsive */
+@media (max-width: 1200px) {
+  .cart-search-bar .searchInput {
+    width: 60%; /* Make the width smaller on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .cart-search-bar .searchInput {
+    width: 70%; /* Even smaller on small screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .cart-search-bar .searchInput {
+    width: 80%; /* Full width on very small screens */
+  }
+
+  .cart-search-bar .searchButton {
+    width: 100px; /* Ensure button is a reasonable size */
+  }
+}
