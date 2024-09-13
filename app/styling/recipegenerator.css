@@ -33,26 +33,8 @@
     background-color: #45a049;
 }
 /* Full-screen container */
-.recipe-container {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;  /* Ensure there are no scrollbars */
-    background-color: rgba(21, 21, 21, 0.7); /* Optional: Add a background overlay if needed */
-  }
-  
-  
 
-/* Ensure the carousel covers the full screen */
-.carousel,
-.carousel-item,
-.carousel-item img {
-  width: 100vw;
-  height: 100vh;
-}
+  
 
 /* Make sure the images cover the entire background area without stretching */
 .full-screen-image {
@@ -60,14 +42,6 @@
   object-position: center;
 }
 
-/* Optional: Customize caption positioning and styles */
-.carousel-caption {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
-  color: #fff; /* Ensure the text is readable on any image */
-}
 
 /* Set the body and html to have no margin and padding for a true full-screen effect */
 html, body {
@@ -79,37 +53,7 @@ html, body {
 
 
 /* Ensure the carousel covers the full screen */
-.carousel-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;  /* Ensure it's in the background */
-  }
-  
-  /* Carousel images are full-screen background images */
-  .full-screen-image {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    object-position: center;
-  }
-  
-  /* Positioning and styling the caption */
-  .carousel-caption {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: #fff;  /* Make sure text is visible against background */
-     /* background-color: rgba(0, 0, 0, 0.5); Optional: Add a semi-transparent background to make text more readable */
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
-  }
-  
+
   html, body {
     margin: 0;
     padding: 0;
@@ -154,7 +98,8 @@ html, body {
 .recipe-background {
     width: 100vw;
     height: 100vh;
-    background-image: url('/images/recipe2.jpg'); /* Path to your image */
+    background-color: #45a049;
+    /* background-image: url('/images/recipe2.jpg'); */
     background-size: cover; /* Ensures the image covers the entire background */
     background-position: center; /* Centers the image */
     position: relative; /* Relative positioning for the overlay */
