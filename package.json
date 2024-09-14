@@ -9,24 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
     "aos": "^2.3.4",
->>>>>>> 044c951fb96b3fd446952724bb739769d221fdb9
     "next": "14.2.9",
     "react": "^18",
     "react-dom": "^18",
     "react-slick": "^0.30.2",
-<<<<<<< HEAD
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@types/node": "22.5.4",
-    "@types/react": "18.3.5",
     "typescript": "5.6.2"
-=======
-    "slick-carousel": "^1.8.1",
-    "styled-components": "^6.1.13"
->>>>>>> 044c951fb96b3fd446952724bb739769d221fdb9
   }
 }

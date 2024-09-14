@@ -216,9 +216,46 @@ html, body {
     gap: 20px; /* Adds space between cards */
     margin-top: 20px; /* Pushes the cards down a bit from the search bar */
   }
-  
-  /* Styling for each card */
-  .card {
-    margin: 10px; /* Adds margin around each card */
-    flex: 1 1 300px; /* Ensures cards take a minimum width of 300px */
+ 
+
+
+
+  .card-container {
+    position: relative;
+    overflow: hidden;
+    margin-top: 50%;
   }
+  
+  .card-image {
+    transition: all 0.3s ease;
+  }
+  
+  .card-container:hover .card-image {
+    filter: blur(5px);
+  }
+  
+  .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .card-container:hover .card-overlay {
+    opacity: 1;
+  }
+  
+  .card-title {
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
