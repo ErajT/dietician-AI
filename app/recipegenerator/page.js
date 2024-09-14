@@ -2,15 +2,22 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
 import SearchBar from '../components/searchbar';
-import CardExample from '../components/placeholder'; // Assuming you have a card component.
+import CardExample from '../components/placeholder'; 
 import '../styling/recipegenerator.css';
 
 export default function RecipeGeneratorPage() {
   const [searchClicked, setSearchClicked] = useState(false);
-  const [responseMessage, setResponseMessage] = useState('');
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false); 
+  const [recipes, setRecipes] = useState([]);
 
   const handleSearch = (query) => {
     console.log('Search Query:', query);
+
+    setSearchClicked(true);
+    setError(false);
+    setLoading(true);
+
     const postData = async () => {
       const data = {
         'dish': query,
@@ -20,49 +27,65 @@ export default function RecipeGeneratorPage() {
         const response = await fetch('http://localhost:3000/api/recipegenerator', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',  
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify(data), 
+          body: JSON.stringify(data),
         });
 
-        const jsonData = await response.json();  
-        setResponseMessage(jsonData.message);
-        console.log('Response Message:', jsonData.message);    
+        const jsonData = await response.json();
+        
+        // Save the received recipes in state to render dynamically
+        setRecipes(jsonData.message || []);   
+        console.log('Data received from API:', jsonData);   
+        
       } catch (error) {
         console.error('There was an error with the POST request:', error);
-        setResponseMessage('Error: ' + error.message);
+        setError(true);
+      }
+      finally {
+        setLoading(false); 
       }
     };
     
-    setSearchClicked(true);
+    
+    postData(); // Fetch the data after defining the function
   };
 
+
   return (
-    <div className="recipe-background">
-      {searchClicked ? (
-        // When search is clicked, show this section
+    <div>
+      <div className="overlay">
+        <h1 className="recipe-generator">Recipe Generator</h1>
+        <h3 className="recipe-subheading">Quick & Easy Recipes</h3>
+        <SearchBar onSearch={handleSearch} />
+      </div>
+      {searchClicked && (
         <div className="recipe-cart-background">
-          <div className="cart-search-bar">
-            <SearchBar onSearch={handleSearch} />
-            <div className="all-carts">
-              <CardExample />
-  
+          {loading ? (
+            <div>Loading recipes...</div>
+          ) : error ? (
+            <div>Failed to load recipes. Please try again later.</div>
+          ) : (
+            <div className="cart-search-bar">
+              <div className="all-carts row">
+                {recipes.length > 0 ? recipes.map((recipe, index) => (
+                  <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4" key={index}>
+                    <CardExample
+                      name={recipe.name}
+                      image={recipe.image || '/images/default-recipe.jpg'}
+                      cuisineType={recipe.cuisineType}
+                      calories={recipe.calories}
+                      ingredients={recipe.ingredients}
+                    />
+                  </div>
+                )) : (
+                  <div>No recipes found.</div>
+                )}
+              </div>
             </div>
-          </div>
-        </div>
-      ) :
-      
-      
-      (
-        // When search is not clicked, show the original content
-        <div className="overlay">
-          <h1 className="recipe-generator">Recipe Generator</h1>
-          <h3 className="recipe-subheading">Quick & Easy Recipe</h3>
-          <SearchBar onSearch={handleSearch} />
+          )}
         </div>
       )}
     </div>
   );
 }
-
-
