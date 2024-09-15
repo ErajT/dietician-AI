@@ -19,25 +19,21 @@ export default function RecipeGeneratorPage() {
     setLoading(true);
 
     const postData = async () => {
-      const data = { 'dish': query,};
-  
       try {
-        const response = await fetch('http://localhost:3000/api/recipegenerator', {
+        const response = await fetch('/api/recipegenerator', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify({dish: query})
         });
 
         const jsonData = await response.json();
-        if (jsonData.status === 'Error') {
-          setError(true);
-          setRecipes([]);  // 
-          return;
-        }
-    
-        setRecipes(jsonData.message || []);
+        
+        // Save the received recipes in state to render dynamically
+        setRecipes(jsonData.message || []);   
+        console.log('Data received from API:', jsonData);   
+        
       } catch (error) {
         console.error('There was an error with the POST request:', error);
         setError(true);
