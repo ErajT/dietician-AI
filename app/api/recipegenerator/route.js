@@ -8,7 +8,7 @@ async function getRecipeInstructions(recipeDetails) {
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
-                "Authorization": `Bearer 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`,
+                "Authorization": `Bearer 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`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
@@ -28,7 +28,10 @@ async function getRecipeInstructions(recipeDetails) {
         return result;
     } catch (error) {
         console.error("Error fetching recipe instructions:", error.message);
-        return null;
+        return NextResponse.json({
+            status: "Error",
+            message: "Could not generate recipe",
+        });
     }
 }
 
@@ -36,6 +39,8 @@ export async function POST(req, res) {
     try {
         // Parse the JSON body from the request
         const { dish } = await req.json();
+
+        console.log(dish);
 
         if (!dish) {
             return NextResponse.json({
@@ -55,6 +60,7 @@ export async function POST(req, res) {
 
         // Parse the response from the API
         const data = await apiResponse.json();
+        console.log(data);
         const hits = data["hits"];
 
 
