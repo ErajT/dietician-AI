@@ -12,12 +12,11 @@
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 25px; /* Round the corners */
-    width: 60%; /* Adjust the width of the input */
-    max-width: 600px; /* Set a maximum width to prevent it from being too wide */
+    border-radius: 25px; 
+    width: 60%; 
+    max-width: 600px; 
 }
 
-/* Search button styles with separation */
 .searchButton {
     padding: 10px 20px;
     font-size: 16px;
@@ -32,45 +31,15 @@
 .searchButton:hover {
     background-color: #45a049;
 }
-/* Full-screen container */
 
-  
-
-/* Make sure the images cover the entire background area without stretching */
-.full-screen-image {
-  object-fit: cover;
-  object-position: center;
-}
-
-
-/* Set the body and html to have no margin and padding for a true full-screen effect */
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;  /* Prevent any scrollbars */
-}
-
-
-
-/* Ensure the carousel covers the full screen */
-
-  html, body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-  
-
-
-  /* Style for the main heading (h1) */
 .recipe-generator {
-    color: #ffffff; /* White text to stand out against the background */
-    font-size: 4rem; /* Large font size for the main heading */
-    font-weight: bold; /* Make the heading bold */
-    text-align: center; /* Center the heading */
-    margin: 0; /* Remove margin to align it better */
+    color: #ffffff; 
+    font-size: 4rem; 
+    font-weight: bold; 
+    text-align: center; 
+    margin: 0; 
     position: absolute;
-    top: 20%; /* Adjust the positioning of the heading */
+    top: 20%;
     left: 50%;
     transform: translateX(-50%); /* Center the heading horizontally */
     z-index: 2; /* Ensure it stays above the carousel */
@@ -81,7 +50,6 @@ html, body {
       
 }
 
-/* Style for the subheading (h3) */
 .recipe-subheading {
     color: #ffffff; /* White text */
     font-size: 2rem; /* Slightly smaller font for subheading */
@@ -100,27 +68,27 @@ html, body {
     height: 100vh;
     background-color: #45a049;
     /* background-image: url('/images/recipe2.jpg'); */
-    background-size: cover; /* Ensures the image covers the entire background */
-    background-position: center; /* Centers the image */
-    position: relative; /* Relative positioning for the overlay */
+    background-size: cover; 
+    background-position: center; 
+    position: relative; 
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
-  /* Blackish overlay */
+ 
   .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(33, 25, 25, 0.753); /* Adjust the opacity for the blackish effect */
+    background-color: rgba(42, 217, 106, 0.753); /* Adjust the opacity for the blackish effect */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 1; /* Ensure overlay is above the background */
+    z-index: 1;
   }
   
 
@@ -128,12 +96,12 @@ html, body {
   .recipe-cart-background {
     width: 100vw;
     height: 100vh;
-    background-image: url('/images/recipe4.jpg'); /* Path to your background image */
+    /* background-image: url('/images/recipe4.jpg');  */
     background-size: cover; /* Ensures the image covers the entire background */
     background-position: center; /* Centers the image in the background */
     background-repeat: no-repeat; /* Prevents the image from repeating */
     display: flex;
-    background-color: #67cf6c; /* Fallback color if the image doesn't load */
+    background-color: #51c0f4; /* Fallback color if the image doesn't load */
     box-sizing: border-box;
     overflow-y: auto;
   }s
@@ -141,9 +109,9 @@ html, body {
 
 .cart-search-bar {
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap */
-  justify-content: space-between; /* Spread items across the row */
-  align-items: flex-start; /* Align items to the top of the flex container */
+  flex-wrap: wrap;
+  justify-content: space-between; 
+  align-items: flex-start; 
   gap: 20px; /* Add space between each card */
   margin: 20px;
 }
@@ -251,4 +219,19 @@ html, body {
   
   .card-image:hover {
     filter: blur(4px);
+  }
+
+
+  .loading {
+    color: black;
+  
+    font-size: larger;
+  }
+
+
+  .failed-recipe {
+    color: black;
+   
+     font-size: larger;
+
   }

@@ -19,9 +19,7 @@ export default function RecipeGeneratorPage() {
     setLoading(true);
 
     const postData = async () => {
-      const data = {
-        'dish': query,
-      };
+      const data = { 'dish': query,};
   
       try {
         const response = await fetch('http://localhost:3000/api/recipegenerator', {
@@ -33,59 +31,60 @@ export default function RecipeGeneratorPage() {
         });
 
         const jsonData = await response.json();
-        
-        // Save the received recipes in state to render dynamically
-        setRecipes(jsonData.message || []);   
-        console.log('Data received from API:', jsonData);   
-        
+        if (jsonData.status === 'Error') {
+          setError(true);
+          setRecipes([]);  // 
+          return;
+        }
+    
+        setRecipes(jsonData.message || []);
       } catch (error) {
         console.error('There was an error with the POST request:', error);
         setError(true);
-      }
-      finally {
-        setLoading(false); 
+      } finally {
+        setLoading(false);
       }
     };
     
     
-    postData(); // Fetch the data after defining the function
+    postData(); 
   };
 
 
   return (
     <div>
-      <div className="overlay">
+      <div className="recipe-background">
         <h1 className="recipe-generator">Recipe Generator</h1>
         <h3 className="recipe-subheading">Quick & Easy Recipes</h3>
         <SearchBar onSearch={handleSearch} />
       </div>
+
+      
       {searchClicked && (
-        <div className="recipe-cart-background">
-          {loading ? (
-            <div>Loading recipes...</div>
-          ) : error ? (
-            <div>Failed to load recipes. Please try again later.</div>
-          ) : (
-            <div className="cart-search-bar">
-              <div className="all-carts row">
-                {recipes.length > 0 ? recipes.map((recipe, index) => (
-                  <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4" key={index}>
-                    <CardExample
-                      name={recipe.name}
-                      image={recipe.image || '/images/default-recipe.jpg'}
-                      cuisineType={recipe.cuisineType}
-                      calories={recipe.calories}
-                      ingredients={recipe.ingredients}
-                    />
-                  </div>
-                )) : (
-                  <div>No recipes found.</div>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-      )}
+  <div className="recipe-cart-background " >
+    {error ? (
+      <div className='failed-recipe'>Failed to load recipes: {recipes.message || "Please try again later."}</div>
+    ) : loading ? (
+      <div className='loading'>Loading recipes...</div>
+    ) : (
+      <div className="cart-search-bar">
+        {Array.isArray(recipes) && recipes.length > 0 ? recipes.map((recipe, index) => (
+          <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4" key={index}>
+            <CardExample
+              name={recipe.name}
+              image={recipe.image || '/images/default-recipe.jpg'}
+              cuisineType={recipe.cuisineType}
+              calories={recipe.calories}
+              ingredients={recipe.ingredients}
+            />
+          </div>
+        )) : (
+          <div>No recipes found.</div>
+        )}
+      </div>
+    )}
+  </div>
+)}
     </div>
   );
 }
