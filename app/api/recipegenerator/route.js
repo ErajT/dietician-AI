@@ -25,6 +25,9 @@ async function getRecipeInstructions(recipeDetails) {
         }
 
         const result = await response.json();
+        console.log(result);
+        console.log(result.choices[0].message.content);
+        console.log("genAI response");
         return result;
     } catch (error) {
         // console.error("Error fetching recipe instructions:", error.message);
@@ -85,16 +88,17 @@ export async function POST(req, res) {
             };
 
             // Fetch instructions using the recipe details
-            console.log("these are recipe details")
+            // console.log("these are recipe details")
             // console.log(recipeDetails);
-            // const instructions = await getRecipeInstructions(recipeDetails);
-            console.log("these are recipe instructions")
+            const instructions = await getRecipeInstructions(recipeDetails);
+            console.log("recipe instructions gotten")
+            // console.log(instructions);
             // console.log(instructions["choices"][0]["message"]["content"]);
 
             return {
                 ...recipeDetails, // Spread the recipe details object
                 image: recipe.image,
-                // recipeInstructions: instructions["choices"][0]["message"]["content"], // Add the generated instructions here
+                recipeInstructions: instructions["choices"][0]["message"]["content"], // Add the generated instructions here
             };
         }));
 
