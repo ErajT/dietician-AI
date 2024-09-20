@@ -24,7 +24,7 @@ async function generateMealPlan(userDetails) {
       }
 
       const result = await response.json();
-      console.log("Meal plan response:", result);
+      console.log("Meal plan response:", result.choices[0].message.content);
       return result.choices[0].message.content;
   } catch (error) {
       return NextResponse.json({
