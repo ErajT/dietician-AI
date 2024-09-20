@@ -22,7 +22,7 @@ const images = [
 ];
 
 const Page = styled.div`
-  background-color: #B7DDB0;
+  background-color: #f2e0cf;
   font-family: 'Lobster', cursive;
 `;
 
@@ -335,94 +335,97 @@ export default function Home() {
 
 
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <Page>
+      {/* Navbar */}
+      <Navbar>
+        <div>DietApp</div>
+        <NavLinks>
+          <a href="#">Home</a>
+          <a href="#">Features</a>
+          <a href="#">Contact</a>
+        </NavLinks>
+      </Navbar>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      {/* Slider */}
+      <Slider>
+        {images.map((image, index) => (
+          <Slide
+            key={index}
+            className={index === currentSlide ? "active" : ""}
+            style={{ backgroundImage: `url(${image})` }}
           >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            <Quote>{quotes[index]}</Quote>
+          </Slide>
+        ))}
+      </Slider>
+
+      {/* Second Section */}
+
+<SecondSection>
+<CenterImage src="/S.png" alt="Left Image" /> 
+<CenterImage src="/F.png" alt="Right Image" /> 
+</SecondSection>
+
+      <Heading data-aos="fade-up">What services we provide</Heading>
+      <CardsSection>
+  <Card data-aos="fade-up" data-aos-duration="1000">
+    <Video autoPlay muted loop playsInline>
+      <source src="/Aesthetic%20Healthy%20Diet.mp4" type="video/mp4" />
+    </Video>
+    <Info className="info">
+      <h3>Card 1</h3>
+      <p>Brief description for Card 1.</p>
+    </Info>
+  </Card>
+
+  <Card data-aos="fade-down" data-aos-duration="1000">
+    <Video autoPlay muted loop playsInline>
+      <source src="/Red%20And%20Black.mp4" type="video/mp4" />
+    </Video>
+    <Info className="info">
+      <h3>Card 2</h3>
+      <p>Brief description for Card 2.</p>
+    </Info>
+  </Card>
+
+  <Card data-aos="fade-left" data-aos-duration="1000">
+    <Video autoPlay muted loop playsInline>
+      <source src="/Colorful%20Modern%20Healthy.mp4" type="video/mp4" />
+    </Video>
+    <Info className="info">
+      <h3>Card 3</h3>
+      <p>Brief description for Card 3.</p>
+    </Info>
+  </Card>
+
+  <Card data-aos="fade-right" data-aos-duration="1000">
+    <Video autoPlay muted loop playsInline>
+      <source src="/White%20Modern%20Video.mp4" type="video/mp4" />
+    </Video>
+    <Info className="info">
+      <h3>Card 4</h3>
+      <p>Brief description for Card 4.</p>
+    </Info>
+  </Card>
+</CardsSection>
+
+  <Section>
+        <VideoWrapper>
+          <video autoPlay muted loop playsInline>
+            <source src="/White%20Green%20Pos.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </VideoWrapper>
+
+        <ImageWrapper>
+        <RightImage src="/h.png" alt="Healthy lifestyle image" />
+        </ImageWrapper>
+      </Section>
+      <audio autoPlay loop>
+        <source src="/ofenbach.mp3" type="audio/mpeg" />
+        Your browser does not support the audio tag.
+      </audio>
+    </Page>
   );
 }
 
