@@ -22,7 +22,7 @@ const images = [
 ];
 
 const Page = styled.div`
-  background-color: #B7DDB0;
+  background-color: #f2e0cf;
   font-family: 'Lobster', cursive;
 `;
 
@@ -418,7 +418,7 @@ export default function Home() {
         </VideoWrapper>
 
         <ImageWrapper>
-        <RightImage src="/i.png" alt="Healthy lifestyle image" />
+        <RightImage src="/h.png" alt="Healthy lifestyle image" />
         </ImageWrapper>
       </Section>
       <audio autoPlay loop>
