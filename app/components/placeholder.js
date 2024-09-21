@@ -1,39 +1,31 @@
 "use client";
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Col, Card } from 'react-bootstrap';
-import '../styling/recipegenerator.css'; 
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
-function CardExample({ name, image, calories, cuisineType }) {
+export default function MediaCard({ name, image, cuisineType, calories, ingredients }) {
   return (
-    <div className="container">
-      <Row className="g-4"> {/* Adds spacing between the grid items */}
+    <Card sx={{ maxWidth: 500, minHeight: 200  }}>
+      <CardMedia className="media-image"
+        sx={{ height:200 , objectFit: 'cover' }}
+        image={image} 
+        title={name} 
+      />
+      <CardContent  className="card-content">
+        <Typography gutterBottom variant="h5" component="div" >
+          {name} 
+        </Typography>
+        <Typography variant="body2" >
+          Cuisine: {cuisineType} 
+        </Typography>
+        <Typography variant="body2" >
+          Calories: {calories ? calories.toFixed(2) : 'N/A'}
+        </Typography>
         
-        {/* Recipe Card */}
-        <Col xs={12} sm={6} md={4} lg={3}> {/* Responsive breakpoints */}
-          <div className="card-container">
-          <Card style={{ width: '100%', position: 'relative' }}> {/* Add padding around the card */}
-              <Card.Img 
-                variant="top" 
-                src={image || "/images/default-recipe.jpg"}
-                className="card-image" 
-                style={{ height: '150px', objectFit: 'cover' }} 
-              />
-              <div className="card-overlay">
-              <Card.Body>
-                <Card.Title className="card-title">{name}</Card.Title> 
-                <Card.Text>Calories: {calories ? `${calories} kcal` : "N/A"}</Card.Text>
-                <Card.Text>cuisineType : {cuisineType}</Card.Text>
-      
-              </Card.Body>
-              </div>
-            </Card>
-          </div>
-        </Col>
-
-      </Row>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
-
-export default CardExample;

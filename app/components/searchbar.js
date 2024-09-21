@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, loading }) => {
   const [query, setQuery] = useState('');
 
   const handleInputChange = (event) => {
@@ -11,21 +11,23 @@ const SearchBar = ({ onSearch }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSearch(query); // Call the function passed as prop with the search query
+    onSearch(query); // Trigger the search
   };
 
   return (
-    <form onSubmit={handleSubmit} className="searchForm">
+    <form 
+      onSubmit={handleSubmit} 
+      className={`searchForm ${loading ? 'move-to-top-right' : ''}`}
+    >
       <input
         type="text"
         value={query}
         onChange={handleInputChange}
         placeholder="Search for a recipe..."
-        className="searchInput" // Apply styles
+        className="searchInput"
       />
       <button type="submit" className="searchButton">Search</button>
     </form>
   );
 };
-
 export default SearchBar;

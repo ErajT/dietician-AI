@@ -1,11 +1,22 @@
 /* Search form container */
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+html, body {
+  height: 100%; /* Use min-height if you expect the content to exceed the viewport height */
+  margin: 0;
+  padding: 0;
+
+}
 .searchForm {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-    width: 100%; /* Ensure the form container is full width */
+    position: absolute;
+    margin-left: -30%;
+    margin-top: 2%;
+    width: 100%; 
+    
+  transition: all 0.8s ease-in-out;
 }
+
 
 /* Input box styles with rounded corners */
 .searchInput {
@@ -26,23 +37,44 @@
     border-radius: 25px; /* Round the corners */
     margin-left: 20px; /* Adds space between the input and button */
     cursor: pointer;
+
 }
 
 .searchButton:hover {
     background-color: #45a049;
 }
 
+
+.searchForm.move-to-top-right {
+  top: 20px;
+  left: auto;
+  /* right: 200px; */
+  transform: translate(0, 0);
+  transition: all 10s ease-in-out;
+}
+
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+
 .recipe-generator {
-    color: #ffffff; 
+    color: #f4f5f4; 
     font-size: 4rem; 
     font-weight: bold; 
-    text-align: center; 
+    text-align: start; 
     margin: 0; 
     position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%); /* Center the heading horizontally */
-    z-index: 2; /* Ensure it stays above the carousel */
+    top: 10%;
+    left: 30%;
+    transform: translateX(-50%); 
+    z-index: 2; 
     font-family: "Bangers", system-ui;
   font-weight: 700;
   font-style: normal;
@@ -51,30 +83,112 @@
 }
 
 .recipe-subheading {
-    color: #ffffff; /* White text */
-    font-size: 2rem; /* Slightly smaller font for subheading */
-    font-weight: normal; /* Normal font weight to distinguish from the heading */
-    text-align: center; /* Center the subheading */
-    margin-top: 0.5rem; /* Small margin between heading and subheading */
+    color: #ffffffb6; 
+    font-size: 2rem; 
+    font-weight: normal; 
+    text-align: center; 
+    margin-top: -5vh; 
+    margin-left: -10vw;
     position: absolute;
-    top: 30%; /* Position it under the heading */
+    top: 30%; 
     left: 60%;
-    transform: translateX(-50%); /* Center the subheading horizontally */
-    z-index: 2; /* Ensure it stays above the carousel */
+    transform: translateX(-50%); 
+    z-index: 2;
 }
 
 .recipe-background {
-    width: 100vw;
-    height: 100vh;
-    background-color: #45a049;
-    /* background-image: url('/images/recipe2.jpg'); */
-    background-size: cover; 
-    background-position: center; 
-    position: relative; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.background-video {
+  position: absolute;
+  height: auto;
+  overflow-y: scroll;
+  width: 100%;
+  top: 0;
+ 
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  z-index: -1; /* Keep the video in the background */
+}
+
+.card-bar {
+ margin-top: 140vh;
+  background-color: #45a049;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 16px; 
+  
+  max-height: 400px;
+  padding: 16px; 
+}
+
+.card {
+  position: relative; /* Ensures the card is positioned correctly */
+  z-index: 10; /* Brings the card above other elements */
+  margin: 20px;
+  max-width: 345px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds some depth */
+  border-radius: 8px; /* Slight rounding on the corners */
+  background-color: white;
+}
+
+/* Keyframe for animation */
+@keyframes cardUpDown {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
   }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Apply animation to cards */
+.animated-card {
+  animation: cardUpDown 0.8s ease-out;
+  transition: transform 0.3s ease;
+}
+
+.animated-card:hover {
+  transform: translateY(-10px);
+}
+
+
+
+
+/* Styling for when loading is true, adding blur effect */
+.blur {
+  filter: blur(8px);
+}
+
+
+
+  
+  .recipe-background, .recipe-cart-background {
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .recipe-background.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .recipe-cart-background {
+    opacity: 1;
+  }
+  
   
  
   .overlay {
@@ -101,7 +215,7 @@
     background-position: center; /* Centers the image in the background */
     background-repeat: no-repeat; /* Prevents the image from repeating */
     display: flex;
-    background-color: #51c0f4; /* Fallback color if the image doesn't load */
+    
     box-sizing: border-box;
     overflow-y: auto;
   }s
@@ -153,80 +267,72 @@
   background-color: #45a049;
 }
 
-/* Media queries to make the search bar responsive */
-@media (max-width: 1200px) {
-  .cart-search-bar .searchInput {
-    width: 60%; /* Make the width smaller on medium screens */
+
+.cart-search-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 3 equal-width columns */
+  gap: 5%; 
+  margin-top: 5%;
+  margin-right: 0%;
+  padding: 20px;
+}
+
+@media (max-width: 900px) {
+  .cart-search-bar {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row on medium screens */
   }
 }
 
-@media (max-width: 768px) {
-  .cart-search-bar .searchInput {
-    width: 70%; /* Even smaller on small screens */
-  }
-}
-
-@media (max-width: 576px) {
-  .cart-search-bar .searchInput {
-    width: 80%; /* Full width on very small screens */
-  }
-
-  .cart-search-bar .searchButton {
-    width: 100px; /* Ensure button is a reasonable size */
+@media (max-width: 600px) {
+  .cart-search-bar {
+    grid-template-columns: 1fr; /* 1 card per row on smaller screens */
   }
 }
 
 
-  .all-carts {
-    display: flex;
-    flex-wrap: wrap; /* Allows the cards to wrap to the next line if necessary */
-    justify-content: space-between; /* Spreads the cards evenly across the row */
-    gap: 20px; /* Adds space between cards */
-    margin-top: 20px; /* Pushes the cards down a bit from the search bar */
-  }
- 
+
+
+ /* Card container to ensure everything is positioned relative */
+.MuiCard-root {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Initial state of the image */
+.media-image {
+  height: 140px;
+  transition: filter 0.5s ease; /* Smooth transition for blur effect */
+}
+
+/* On hover, blur the image */
+.MuiCard-root:hover .media-image {
+  filter: blur(5px); /* Blur the image on hover */
+}
+
+/* Initial hidden state of the card content (text) */
+.card-content {
+  opacity: 0;
+  position: absolute;
+  color: #ffffff;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  transition: opacity 0.5s ease; /* Smooth fade-in transition for text */
+}
+
+/* On hover, reveal the card content */
+.MuiCard-root:hover .card-content {
+  opacity: 1; /* Fade in the text on hover */
+}
 
 
 
-  .card-container {
-    width: 100%; /* Use 100% of the grid column width */
-    margin-bottom: 20px; /* Add some space between the cards */
-  }
-  
-  .card-image {
-    width: 100%;
-    height: 200px; /* Adjust height to make the card larger */
-    object-fit: cover;
-  }
-  
-  .card-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .card-overlay:hover {
-    opacity: 1;
-  }
-  
-  .card-image:hover {
-    filter: blur(4px);
-  }
-
-
-  .loading {
-    color: black;
-  
-    font-size: larger;
-  }
 
 
   .failed-recipe {
