@@ -1,10 +1,10 @@
+
 "use client";
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
-{/* <MovingImage src="https://www.pngall.com/wp-content/uploads/5/Diet-PNG.png" alt="Moving" /> */}
-  //  https://www.pngmart.com/files/1/Salad-PNG-File.png
+
 const quotes = [
   "Eat healthy, stay healthy.",
   "Your body deserves the best.",
@@ -15,14 +15,14 @@ const quotes = [
 
 const images = [
   'https://simplehealthfacts.com/media/2021/07/44-healthy-foods-to-eat-that-you-should-include-in-your-diet.jpg',
-  'http://res.mindbodygreen.com/img/crp/WomanChillingINGardenEarlyMorning-850x400.jpg',
-  'https://www.bria.com.ph/wp-content/uploads/2023/06/Healthy-living.png',
+  'https://images.pexels.com/photos/3756042/pexels-photo-3756042.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/6327159/pexels-photo-6327159.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
   'https://kyolic.com/wp-content/uploads/2020/11/healthy-life-blog-image.jpg',
   'https://www.drweil.com/wp-content/uploads/2017/01/health-wellness_balanced-living_healthy-living_whats-the-best-indoor-light_1440x1080_500378277.jpeg'
 ];
 
 const Page = styled.div`
-  background-color: #B7DDB0;
+  background-color: #cee2d2;
   font-family: 'Lobster', cursive;
 `;
 
@@ -31,9 +31,10 @@ const Navbar = styled.nav`
   justify-content: space-between;
   align-items: center;
   // background-color: #073B3A;
-  padding: 20px 40px;
+  // padding: 20px 40px;
   color: white;
   font-size: 1.5em;
+  height:70px;
 `;
 
 const NavLinks = styled.div`
@@ -47,6 +48,9 @@ const NavLinks = styled.div`
       border-radius: 5px;
     }
   }
+`;
+const Logo = styled.img`
+  height: 95px;
 `;
 
 const Slider = styled.div`
@@ -102,6 +106,7 @@ const Quote = styled.div`
 const VideoWrapper = styled.div`
   flex: 1;
   padding-right: 20px;
+  padding-left: 50px;
 
   video {
     width: 100%;
@@ -118,13 +123,16 @@ const Section = styled.div`
   background-image: linear-gradient(135deg, #073B3A 25%, #0E6251 75%);
   margin-top: 90px;
   margin-bottom: 50px;
-  // border-radius: 10px;
+  // border-radius: 100px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   align-items: center;
   gap: 15px;
-  height: 90vh;
+  height: 110vh;
   position: relative;
   overflow: hidden;
+  // margin-right: 50px;
+  // margin-left: 50px;
+  
 
   &:before {
     content: '';
@@ -141,7 +149,7 @@ const Section = styled.div`
 
 const ImageWrapper = styled.div`
   flex: 1;
-  padding-left: 20px;
+  padding-left: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -229,32 +237,48 @@ const Info = styled.div`
   text-align: center;
 `;
 
-const Heading = styled.h2`
-  text-align: center;
-  font-size: 2.5em;
-  margin-bottom: 30px;
+const breathing = keyframes`
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+`;
+
+// Styled component for each letter of the Heading
+const BreathingLetter = styled.span`
+  display: inline-block;
+  animation: ${breathing} 1s ease-in-out infinite;
+  animation-delay: ${({ delay }) => delay}s;
   color: #073B3A;
   font-family: 'Pacifico', cursive;
-  margin-top: 90px; /* Adds space above the heading */
-  transition: transform 0.3s, opacity 0.3s;
-  opacity: 0;
-  transform: translateY(20px);
-
-  &.aos-animate {
-    opacity: 1;
-    transform: translateY(0);
-  }
 `;
+
+// Component to create the heading with each letter animated and words separated
+const BreathingHeading = ({ text }) => (
+  <h2 style={{ textAlign: 'center',marginBottom: '30px', fontSize: '3em',marginTop: '90px' }}>
+    {text.split(' ').map((word, wordIndex) => (
+      <span key={wordIndex} style={{ marginRight: '0.5em' }}>
+        {word.split('').map((letter, letterIndex) => (
+          <BreathingLetter key={letterIndex} delay={(wordIndex + letterIndex) * 0.2}>
+            {letter}
+          </BreathingLetter>
+        ))}
+      </span>
+    ))}
+  </h2>
+);
+
 const SecondSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between; /* This will place one image on the left and one on the right */
   background-color: #79b791;
   position: relative;
-  height: 90vh;
+  height: 100vh;
   overflow: hidden;
-  margin-top: 80px;
-  padding: 0 60px; /* Adds some padding for spacing around the images */
+  // margin-top: 80px;
+  padding: 0 100px; /* Adds some padding for spacing around the images */
+  //  margin-right: 50px;
+  // margin-left: 50px;
+  // border-radius: 100px;
 
   &:before {
     content: '';
@@ -316,10 +340,71 @@ const MovingImage = styled.img`
   }
 `;
 
+
+const CarouselSection = styled.div`
+  perspective: 1000px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  background-color: #f5f5f5;
+`;
+
+const Carousel = styled.div`
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(-300px) rotateY(calc(var(--current-index) * -90deg));
+  transition: transform 1s;
+`;
+
+const CarouselItem = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transform: rotateY(calc(var(--index) * 90deg)) translateZ(300px);
+  backface-visibility: hidden;
+`;
+
+const CarouselControl = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 100;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const PrevButton = styled(CarouselControl)`
+  left: 10px;
+`;
+
+const NextButton = styled(CarouselControl)`
+  right: 10px;
+`;
+
+const images1 = [
+  'https://simple-veganista.com/wp-content/uploads/2012/09/healthy-chopped-vegetable-salad-recipe-3.jpg',
+  'https://getonmyplate.com/wp-content/uploads/2022/06/caesar-salad-no-anchovies-7-1200x1800.jpg',
+  'https://simple-veganista.com/wp-content/uploads/2012/09/healthy-chopped-vegetable-salad-recipe-3.jpg',
+  'https://getonmyplate.com/wp-content/uploads/2022/06/caesar-salad-no-anchovies-7-1200x1800.jpg',
+];
+
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
- useEffect(() => {
+  useEffect(() => {
     AOS.init({
       duration: 3000,
       easing: 'ease-in-out',
@@ -333,18 +418,28 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  const handleNext = () => {
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % images1.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentSlide((prevSlide) => (prevSlide - 1 + images1.length) % images1.length);
+  };
+
+
 
   return (
     <Page>
       {/* Navbar */}
       <Navbar>
-        <div>DietApp</div>
-        <NavLinks>
-          <a href="#">Home</a>
-          <a href="#">Features</a>
-          <a href="#">Contact</a>
-        </NavLinks>
-      </Navbar>
+      {/* Replace text with the logo image */}
+      <Logo src="Logo.png" alt="DietApp Logo" />
+      <NavLinks>
+        <a href="#">Home</a>
+        <a href="#">Features</a>
+        <a href="#">Contact</a>
+      </NavLinks>
+    </Navbar>
 
       {/* Slider */}
       <Slider>
@@ -366,7 +461,7 @@ export default function Home() {
 <CenterImage src="/F.png" alt="Right Image" /> 
 </SecondSection>
 
-      <Heading data-aos="fade-up">What services we provide</Heading>
+<BreathingHeading text="What services we provide" />
       <CardsSection>
   <Card data-aos="fade-up" data-aos-duration="1000">
     <Video autoPlay muted loop playsInline>
@@ -421,13 +516,118 @@ export default function Home() {
         <RightImage src="/i.png" alt="Healthy lifestyle image" />
         </ImageWrapper>
       </Section>
-      <audio autoPlay loop>
+
+      {/* <CarouselSection>
+      <PrevButton onClick={handlePrev}>&lt;</PrevButton>
+      <Carousel style={{ '--current-slide': currentSlide }}>
+        {images1.map((image, index) => (
+          <CarouselItem
+            key={index}
+            style={{ '--index': index, backgroundImage: `url(${image})` }}
+          />
+        ))}
+      </Carousel>
+      <NextButton onClick={handleNext}>&gt;</NextButton>
+    </CarouselSection> */}
+      {/* <audio autoPlay loop>
         <source src="/ofenbach.mp3" type="audio/mpeg" />
         Your browser does not support the audio tag.
-      </audio>
+      </audio> */}
     </Page>
   );
 }
 
 
+// "use client";
+// import React, { useEffect, useState, useRef } from 'react';
+// import styled from 'styled-components';
 
+// const LandingPage = () => {
+//   const [activeSection, setActiveSection] = useState(0);
+//   const imageRef = useRef(null);
+
+
+//   useEffect(() => {
+//     const sections = document.querySelectorAll('section');
+//     const observer = new IntersectionObserver(
+//       (entries) => {
+//         entries.forEach((entry) => {
+//           if (entry.isIntersecting) {
+//             const index = entry.target.getAttribute('data-index');
+//             setActiveSection(parseInt(index));
+//           }
+//         });
+//       },
+//       { threshold: 0.5 }
+//     );
+
+//     sections.forEach((section) => {
+//       observer.observe(section);
+//     });
+
+//     return () => {
+//       sections.forEach((section) => {
+//         observer.unobserve(section);
+//       });
+//     };
+//   }, []);
+
+//   return (
+//     <MainContainer>
+//       <ImageWrapper ref={imageRef} position={activeSection}>
+//         <SaladImage src="B.png" alt="Salad" />
+//       </ImageWrapper>
+
+//       <Section backgroundColor="#f5f5f5" data-index="0">
+//         Section 1 - Image on the Right
+//       </Section>
+//       {/* Section 2 */}
+//       <Section backgroundColor="#e0e0e0" data-index="1">
+//         Section 2 - Image in the Center
+//       </Section>
+//       {/* Section 3 */}
+//       <Section backgroundColor="#c0c0c0" data-index="2">
+//         Section 3 - Image on the Left
+//       </Section>
+//     </MainContainer>
+//   );
+// };
+
+// // Main container to handle the sections
+// const MainContainer = styled.div`
+//   width: 100%;
+//   height: 300vh;
+//   overflow-x: hidden;
+//   position: relative;
+// `;
+
+// const ImageWrapper = styled.div`
+//   position: fixed;
+//   top: 50%;
+//   left: ${(props) => (props.position === 0 ? '80%' : props.position === 1 ? '50%' : '10%')};
+//   transform: ${(props) =>
+//     props.position === 0
+//       ? 'translate(-80%, -50%)'
+//       : props.position === 1
+//       ? 'translate(-50%, -50%)'
+//       : 'translate(-10%, -50%)'};
+//   transition: left 1s ease, transform 1s ease;
+//   pointer-events: none; /* Prevents blocking interactions */
+// `;
+
+// // Image of the salad
+// const SaladImage = styled.img`
+//   width: 30vw;
+// `;
+
+// // Section styling
+// const Section = styled.section`
+//   height: 100vh;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   font-size: 2rem;
+//   background-color: ${(props) => props.backgroundColor};
+// `;
+
+// export default LandingPage;
