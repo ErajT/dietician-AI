@@ -223,6 +223,19 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 'use client';
 
 import { useSearchParams } from 'next/navigation';
@@ -284,13 +297,13 @@ const PlannerPage = () => {
   }, [searchParams]);
 
   const handleCardClick = (meal) => {
-    setSelectedMeal(meal);
-    setOpen(true);
+    setSelectedMeal(meal);  // Set the selected meal data here
+    setOpen(true);  // Open the dialog
   };
 
   const handleClose = () => {
     setOpen(false);
-    setSelectedMeal(null);
+    setSelectedMeal(null);  // Clear the selected meal data
   };
 
   // Show basic loading indicator
@@ -378,13 +391,13 @@ const PlannerPage = () => {
                       >
                         <CardMedia
                           component="img"
-                          alt={meal.name}
+                          alt={meal.name}  // Correct meal name here
                           height="140"
-                          image={meal.image}
+                          image={meal.image || "https://via.placeholder.com/150"}  // Use meal.image or fallback
                         />
 
                         <CardContent>
-                          <Typography variant="h6">{meal.name}</Typography>
+                          <Typography variant="h6">{meal.name}</Typography>  {/* Display the meal name */}
                         </CardContent>
                       </Card>
                     </motion.div>
@@ -400,99 +413,120 @@ const PlannerPage = () => {
 
       {/* Dialog for displaying full meal image and details */}
       <Dialog 
-  open={open} 
-  onClose={handleClose} 
-  maxWidth="md" // You can set this to any size like 'sm', 'md', or 'lg'
-  fullWidth
-  sx={{
-    height: '90%', // Set dialog height to 90% of the screen
-    maxHeight: '90vh', // Ensure it doesn't exceed the screen height
-  }}
->
-  <motion.div
-    initial={{ scale: 0 }}
-    animate={{ scale: 1 }}
-    exit={{ scale: 0 }}
-    transition={{ duration: 0.3 }}
-  >
-    {selectedMeal && ( // Add a check to ensure selectedMeal is not null
-      <Box 
-        sx={{ 
-          display: 'flex', 
-          height: '100%', // Ensure the content fills the entire dialog
-          background: '#fff', 
-          borderRadius: '8px', 
-          boxShadow: 3 
+        open={open} 
+        onClose={handleClose} 
+        maxWidth="md" // You can set this to any size like 'sm', 'md', or 'lg'
+        fullWidth
+        sx={{
+          height: '90%', // Set dialog height to 90% of the screen
+          maxHeight: '90vh', // Ensure it doesn't exceed the screen height
         }}
       >
-        {/* Left Side: Meal Image */}
-        <Box
-          sx={{
-            width: '40%', // Image takes up 40% of the dialog width
-            position: 'relative',
-          }}
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          exit={{ scale: 0 }}
+          transition={{ duration: 0.3 }}
         >
-          <CardMedia
-            component="img"
-            alt={selectedMeal.name}
-            image={selectedMeal.image ? selectedMeal.image : "https://via.placeholder.com/150"} // Fallback to placeholder if no image
-            sx={{ 
-              height: '100%',  // Cover entire height
-              width: '100%',   // Cover entire width
-              objectFit: 'cover', 
-              borderTopLeftRadius: '8px',
-              borderBottomLeftRadius: '8px',
-            }}
-          />
+          {selectedMeal && ( // Add a check to ensure selectedMeal is not null
+            <Box 
+              sx={{ 
+                display: 'flex', 
+                height: '100%', // Ensure the content fills the entire dialog
+                background: '#fff', 
+                borderRadius: '8px', 
+                boxShadow: 3 
+              }}
+            >
+              {/* Left Side: Meal Image */}
+              <Box
+                sx={{
+                  width: '40%', // Image takes up 40% of the dialog width
+                  position: 'relative',
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  alt={selectedMeal.name}  // Display meal name in alt
+                  image={selectedMeal.image || "https://via.placeholder.com/150"} // Fallback to placeholder if no image
+                  sx={{ 
+                    height: '100%',  // Cover entire height
+                    width: '100%',   // Cover entire width
+                    objectFit: 'cover', 
+                    borderTopLeftRadius: '8px',
+                    borderBottomLeftRadius: '8px',
+                  }}
+                />
 
-          {/* Semicircle Overlay */}
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 0,
-              right: '-40px', // Slightly extend beyond the image
-              width: '80px',
-              height: '100%',
-              backgroundColor: '#fff', // Same as dialog background
-              borderTopRightRadius: '50%',
-              borderBottomRightRadius: '50%',
-            }}
-          />
-        </Box>
-        
-        {/* Right Side: Meal Details */}
-        <Box 
-          sx={{ 
-            padding: '5%',  // Adjust padding as necessary
-            display: 'flex', 
-            flexDirection: 'column', 
-            justifyContent: 'space-between', 
-            width: '60%', // Details take up 60% of the dialog width
-          }}
-        >
-          <Box>
-            <Typography variant="h5" gutterBottom>
-              {selectedMeal?.meal || "Meal Name"}
-            </Typography>
-            <Typography variant="body1" sx={{ marginBottom: 2 }}>
-              {selectedMeal?.details || "No details available."}
-            </Typography>
-          </Box>
-          
-          <Button onClick={handleClose} variant="contained" sx={{ alignSelf: 'flex-end' }}>
-            Close
-          </Button>
-        </Box>
-      </Box>
-    )}
-  </motion.div>
-</Dialog>
-
-
-
+                {/* Semicircle Overlay */}
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    right: '-40px', // Slightly extend beyond the image
+                    width: '80px',
+                    height: '100%',
+                    backgroundColor: '#fff', // Same as dialog background
+                    borderTopRightRadius: '50%',
+                    borderBottomRightRadius: '50%',
+                  }}
+                />
+              </Box>
+              
+              {/* Right Side: Meal Details */}
+              <Box 
+                sx={{ 
+                  padding: '5%',  // Adjust padding as necessary
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  justifyContent: 'space-between', 
+                  width: '60%', // Details take up 60% of the dialog width
+                }}
+              >
+                <Box>
+                  <Typography variant="h5" gutterBottom>
+                    {selectedMeal.name || "Meal Name"} {/* Ensure meal name is shown in the popup */}
+                  </Typography>
+                  <Typography variant="body1" sx={{ marginBottom: 2 }}>
+                    {selectedMeal.details || "No details available."} {/* Show meal details */}
+                  </Typography>
+                </Box>
+                
+                <Button onClick={handleClose} variant="contained" sx={{ alignSelf: 'flex-end' }}>
+                  Close
+                </Button>
+              </Box>
+            </Box>
+          )}
+        </motion.div>
+      </Dialog>
     </Box>
   );
 };
 
 export default PlannerPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
