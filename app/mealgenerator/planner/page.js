@@ -1,316 +1,48 @@
 // 'use client';
 
-// import { useSearchParams } from 'next/navigation'; // For query params in App Router
-// import { useState } from 'react';
-
-// export default function MealPlanner() {
-//   const searchParams = useSearchParams(); // Use the new hook for App Router
-
-//   // Extracting form data from URL
-//   const calories = searchParams.get('calories');
-//   const excludeIngredients = searchParams.get('excludeIngredients');
-//   const diet = searchParams.get('diet');
-//   const timeFrame = searchParams.get('timeFrame');
-
-//   const [activeTab, setActiveTab] = useState('Monday');
-
-//   const handleTabClick = (day) => {
-//     setActiveTab(day);
-//   };
-
-//   return (
-//     <div style={styles.container}>
-//       <div style={styles.header}>
-//         <h1>Meal Planner for {timeFrame}</h1>
-//         <p>Calories: {calories}, Diet: {diet}, Exclude: {excludeIngredients}</p>
-//       </div>
-
-//       <div style={styles.tabs}>
-//         {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
-//           <button
-//             key={day}
-//             style={activeTab === day ? styles.activeTab : styles.tab}
-//             onClick={() => handleTabClick(day)}
-//           >
-//             {day}
-//           </button>
-//         ))}
-//       </div>
-
-//       <div style={styles.content}>
-//         <h2>{activeTab}'s Meals</h2>
-//         <p>Here you will see the meals for {activeTab}.</p>
-//       </div>
-//     </div>
-//   );
-// }
-
-// const styles = {
-//   container: { padding: '20px', textAlign: 'center' },
-//   header: { marginBottom: '20px' },
-//   tabs: { display: 'flex', justifyContent: 'center', marginBottom: '20px' },
-//   tab: { padding: '10px 20px', backgroundColor: '#f0f0f0', border: '1px solid #ddd', cursor: 'pointer' },
-//   activeTab: { padding: '10px 20px', backgroundColor: '#007bff', color: '#fff', border: '1px solid #007bff' },
-//   content: { textAlign: 'center' },
-// };
-
-
-
-
-// 'use client';
-
+// import { useSearchParams } from 'next/navigation';
 // import { useEffect, useState } from 'react';
-// import { useRouter } from 'next/navigation';
-
-// const PlannerPage = () => {
-//   const router = useRouter();
-//   const [mealPlan, setMealPlan] = useState(null);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     if (typeof window !== 'undefined') {
-//       fetchMealPlan();
-//     }
-//   }, []);
-
-//   const fetchMealPlan = async () => {
-//     setLoading(true);
-
-//     try {
-//       const res = await fetch('/api/mealplanner', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           mealsPerDay: 3, 
-//           dietaryRestrictions: ['vegetarian'],
-//         }),
-//       });
-
-//       if (!res.ok) {
-//         throw new Error('Error fetching meal plan');
-//       }
-
-//       const data = await res.json();
-//       setMealPlan(data); // Set entire response to view raw JSON
-//     } catch (error) {
-//       console.error('Error fetching meal plan:', error.message);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   if (loading) {
-//     return <p>Loading...</p>;
-//   }
-
-//   if (!mealPlan) {
-//     return <p>No meal plan available</p>;
-//   }
-
-//   // Display the raw JSON response
-//   return (
-//     <div>
-//       <h1>Meal Plan (Raw JSON Response)</h1>
-//       <pre>{JSON.stringify(mealPlan, null, 2)}</pre> {/* Pretty print the JSON */}
-//     </div>
-//   );
-// };
-
-// export default PlannerPage;
-
-
-
-
-
-
-
-
-
-
-
-
-// KAL A CODE
-// 'use client';
-
-// import { useEffect, useState } from 'react';
-
-// const PlannerPage = () => {
-//   const [mealPlan, setMealPlan] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [activeDay, setActiveDay] = useState('Monday'); // Default day
-
-//   useEffect(() => {
-//     fetchMealPlan();
-//   }, []);
-
-//   const fetchMealPlan = async () => {
-//     setLoading(true);
-
-//     try {
-//       const res = await fetch('/api/mealplanner', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({
-//           mealsPerDay: 3,
-//           dietaryRestrictions: ['vegetarian'],
-//         }),
-//       });
-
-//       if (!res.ok) {
-//         throw new Error('Error fetching meal plan');
-//       }
-
-//       const data = await res.json();
-//       setMealPlan(data.mealPlan); // Set only the mealPlan part of the response
-//     } catch (error) {
-//       console.error('Error fetching meal plan:', error.message);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   if (loading) return <p>Loading...</p>;
-//   if (!mealPlan) return <p>No meal plan available</p>;
-
-//   const days = Object.keys(mealPlan); // Get days from the mealPlan
-
-//   return (
-//     <div>
-//       <h1>Meal Plan for the Week</h1>
-//       <div className="tabs">
-//         {days.map((day) => (
-//           <button key={day} onClick={() => setActiveDay(day)}>
-//             {day}
-//           </button>
-//         ))}
-//       </div>
-
-//       <div className="meals">
-//         {mealPlan[activeDay].map((meal, index) => (
-//         <div key={index} className="meal-card">
-//           <h2>{meal.meal}</h2>
-//           <img src={meal.image} alt={meal.meal} style={{ width: '150px', height: '150px' }} />
-//           <p>Ingredients: {Array.isArray(meal.ingredients) ? meal.ingredients.join(', ') : 'No ingredients available'}</p>
-//       </div>
-//   ))}
-// </div>
-
-//     </div>
-//   );
-// };
-
-// export default PlannerPage;
-
-
-
-
-
-
-
-
-'use client';
-
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { Box, Button, Typography, Card, CardContent, CardMedia, AppBar, Toolbar, Dialog } from '@mui/material';
-import { motion } from 'framer-motion';
-
-const PlannerPage = () => {
-  const [mealPlan, setMealPlan] = useState({ Monday: [], Tuesday: [], Wednesday: [], Thursday: [], Friday: [], Saturday: [], Sunday: [] });
-  const [activeDay, setActiveDay] = useState('Monday');
-  const [open, setOpen] = useState(false);
-  const [selectedMeal, setSelectedMeal] = useState(null);
-  const searchParams = useSearchParams();
-
-  // Fetch meal plan from API
-  useEffect(() => {
-    const fetchMealPlan = async () => {
-      const age = searchParams.get('age');
-      const gender = searchParams.get('gender');
-      const dietType = searchParams.get('dietType');
-      const mealsPerDay = searchParams.get('mealsPerDay');
-
-      try {
-        const response = await fetch(`/api/mealplanner`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            age,
-            gender,
-            dietType,
-            mealsPerDay
-          })
-        });
-
-        if (!response.ok) {
-          const errorMessage = await response.text();
-          console.error("Response error:", errorMessage);
-          throw new Error(`Failed to fetch meal plan: ${response.status} ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        if (data.mealPlan) {
-          setMealPlan(data.mealPlan);
-        } else {
-          throw new Error('Invalid mealPlan structure');
-        }
-      } catch (error) {
-        console.error("Error fetching meal plan:", error);
-      }
-    };
-
-    fetchMealPlan();
-  }, [searchParams]);
-
-  const handleTabClick = (day) => {
-    setActiveDay(day);
-  };
-
-  const handleCardClick = (meal) => {
-    setSelectedMeal(meal);
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setSelectedMeal(null);
-  };
-
-  if (!mealPlan || Object.keys(mealPlan).length === 0) {
-    return <Typography>Loading meal plan...</Typography>;
-  }
-
-  
-
-
-
-// 'use client';
-// import React, { useState, useEffect } from 'react';
-// import { Box, Button, Typography, Card, CardContent, CardMedia, AppBar, Toolbar, Dialog } from '@mui/material';
+// import { Box, Button, Typography, Card, CardContent, CardMedia, AppBar, Toolbar, Dialog, CircularProgress } from '@mui/material';
 // import { motion } from 'framer-motion';
 
 // const PlannerPage = () => {
-//   const [mealPlan, setMealPlan] = useState({ Monday: [], Tuesday: [], Wednesday: [], Thursday: [], Friday: [], Saturday: [], Sunday: [] });
+//   const [mealPlan, setMealPlan] = useState({});
 //   const [activeDay, setActiveDay] = useState('Monday');
 //   const [open, setOpen] = useState(false);
 //   const [selectedMeal, setSelectedMeal] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const searchParams = useSearchParams();
 
 //   // Fetch meal plan from API
 //   useEffect(() => {
 //     const fetchMealPlan = async () => {
+//       const age = searchParams.get('age');
+//       const gender = searchParams.get('gender');
+//       const dietType = searchParams.get('dietType');
+//       const mealsPerDay = searchParams.get('mealsPerDay');
+
 //       try {
-//         const response = await fetch('/api/mealplanner');
+//         setLoading(true);
+//         const response = await fetch(`/api/mealplanner`, {
+//           method: 'POST',
+//           headers: {
+//             'Content-Type': 'application/json',
+//           },
+//           body: JSON.stringify({
+//             age,
+//             gender,
+//             dietType,
+//             mealsPerDay,
+//           }),
+//         });
+
 //         if (!response.ok) {
-//           const errorMessage = await response.text();
-//           console.error("Response error:", errorMessage);
-//           throw new Error(`Failed to fetch meal plan: ${response.status} ${response.statusText}`);
+//           throw new Error(`Failed to fetch meal plan: ${response.statusText}`);
 //         }
+
 //         const data = await response.json();
-//         console.log('Fetched data:', data);
+//         console.log("Meal Plan Response:", data);
+
 //         if (data.mealPlan) {
 //           setMealPlan(data.mealPlan);
 //         } else {
@@ -318,14 +50,13 @@ const PlannerPage = () => {
 //         }
 //       } catch (error) {
 //         console.error("Error fetching meal plan:", error);
+//       } finally {
+//         setLoading(false);
 //       }
 //     };
-    
-    
-    
 
 //     fetchMealPlan();
-//   }, []);
+//   }, [searchParams]);
 
 //   const handleTabClick = (day) => {
 //     setActiveDay(day);
@@ -341,29 +72,267 @@ const PlannerPage = () => {
 //     setSelectedMeal(null);
 //   };
 
-//   // Add a check to ensure mealPlan is loaded
-//   // Add this right before your return statement
-//   if (!mealPlan || Object.keys(mealPlan).length === 0) {
-//     return <Typography>Loading meal plan...</Typography>;
+//   if (loading) {
+//     return (
+//       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+//         <CircularProgress color="secondary" />
+//       </Box>
+//     );
 //   }
 
+//   if (!mealPlan || Object.keys(mealPlan).length === 0) {
+//     return <Typography>No meal plan available.</Typography>;
+//   }
+
+//   // Check if activeDay has meals
+//   const mealsForActiveDay = mealPlan[activeDay];
+
+//   return (
+//     <Box 
+//       sx={{ 
+//         backgroundImage: 'url("path/to/background.jpg")', 
+//         backgroundSize: 'cover', 
+//         minHeight: '100vh', 
+//         padding: 2, 
+//         color: '#fff'
+//       }}
+//     >
+//       <AppBar position="static" sx={{ background: 'rgba(0, 0, 0, 0.7)' }}>
+//         <Toolbar>
+//           <Typography variant="h6">Meal Planner</Typography>
+//         </Toolbar>
+//       </AppBar>
+
+//       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 2 }}>
+//         <Typography variant="h4" gutterBottom>Meal Plan for {activeDay}</Typography>
+//         <Box sx={{ display: 'flex', marginBottom: 2 }}>
+//           {Object.keys(mealPlan).map((day) => (
+//             <Button
+//               key={day}
+//               variant={activeDay === day ? 'contained' : 'outlined'}
+//               onClick={() => handleTabClick(day)}
+//               sx={{ marginRight: 1, borderRadius: '20px' }}
+//             >
+//               {day}
+//             </Button>
+//           ))}
+//         </Box>
+//       </Box>
+
+//       <motion.div
+//         key={activeDay}
+//         initial={{ opacity: 0, y: 20 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         exit={{ opacity: 0, y: -20 }}
+//         transition={{ duration: 0.3 }}
+//       >
+//         {mealsForActiveDay && mealsForActiveDay.length === 0 ? (
+//           <Typography>No meals available for {activeDay}.</Typography>
+//         ) : (
+//           <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 2 }}>
+//             {mealsForActiveDay && mealsForActiveDay.length > 0 ? (
+//               mealsForActiveDay.map((meal, index) => {
+//                 const mealName = meal.meal || "Meal Name";  // Use 'meal' from API
+//                 const mealImage = meal.image || "https://via.placeholder.com/150";  // Fallback for missing images
+
+//                 return (
+//                   <Card
+//                     key={index}
+//                     sx={{
+//                       width: 250,
+//                       transition: 'transform 0.3s',
+//                       '&:hover': { transform: 'scale(1.05)', boxShadow: 3 },
+//                     }}
+//                     onClick={() => handleCardClick(meal)}
+//                   >
+//                     <CardMedia
+//                       component="img"
+//                       alt={mealName}
+//                       height="140"
+//                       image={mealImage}
+//                     />
+//                     <CardContent>
+//                       <Typography variant="h6">{mealName}</Typography>
+//                     </CardContent>
+//                   </Card>
+//                 );
+//               })
+//             ) : (
+//               <Typography>No meals available for {activeDay}.</Typography>
+//             )}
+//           </Box>
+//         )}
+//       </motion.div>
+
+//       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+//         <Box sx={{ padding: 2, background: 'rgba(255, 255, 255, 0.9)' }}>
+//           {selectedMeal && (
+//             <>
+//               <CardMedia
+//                 component="img"
+//                 alt={selectedMeal.meal || "Meal image"}
+//                 height="140"
+//                 image={selectedMeal.image || "https://via.placeholder.com/150"}  // Fallback for missing images
+//               />
+
+//               <Typography variant="h5">{selectedMeal.meal || "Meal Name"}</Typography>
+//               <Typography variant="body1" sx={{ marginBottom: 2 }}>{selectedMeal.details || "No details available."}</Typography>
+//               <Button onClick={handleClose} variant="contained">Close</Button>
+//             </>
+//           )}
+//         </Box>
+//       </Dialog>
+//     </Box>
+//   );
+// };
+
+// export default PlannerPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'use client';
+
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Box, Button, Typography, Card, CardContent, CardMedia, Dialog, CircularProgress, Grid } from '@mui/material';
+import { motion } from 'framer-motion';
+
+const PlannerPage = () => {
+  const [mealPlan, setMealPlan] = useState({});
+  const [activeDay, setActiveDay] = useState('Monday');
+  const [open, setOpen] = useState(false);
+  const [selectedMeal, setSelectedMeal] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const searchParams = useSearchParams();
+
+  // Fetch meal plan from API
+  useEffect(() => {
+    const fetchMealPlan = async () => {
+      const age = searchParams.get('age');
+      const gender = searchParams.get('gender');
+      const dietType = searchParams.get('dietType');
+      const mealsPerDay = searchParams.get('mealsPerDay');
+
+      try {
+        setLoading(true);
+        const response = await fetch(`/api/mealplanner`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            age,
+            gender,
+            dietType,
+            mealsPerDay,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch meal plan: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log("Meal Plan Response:", data);
+
+        if (data.mealPlan) {
+          setMealPlan(data.mealPlan);
+        } else {
+          throw new Error('Invalid mealPlan structure');
+        }
+      } catch (error) {
+        console.error("Error fetching meal plan:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMealPlan();
+  }, [searchParams]);
+
+  const handleCardClick = (meal) => {
+    setSelectedMeal(meal);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedMeal(null);
+  };
+
+  // Show basic loading indicator
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
+          backgroundColor: '#cee2d2',
+          color: '#102820',
+        }}
+      >
+        <CircularProgress sx={{ color: '#102820' }} />
+        <Typography variant="h6" sx={{ marginTop: 2 }}>
+          Loading your meal plan...
+        </Typography>
+      </Box>
+    );
+  }
+
+  if (!mealPlan || Object.keys(mealPlan).length === 0) {
+    return <Typography>No meal plan available.</Typography>;
+  }
+
+  // Check if activeDay has meals
+  const mealsForActiveDay = mealPlan[activeDay];
 
   return (
     <Box 
       sx={{ 
-        backgroundImage: 'url("path/to/background.jpg")', 
-        backgroundSize: 'cover', 
+        backgroundColor: '#cee2d2', 
         minHeight: '100vh', 
         padding: 2, 
-        color: '#fff'
+        color: '#102820', 
+        position: 'relative',
+        overflow: 'hidden'
       }}
     >
-      <AppBar position="static" sx={{ background: 'rgba(0, 0, 0, 0.7)' }}>
-        <Toolbar>
-          <Typography variant="h6">Meal Planner</Typography>
-        </Toolbar>
-      </AppBar>
-
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 2 }}>
         <Typography variant="h4" gutterBottom>Meal Plan for {activeDay}</Typography>
         <Box sx={{ display: 'flex', marginBottom: 2 }}>
@@ -371,7 +340,7 @@ const PlannerPage = () => {
             <Button
               key={day}
               variant={activeDay === day ? 'contained' : 'outlined'}
-              onClick={() => handleTabClick(day)}
+              onClick={() => setActiveDay(day)}
               sx={{ marginRight: 1, borderRadius: '20px' }}
             >
               {day}
@@ -381,62 +350,146 @@ const PlannerPage = () => {
       </Box>
 
       <motion.div
-  key={activeDay}
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  exit={{ opacity: 0, y: -20 }}
-  transition={{ duration: 0.3 }}
+        key={activeDay}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+      >
+        {mealsForActiveDay && mealsForActiveDay.length === 0 ? (
+          <Typography>No meals available for {activeDay}.</Typography>
+        ) : (
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 2 }}>
+            {mealsForActiveDay && mealsForActiveDay.length > 0 ? (
+              <Grid container spacing={2}>
+                {mealsForActiveDay.map((meal, index) => (
+                  <Grid item xs={12} sm={6} md={4} key={index}>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Card
+                        sx={{
+                          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+                          '&:hover': { transform: 'scale(1.05)', boxShadow: 3 },
+                        }}
+                        onClick={() => handleCardClick(meal)}
+                      >
+                        <CardMedia
+                          component="img"
+                          alt={meal.name}
+                          height="140"
+                          image={meal.image}
+                        />
+
+                        <CardContent>
+                          <Typography variant="h6">{meal.name}</Typography>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </Grid>
+                ))}
+              </Grid>
+            ) : (
+              <Typography>No meals available for {activeDay}.</Typography>
+            )}
+          </Box>
+        )}
+      </motion.div>
+
+      {/* Dialog for displaying full meal image and details */}
+      <Dialog 
+  open={open} 
+  onClose={handleClose} 
+  maxWidth="md" // You can set this to any size like 'sm', 'md', or 'lg'
+  fullWidth
+  sx={{
+    height: '90%', // Set dialog height to 90% of the screen
+    maxHeight: '90vh', // Ensure it doesn't exceed the screen height
+  }}
 >
-  {mealPlan[activeDay].length === 0 ? (
-    <Typography>No meals available for {activeDay}.</Typography>
-  ) : (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 2 }}>
-      {mealPlan[activeDay].map((meal, index) => (
-    <Card 
-        key={index} 
+  <motion.div
+    initial={{ scale: 0 }}
+    animate={{ scale: 1 }}
+    exit={{ scale: 0 }}
+    transition={{ duration: 0.3 }}
+  >
+    {selectedMeal && ( // Add a check to ensure selectedMeal is not null
+      <Box 
         sx={{ 
-            width: 250, 
-            transition: 'transform 0.3s', 
-            '&:hover': { transform: 'scale(1.05)', boxShadow: 3 } 
+          display: 'flex', 
+          height: '100%', // Ensure the content fills the entire dialog
+          background: '#fff', 
+          borderRadius: '8px', 
+          boxShadow: 3 
         }}
-        onClick={() => handleCardClick(meal)}
-    >
-        <CardMedia
+      >
+        {/* Left Side: Meal Image */}
+        <Box
+          sx={{
+            width: '40%', // Image takes up 40% of the dialog width
+            position: 'relative',
+          }}
+        >
+          <CardMedia
             component="img"
-            alt={meal.name}
-            height="140"
-            image={meal.image} // Ensure this uses the fetched image
-        />
-        <CardContent>
-            <Typography variant="h6">{meal.name}</Typography>
-            <Typography color="text.secondary">{meal.type}</Typography>
-        </CardContent>
-    </Card>
-))}
+            alt={selectedMeal.name}
+            image={selectedMeal.image ? selectedMeal.image : "https://via.placeholder.com/150"} // Fallback to placeholder if no image
+            sx={{ 
+              height: '100%',  // Cover entire height
+              width: '100%',   // Cover entire width
+              objectFit: 'cover', 
+              borderTopLeftRadius: '8px',
+              borderBottomLeftRadius: '8px',
+            }}
+          />
 
-    </Box>
-  )}
-</motion.div>
-
-
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
-        <Box sx={{ padding: 2, background: 'rgba(255, 255, 255, 0.9)' }}>
-          {selectedMeal && (
-            <>
-              <CardMedia
-                component="img"
-                alt={selectedMeal.name}
-                height="200"
-                image={selectedMeal.image}
-                sx={{ marginBottom: 2 }}
-              />
-              <Typography variant="h5">{selectedMeal.name}</Typography>
-              <Typography variant="body1" sx={{ marginBottom: 2 }}>{selectedMeal.details}</Typography>
-              <Button onClick={handleClose} variant="contained">Close</Button>
-            </>
-          )}
+          {/* Semicircle Overlay */}
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              right: '-40px', // Slightly extend beyond the image
+              width: '80px',
+              height: '100%',
+              backgroundColor: '#fff', // Same as dialog background
+              borderTopRightRadius: '50%',
+              borderBottomRightRadius: '50%',
+            }}
+          />
         </Box>
-      </Dialog>
+        
+        {/* Right Side: Meal Details */}
+        <Box 
+          sx={{ 
+            padding: '5%',  // Adjust padding as necessary
+            display: 'flex', 
+            flexDirection: 'column', 
+            justifyContent: 'space-between', 
+            width: '60%', // Details take up 60% of the dialog width
+          }}
+        >
+          <Box>
+            <Typography variant="h5" gutterBottom>
+              {selectedMeal?.meal || "Meal Name"}
+            </Typography>
+            <Typography variant="body1" sx={{ marginBottom: 2 }}>
+              {selectedMeal?.details || "No details available."}
+            </Typography>
+          </Box>
+          
+          <Button onClick={handleClose} variant="contained" sx={{ alignSelf: 'flex-end' }}>
+            Close
+          </Button>
+        </Box>
+      </Box>
+    )}
+  </motion.div>
+</Dialog>
+
+
+
     </Box>
   );
 };

@@ -11,7 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@mui/material": "^6.1.1",
+    "@mui/material": "^6.1.4",
     "aos": "^2.3.4",
     "bootstrap": "^5.3.3",
     "framer-motion": "^11.5.6",
