@@ -78,24 +78,10 @@ async function generateMealPlan(userDetails) {
             console.log(day); // Log the current day
             const meals = mealPlan[day];
             for (const meal of meals) {
-                const imageUrl = await getImageUrl(meal.meal);
-                meal.image = imageUrl || "No image available"; // Ensure this logic assigns a valid image URL
-                console.log("Image URL:", imageUrl); // Add this log to check the image URL
-
-
+                const imageUrl = await getImageUrl(meal.meal); // Correct usage of 'meal.meal' for querying images
+                meal.image = imageUrl || "No image available"; // Add image URL to meal
             }
         }
-
-
-        // for (const day in mealPlan) {
-        //     console.log(day); // Log the current day
-        //     const meals = mealPlan[day];
-        //     for (const meal of meals) {
-        //       meal.meal = meal.meal || "Unknown Meal"; // Set a default meal name
-        //       const imageUrl = await getImageUrl(meal.meal); // Correct usage of 'meal.meal' for querying images
-        //       meal.image = imageUrl || "https://via.placeholder.com/150"; // Set a default image URL
-        //     }
-        //   }
 
         return mealPlan;
     } catch (error) {
@@ -124,6 +110,3 @@ export async function POST(req) {
         });
     }
 }
-
-
-
