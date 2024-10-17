@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@splinetool/react-spline": "^4.0.0",
     "aos": "^2.3.4",
     "bootstrap": "^5.3.3",
     "next": "14.2.9",
@@ -17,6 +18,7 @@
     "react-dom": "^18",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
+    "spline": "^0.0.0",
     "styled-components": "^6.1.13"
   },
   "devDependencies": {

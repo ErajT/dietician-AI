@@ -43,6 +43,7 @@ async function generateMealPlan(userDetails) {
 
         const result = await response.json();
         let mealPlan = result.choices[0].message.content;
+        console.log(mealPlan);
 
         // Parse the meal plan JSON string if necessary
         let jsonStringMatch = mealPlan.match(/\{[\s\S]*\}/);
