@@ -10,8 +10,8 @@ html, body {
     display: flex;
     justify-content: center;
     position: absolute;
-    margin-left: -30%;
-    margin-top: 2%;
+    margin-left: 10%;
+    margin-top: 20%;
     width: 100%; 
     
   transition: all 0.8s ease-in-out;
@@ -44,14 +44,24 @@ html, body {
     background-color: #45a049;
 }
 
-
-.searchForm.move-to-top-right {
-  top: 20px;
-  left: auto;
-  /* right: 200px; */
-  transform: translate(0, 0);
-  transition: all 10s ease-in-out;
+.search-bar-top {
+  display: flex;
+  justify-content: flex-start; /* Align to the top-left */
+  position: relative; /* Relative to its container */
+  margin-top: 5vh; /* Adjust space from the top */
+  margin-left: 40vw;
+  width: 100%;
 }
+
+.search-bar-top .searchInput {
+  width: 80%; /* Adjust the width as necessary */
+}
+
+.search-bar-top .searchButton {
+  margin-left: 10px; /* Adjust space between the input and button */
+}
+
+
 
 
 .loading {
@@ -65,7 +75,7 @@ html, body {
 
 
 .recipe-generator {
-    color: #f4f5f4; 
+    color: #102820; 
     font-size: 4rem; 
     font-weight: bold; 
     text-align: start; 
@@ -83,7 +93,7 @@ html, body {
 }
 
 .recipe-subheading {
-    color: #ffffffb6; 
+    color: #102820; 
     font-size: 2rem; 
     font-weight: normal; 
     text-align: center; 
@@ -97,29 +107,15 @@ html, body {
 }
 
 .recipe-background {
-  position: relative;
-  
-  z-index: -1;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background-color: #cee2d2;
+  background-image: url('/images/bg.png'); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the container */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  height: 100vh; /* Full viewport height */
+  width: 100%; /* Full width */
 }
 
-.background-video {
-  position: absolute;
-  height: auto;
-  overflow-y: scroll;
-  width: 100%;
-  top: 0;
- 
-  width: 100%;
-  height: 100%;
-  object-fit: cover; 
-  z-index: -1; /* Keep the video in the background */
-}
 
 .card-bar {
  margin-top: 140vh;
@@ -250,89 +246,6 @@ html, body {
 }
 
 
-/* Search button styles */
-.cart-search-bar .searchButton {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #154b18;
-  color: white;
-  border: none;
-  border-radius: 25px;
-  margin-left: 15px;
-  cursor: pointer;
-}
-
-/* Hover effect for button */
-.cart-search-bar .searchButton:hover {
-  background-color: #45a049;
-}
-
-
-.cart-search-bar {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 3 equal-width columns */
-  gap: 5%; 
-  margin-top: 5%;
-  margin-right: 0%;
-  padding: 20px;
-}
-
-@media (max-width: 900px) {
-  .cart-search-bar {
-    grid-template-columns: repeat(2, 1fr); /* 2 cards per row on medium screens */
-  }
-}
-
-@media (max-width: 600px) {
-  .cart-search-bar {
-    grid-template-columns: 1fr; /* 1 card per row on smaller screens */
-  }
-}
-
-
-
-
- /* Card container to ensure everything is positioned relative */
-.MuiCard-root {
-  position: relative;
-  overflow: hidden;
-}
-
-/* Initial state of the image */
-.media-image {
-  height: 140px;
-  transition: filter 0.5s ease; /* Smooth transition for blur effect */
-}
-
-/* On hover, blur the image */
-.MuiCard-root:hover .media-image {
-  filter: blur(5px); /* Blur the image on hover */
-}
-
-/* Initial hidden state of the card content (text) */
-.card-content {
-  opacity: 0;
-  position: absolute;
-  color: #ffffff;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-  transition: opacity 0.5s ease; /* Smooth fade-in transition for text */
-}
-
-/* On hover, reveal the card content */
-.MuiCard-root:hover .card-content {
-  opacity: 1; /* Fade in the text on hover */
-}
-
-
-
 
 
   .failed-recipe {
@@ -341,3 +254,27 @@ html, body {
      font-size: larger;
 
   }
+
+
+  /* ActionAreaCard container */
+.action-card {
+  max-width: 345px;
+  margin: 20px auto; /* Centers the card horizontally with some margin */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  border-radius: 8px; /* Rounds the corners slightly */
+  overflow: hidden; /* Ensures no content overflows outside the card */
+}
+
+/* For the image inside the card */
+.action-card-image {
+  width: 100%; /* Ensures the image takes full width */
+  height: 140px; /* Sets the image height */
+  object-fit: cover; /* Ensures the image fits within the given dimensions without stretching */
+}
+
+/* Hover effect for the card */
+.action-card:hover {
+  transform: translateY(-5px); /* Slight upward movement */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); /* Increases shadow on hover */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
