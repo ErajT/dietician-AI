@@ -4,14 +4,17 @@ html, body {
   height: 100%; /* Use min-height if you expect the content to exceed the viewport height */
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: #cee2d2;
 
 }
 .searchForm {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     position: absolute;
-    margin-left: 10%;
-    margin-top: 20%;
+    margin-left: 20rem;
+    margin-top: 15rem;
     width: 100%; 
     
   transition: all 0.8s ease-in-out;
@@ -20,28 +23,30 @@ html, body {
 
 /* Input box styles with rounded corners */
 .searchInput {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 25px; 
+    padding: 1rem;
+    font-size: 1rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 5rem; 
     width: 60%; 
     max-width: 600px; 
 }
 
 .searchButton {
-    padding: 10px 20px;
+    padding: 1rem 2rem;
     font-size: 16px;
-    background-color: #4CAF50;
-    color: white;
+    background-color:#102820;
+    color:#cee2d2 ;
+
     border: none;
-    border-radius: 25px; /* Round the corners */
-    margin-left: 20px; /* Adds space between the input and button */
+    border-radius: 5rem; /* Round the corners */
+    margin-left: 2rem; /* Adds space between the input and button */
     cursor: pointer;
 
 }
 
 .searchButton:hover {
-    background-color: #45a049;
+    background-color: #87dc98;
+    color: #102820;
 }
 
 .search-bar-top {
@@ -49,7 +54,7 @@ html, body {
   justify-content: flex-start; /* Align to the top-left */
   position: relative; /* Relative to its container */
   margin-top: 5vh; /* Adjust space from the top */
-  margin-left: 40vw;
+  margin-left: 37vw;
   width: 100%;
 }
 
@@ -58,7 +63,7 @@ html, body {
 }
 
 .search-bar-top .searchButton {
-  margin-left: 10px; /* Adjust space between the input and button */
+  margin-left: 1rem; /* Adjust space between the input and button */
 }
 
 
@@ -109,57 +114,14 @@ html, body {
 .recipe-background {
   background-color: #cee2d2;
   background-image: url('/images/bg.png'); /* Replace with your image path */
-  background-size: cover; /* Ensures the image covers the container */
+  background-size: cover; 
+ /* Ensures the image covers the container */
   background-position: center; /* Centers the image */
   background-repeat: no-repeat; /* Prevents the image from repeating */
   height: 100vh; /* Full viewport height */
   width: 100%; /* Full width */
 }
 
-
-.card-bar {
- margin-top: 140vh;
-  background-color: #45a049;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap; 
-  gap: 16px; 
-  
-  max-height: 400px;
-  padding: 16px; 
-}
-
-.card {
-  position: relative; /* Ensures the card is positioned correctly */
-  z-index: 10; /* Brings the card above other elements */
-  margin: 20px;
-  max-width: 345px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds some depth */
-  border-radius: 8px; /* Slight rounding on the corners */
-  background-color: white;
-}
-
-/* Keyframe for animation */
-@keyframes cardUpDown {
-  0% {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Apply animation to cards */
-.animated-card {
-  animation: cardUpDown 0.8s ease-out;
-  transition: transform 0.3s ease;
-}
-
-.animated-card:hover {
-  transform: translateY(-10px);
-}
 
 
 
@@ -170,8 +132,6 @@ html, body {
 }
 
 
-
-  
   .recipe-background, .recipe-cart-background {
     transition: opacity 0.5s ease-in-out;
   }
@@ -255,26 +215,73 @@ html, body {
 
   }
 
+  .recipe-cards-container {
+    margin-top: 2vh;
+    margin-left: 5vw;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 2vw; 
+    box-sizing: border-box;
+    
+    
+   
+  }
+  
+  .recipe-cards-container > * {
+    box-sizing: border-box;
+  }
+  
 
-  /* ActionAreaCard container */
-.action-card {
-  max-width: 345px;
-  margin: 20px auto; /* Centers the card horizontally with some margin */
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
-  border-radius: 8px; /* Rounds the corners slightly */
-  overflow: hidden; /* Ensures no content overflows outside the card */
-}
+  .flip-card {
+    background-color:#102820 ;
+ 
+    width: 20vw;
+    height: 40vh;
+    padding: 5%;
+    border-radius: 10%;
+    border: 0.2rem ridge #102820;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  }
+  
+  /* This container is needed to position the front and back side */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    background-color:#102820 ;
+  }
+  
+  /* Do an horizontal flip when you move the mouse over the flip box container */
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  /* Position the front and back side */
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    
+  }
+  
+  /* Style the front side (fallback if image is missing) */
+  .flip-card-front {
+    background-color:  #102820 ;
+    
+   
+  }
+  
+  /* Style the back side */
+  .flip-card-back {
+    background-color:#102820 ;
+    color: #f8fdfb;
+    transform: rotateY(180deg);
+  }
 
-/* For the image inside the card */
-.action-card-image {
-  width: 100%; /* Ensures the image takes full width */
-  height: 140px; /* Sets the image height */
-  object-fit: cover; /* Ensures the image fits within the given dimensions without stretching */
-}
-
-/* Hover effect for the card */
-.action-card:hover {
-  transform: translateY(-5px); /* Slight upward movement */
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); /* Increases shadow on hover */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
-}
+ 

@@ -1,16 +1,37 @@
-"use client";
-import React from 'react';
-import Stack from '@mui/material/Stack';
-import CircularProgress from '@mui/material/CircularProgress';// Import from material
+// LoadingSkeleton.tsx
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import Skeleton from '@mui/material/Skeleton';
 
+const Image = styled('img')({
+  width: '50%',
+});
 
 const Loading = () => {
   return (
-    <Stack sx={{ color: 'grey.500' }} spacing={2} direction="row">
-    <CircularProgress color="secondary" />
-    
-  </Stack>
+    <div >
+     
+          <Skeleton
+        variant="rectangular"
+        width="20vw"
+        height="40vh"
+        sx={{
+          backgroundColor: '#102820',  // Green background color
+          borderRadius: '5%',  // Rounded corners
+          border: '2px solid',             // Base for the 3D border effect
+          borderTopColor: '#ffffff',       // Light color on top (simulates light source)
+          borderLeftColor: '#ffffff',      // Light color on left
+          borderBottomColor: '#555555',    // Dark color on bottom (simulates shadow)
+          borderRightColor: '#555555',     // Dark color on right
+        }}
+      >
+        <div style={{ paddingTop: '57%' }} />
+      </Skeleton>
+    </div>
   );
-}
+};
 
 export default Loading;

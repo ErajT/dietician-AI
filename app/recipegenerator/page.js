@@ -33,7 +33,8 @@ export default function RecipeGeneratorPage() {
           <Typography variant="h5" component="h3" className="recipe-subheading">
             Quick & Easy Recipes
           </Typography>
-          <SearchBar className="searchForm-centered" onSearch={handleSearch} loading={false} />
+          
+          <SearchBar  onSearch={handleSearch} loading={false} />
         </div>
       )}
     </div>

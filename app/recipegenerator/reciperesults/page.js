@@ -1,17 +1,21 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../../components/searchbar';
-import { useRouter } from 'next/navigation';  // Import the router
+import { useRouter } from 'next/navigation';
 import '../../styling/recipegenerator.css';
+import '../../styling/NoResults.css';
+import ActionAreaCard from '../../components/cards';
+import { Typography } from '@mui/material';
+import Loading from '../../components/loading'
+import NoResults from '../../components/noresults';
 
 export default function RecipeResultsPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [recipes, setRecipes] = useState([]);
-  const [dishQuery, setDishQuery] = useState(""); // State to hold the search query
+  const [dishQuery, setDishQuery] = useState("");
 
-  // Get the search query from the URL or state
   useEffect(() => {
     const query = new URLSearchParams(window.location.search).get('dish');
     if (query) {
@@ -32,12 +36,13 @@ export default function RecipeResultsPage() {
       });
 
       const jsonData = await response.json();
+      console.log('API Response:', jsonData); // Log the response
 
       if (jsonData.status === "Success") {
-        setRecipes(jsonData.message); // Store the 'message' array
+        setRecipes(jsonData.message);
         setError(false);
       } else {
-        setRecipes([]);  // No recipes found
+        setRecipes([]);
       }
     } catch (err) {
       console.error('Error fetching recipes:', err);
@@ -47,36 +52,64 @@ export default function RecipeResultsPage() {
     }
   };
 
+  const handleSearch = (query) => {
+    console.log('Searching for:', query); // Log the search query
+    setDishQuery(query);
+    router.push(`?dish=${query}`);
+    fetchRecipes(query);
+  };
+
   return (
     <div>
-      <SearchBar className="search-bar-top" loading={false} />
+      <SearchBar onSearch={handleSearch} className="search-bar-top" loading={loading} />
 
       {loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>There was an error fetching the recipes.</p>
+        <div style={{
+          display: 'grid',  
+          marginLeft:"5vw",
+          marginTop:"10vh",
+          
+          gridTemplateColumns: 'repeat(4, 1fr)', // Three columns
+          gap: '16px',                   // Adjust gap between items as needed
+                     // Optional: Adds some vertical spacing
+        }}
+        >
+        <Loading />
+        <Loading />
+        <Loading />
+        <Loading />
+        <Loading />
+        <Loading />
+        <Loading />
+        <Loading />
+        <Loading />
+        </div>
+        
+      ) : error ? (<div className="no-result">
+        <Typography variant="h5" component="h3" className="custom-typography">Oops!There seems to be a network issue.</Typography>
+     
+       <NoResults /></div>
       ) : recipes.length === 0 ? (
-        <p>No results for {dishQuery}.</p>
+        <div className="no-result">
+           <Typography variant="h5" component="h3" className="custom-typography">Oops!No recipes available for {dishQuery}.</Typography>
+        
+          <NoResults /></div>
       ) : (
         <div>
-          <h1>Recipe Results for: {dishQuery}</h1>
-          {recipes.map((recipe, index) => (
-            <div key={index}>
-              <h2>{recipe.name}</h2>
-              <ul>
-                {recipe.ingredients.map((ingredient, i) => (
-                  <li key={i}>
-                    <img 
-                      src={ingredient.image} 
-                      alt={ingredient.name} 
-                      style={{ width: '50px', height: '50px', marginRight: '10px' }} 
-                    />
-                    {ingredient.name} - {ingredient.weight}g
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <Typography variant="h5" component="h3">
+            Recipe Results for: {dishQuery}
+          </Typography>
+          <div className="recipe-cards-container">
+            {recipes.map((recipe, index) => (
+              <ActionAreaCard
+                key={index}
+                name={recipe.name}
+                image={recipe.image}
+                cuisine={recipe.cuisineType}
+                calories={recipe.calories}
+              />
+            ))}
+          </div>
         </div>
       )}
     </div>
