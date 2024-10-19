@@ -1,42 +1,6 @@
 import { NextResponse } from 'next/server';
 
-// Helper function to fetch recipe instructions from OpenRouter API
-async function getRecipeInstructions(recipeDetails) {
-    const content = "Act as a chef and return a list of steps needed to create the dish using the ingredients specified, don't include any introduction or conclusion, just return the list with all of the steps.";
-    
-    try {
-        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer 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`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                "model": "meta-llama/llama-3.1-8b-instruct:free",
-                "messages": [
-                    { "role": "user", "content": JSON.stringify(recipeDetails) },
-                    { "role": "system", "content": content },
-                ]
-            })
-        });
 
-        if (!response.ok) {
-            throw new Error("Failed to fetch recipe instructions");
-        }
-
-        const result = await response.json();
-        console.log(result);
-        console.log(result.choices[0].message.content);
-        console.log("genAI response");
-        return result;
-    } catch (error) {
-        // console.error("Error fetching recipe instructions:", error.message);
-        return NextResponse.json({
-            status: "Error",
-            message: "Could not generate recipe",
-        });
-    }
-}
 
 export async function POST(req, res) {
     try {
@@ -63,8 +27,9 @@ export async function POST(req, res) {
 
         // Parse the response from the API
         const data = await apiResponse.json();
-        console.log(data);
+        // console.log(data);
         const hits = data["hits"];
+        console.log(hits);
 
 
         // Process each recipe and fetch instructions for it
@@ -87,18 +52,9 @@ export async function POST(req, res) {
                 dishType: recipe.dishType
             };
 
-            // Fetch instructions using the recipe details
-            // console.log("these are recipe details")
-            // console.log(recipeDetails);
-            const instructions = await getRecipeInstructions(recipeDetails);
-            console.log("recipe instructions gotten")
-            // console.log(instructions);
-            // console.log(instructions["choices"][0]["message"]["content"]);
-
             return {
                 ...recipeDetails, // Spread the recipe details object
                 image: recipe.image,
-                recipeInstructions: instructions["choices"][0]["message"]["content"], // Add the generated instructions here
             };
         }));
 

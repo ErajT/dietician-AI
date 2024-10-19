@@ -19,7 +19,7 @@ async function getImageUrl(query) {
 }
 
 async function generateMealPlan(userDetails) {
-    const content = "Act as a nutritionist and return a weekly meal plan. Each day of the week should be a key in the response object, and the value should be a list of meals for that day. Consider the user's preferences for the number of meals per day, the time they want to eat, and their dietary restrictions. Also return the quantities with the ingredients of the meal. Only return the JSON object with no additional text.";
+    const content = "Act as a nutritionist and return a weekly meal plan. Each day of the week should be a key in the response object (in full form: like Monday), and the value should be a list of meals for that day. Consider the user's preferences for the number of meals per day, the time they want to eat, and their dietary restrictions. Also return the quantities with the ingredients of the meal. Only return the JSON object with no additional text.";
 
     try {
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
