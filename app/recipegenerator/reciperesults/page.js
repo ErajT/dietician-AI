@@ -102,11 +102,13 @@ export default function RecipeResultsPage() {
           <div className="recipe-cards-container">
             {recipes.map((recipe, index) => (
               <ActionAreaCard
-                key={index}
+              key={index} // Use the index as the key
+              id={index} 
                 name={recipe.name}
                 image={recipe.image}
                 cuisine={recipe.cuisineType}
                 calories={recipe.calories}
+                onClick={handleCardClick}
               />
             ))}
           </div>
