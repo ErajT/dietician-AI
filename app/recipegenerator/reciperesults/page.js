@@ -36,7 +36,7 @@ export default function RecipeResultsPage() {
       });
 
       const jsonData = await response.json();
-      console.log('API Response:', jsonData); // Log the response
+      console.log('API Response:', jsonData); 
 
       if (jsonData.status === "Success") {
         setRecipes(jsonData.message);
@@ -58,6 +58,7 @@ export default function RecipeResultsPage() {
     router.push(`?dish=${query}`);
     fetchRecipes(query);
   };
+ 
 
   return (
     <div>
@@ -70,8 +71,8 @@ export default function RecipeResultsPage() {
           marginTop:"10vh",
           
           gridTemplateColumns: 'repeat(4, 1fr)', // Three columns
-          gap: '16px',                   // Adjust gap between items as needed
-                     // Optional: Adds some vertical spacing
+          gap: '16px',                  
+                     
         }}
         >
         <Loading />
@@ -103,12 +104,13 @@ export default function RecipeResultsPage() {
             {recipes.map((recipe, index) => (
               <ActionAreaCard
               key={index} // Use the index as the key
-              id={index} 
+              id={Number(index)}  
                 name={recipe.name}
                 image={recipe.image}
                 cuisine={recipe.cuisineType}
                 calories={recipe.calories}
-                onClick={handleCardClick}
+                dishQuery={dishQuery}
+                
               />
             ))}
           </div>
