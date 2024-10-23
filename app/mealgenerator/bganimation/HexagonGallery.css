@@ -1,0 +1,105 @@
+/* Hexagon container */
+.hexagon-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align to the left for a staggered layout */
+  gap: 20px; /* Maintain the overall gap between hexagons */
+  padding-left: 0;
+  position: absolute; /* Position it absolutely to control its placement */
+  left: 0; /* Align to the left */
+  top: 100px; /* Align to the top */
+  width: 30%; /* Adjust width to fit design */
+  margin-left: 40px; /* Increased left margin */
+}
+
+/* Hexagon shape */
+.hexagon {
+  position: relative;
+  width: 200px; /* Reduced width */
+  height: 173.2px; /* Adjusted height for proper alignment */
+  background-color: transparent;
+  margin: -20px 0; /* Reduce negative margin for less overlap */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: popAnimation 2.5s ease-in-out infinite;
+  overflow: hidden; /* Ensure quotes don't overflow */
+}
+
+/* Quote text inside hexagon */
+.hexagon .quote {
+  position: absolute;
+  color: whitesmoke; /* Text color */
+  font-size: 16px; /* Font size for the quote */
+  text-align: center; /* Center text */
+  padding: 10px; /* Padding for the quote */
+  background-color:transparent; /* Light background for readability */
+  border-radius: 5px; /* Rounded corners */
+  visibility: hidden; /* Hide by default */
+  opacity: 0; /* Start with no opacity */
+  transition: visibility 0s, opacity 0.3s ease-in-out; /* Smooth transition */
+}
+
+/* Show the quote text on hover */
+.hexagon:hover .quote {
+  visibility: visible; /* Show quote on hover */
+  opacity: 2; /* Make it visible */
+}
+
+/* Blur the image on hover */
+.hexagon:hover .hexagon-image {
+  filter: blur(3px) brightness(0.75); /* Apply blur effect and reduce brightness */
+}
+/* Odd hexagons */
+.hexagon:nth-child(odd) {
+  margin-left: -20px; /* Align to the left */
+  animation-delay: 0s;
+  margin-top: -50px; /* Reduced top spacing for even hexagons */
+}
+
+/* Even hexagons */
+.hexagon:nth-child(even) {
+  margin-left: 140px; /* Increased left margin for even hexagons */
+  margin-top: -40px; /* Reduced top spacing for even hexagons */
+  animation-delay: 1.25s;
+}
+
+.hexagon::before,
+.hexagon::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 100px solid transparent; /* Adjusted for smaller hexagons */
+  border-right: 100px solid transparent; /* Adjusted for smaller hexagons */
+}
+
+.hexagon::before {
+  bottom: 100%;
+  border-bottom: 86.6px solid transparent; /* Adjusted for smaller hexagons */
+}
+
+.hexagon::after {
+  top: 100%;
+  border-top: 86.6px solid transparent; /* Adjusted for smaller hexagons */
+}
+
+/* Hexagon image */
+.hexagon-image {
+  width: 200px; /* Reduced width */
+  height: 200px; /* Reduced height */
+  background-size: cover;
+  background-position: center;
+  clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
+  transition: filter 0.3s ease-in-out; /* Smooth transition for blur effect */
+}
+
+/* Keyframes for pop animation */
+@keyframes popAnimation {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
