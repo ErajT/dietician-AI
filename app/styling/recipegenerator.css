@@ -233,13 +233,13 @@ html, body {
   
 
   .flip-card {
-    background-color:#102820 ;
+    background-color:#cee2d2  ;
  
     width: 20vw;
     height: 40vh;
-    padding: 5%;
-    border-radius: 10%;
-    border: 0.2rem ridge #102820;
+    
+    
+   
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
   }
   
@@ -251,10 +251,10 @@ html, body {
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-    background-color:#102820 ;
+    background-color:#cee2d2  ;
   }
   
-  /* Do an horizontal flip when you move the mouse over the flip box container */
+
   .flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
   }
@@ -271,7 +271,7 @@ html, body {
   
   /* Style the front side (fallback if image is missing) */
   .flip-card-front {
-    background-color:  #102820 ;
+    background-color:#cee2d2  ;
     
    
   }

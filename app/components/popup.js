@@ -31,15 +31,38 @@ export default function ResponsiveDialog({ open, handleClose }) {
       open={open}
       onClose={handleClose}
       aria-labelledby="responsive-dialog-title"
+      sx={{
+        '& .MuiDialog-paper': {
+          width: '25em', // Set custom width
+          borderRadius: '2em',
+          height: '10em', // Set custom height
+          backgroundColor: '#cee2d2', // Set background color (light green here)
+          
+        },
+      }}
     >
-      <DialogTitle id="responsive-dialog-title">
-        {"Great news!"}
+      <DialogTitle 
+        id="responsive-dialog-title"
+        sx={{
+          fontSize: '2em', 
+          fontWeight: 'bold',
+          textAlign: 'center', 
+        }}
+      >
+        {"Hurray!"}
       </DialogTitle>
+      
+        
       <DialogContent>
-        <DialogContentText>
-        Hurray! This recipe is low on calories and packed with flavor! 
-        Enjoy guilt-free deliciousness!
-
+        <DialogContentText
+          sx={{
+            fontSize: '1em', 
+            color: '#102820 ', 
+            textAlign: 'center', 
+          }}
+        >
+          This recipe is low on calories and packed with flavor!
+          Enjoy guilt-free deliciousness!
         </DialogContentText>
       </DialogContent>
     </Dialog>

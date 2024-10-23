@@ -2,7 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'; 
-import ResponsiveDialog from '../../components/popup'; // Import the responsive dialog component
+import ResponsiveDialog from '../../components/popup'; 
+import RecipeTable from '../../components/recipedetails';
+import IngredientsTable from '../../components/ingredients';
+import '../../styling/recipegenerator.css';
+import { Margin, Padding } from '@mui/icons-material';
+
 
 const IndividualRecipe = () => {
   const router = useRouter();
@@ -11,26 +16,25 @@ const IndividualRecipe = () => {
   const [error, setError] = useState(false);
   const [dish, setDish] = useState(null);
   const [id, setId] = useState(null); // State for id
-  const [openDialog, setOpenDialog] = useState(false); // State for dialog visibility
-
+  const [openDialog, setOpenDialog] = useState(false); 
+  const [isHovered, setIsHovered] = useState(false); 
   useEffect(() => {
-    // Retrieve the stored dish and id from session storage
+    
     const storedDish = sessionStorage.getItem('dish');
-    const storedId = sessionStorage.getItem('id'); // Get the id from session storage
+    const storedId = sessionStorage.getItem('id'); 
 
-    setDish(storedDish); // Set the dish state
+    setDish(storedDish); 
     setId(storedId); // Set the id state
 
-    // Log the stored dish and id
+  
     console.log('Stored Dish:', storedDish);
     console.log('Stored ID:', storedId);
 
-    // Fetch recipes only if a dish and id are found
+    
     if (storedDish && storedId) {
-      fetchRecipes(storedDish, storedId); // Pass both dish and id to the fetch function
+      fetchRecipes(storedDish, storedId); 
     }
-  }, []); // Run only once when the component mounts
-
+  }, []);
   const fetchRecipes = async (query, recipeId) => {
     setLoading(true);
     try {
@@ -39,7 +43,7 @@ const IndividualRecipe = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ dish: query }), // Use the stored dish for the API call
+        body: JSON.stringify({ dish: query }), 
       });
 
       const jsonData = await response.json();
@@ -52,7 +56,7 @@ const IndividualRecipe = () => {
 
         // Check the calories and open the dialog if less than 600
         if (selectedRecipe.calories < 600) {
-          setOpenDialog(true); // Open the dialog
+          setOpenDialog(true); 
         }
 
       } else {
@@ -72,36 +76,100 @@ const IndividualRecipe = () => {
 
   // Render recipe details
   return (
-    <div>
+    <div >
       {recipe && (
         <div>
-          <h1>{recipe.name}</h1> {/* Recipe name */}
-          <img src={recipe.image} alt={recipe.name} style={{ width: '300px', height: '300px' }} /> {/* Recipe image */}
-          
-          <h2>Ingredients:</h2>
-          <ul>
-            {recipe.ingredients.map((ingredient, index) => (
-              <li key={index}>
-                <img 
-                  src={ingredient.image} 
-                  alt={ingredient.name} 
-                  style={{ width: '50px', height: '50px', marginRight: '10px' }} 
-                />
-                {ingredient.name} - {ingredient.weight}g
-              </li>
-            ))}
-          </ul>
+          <h1 style={{
+             
+  fontFamily: 'Poppins, sans-serif', 
+  fontSize: '4em',  
+  marginLeft:'10%',        
+  color: '#102820',               
+        
+  alignItems : "center",
+  justifyContent :"center",
+  fontWeight: 'bold',     
+           
+}}>{recipe.name}</h1>
 
-          <h2>Details:</h2>
-          <p><strong>Calories:</strong> {recipe.calories}</p>
-          <p><strong>Total Weight:</strong> {recipe.totalWeight}g</p>
-          <p><strong>Cuisine Type:</strong> {recipe.cuisineType.join(', ')}</p>
-          <p><strong>Meal Type:</strong> {recipe.mealType.join(', ')}</p>
-          <p><strong>Dish Type:</strong> {recipe.dishType.join(', ')}</p>
-        </div>
+
+<div style={{ 
+    display: 'flex', 
+     
+    alignItems: 'center', 
+
+    backgroundColor:'#9cb5a1', 
+    width: '100%',
+    height:'50%'
+}} >
+ 
+<div style={{'width':'30%',marginLeft:'10%'}}>
+    <RecipeTable recipe={recipe}  /></div>
+  
+  <div style={{ 
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      width: '30%', 
+      height: '20%', 
+      border: '10% solid red',
+      marginLeft:'10%',
+      backgroundColor:'#9cb5a1',
+      padding:'2% 1%',
+  }}>
+    <img
+                src={recipe.image}
+                alt={recipe.name}
+                style={{
+                  width: '90%',
+                  height: '90%',
+                  transition: 'transform 0.3s ease', 
+                  transform: isHovered ? 'scale(1.2)' : 'scale(1)', 
+                }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)} 
+              /> {/* Recipe image */}
+  </div>
+</div>
+
+
+        
+
+<div style={{
+    textAlign: 'left',
+    padding: '0 10%',
+     justifyContent:'left',
+      justifyItems:'left',
+      display:'flex',
+      justifyContent:'flex-start',
+
+      
+}}>
+  <h2 style={{
+      fontFamily: 'Poppins, sans-serif',
+      fontSize: '2em',
+      color: '#102820',
+      fontWeight: 'bold',
+      marginBottom: '5%', // Optional: Add space below the heading
+  }}>
+    Ingredients:
+  </h2>
+  
+  <div style={{
+      display: 'block', 
+      width: '100%',
+      justifyContent:'left',
+      justifyItems:'left',
+      marginLeft:'-20%',
+  }}>
+    <IngredientsTable recipe={recipe} style={{ margin: '0 auto', textAlign: 'left' }} /> {/* Ensure the table is left-aligned */}
+  </div>
+</div>
+            
+            </div>
       )}
 
-      {/* Responsive Dialog for positive message */}
+    
       <ResponsiveDialog open={openDialog} handleClose={() => setOpenDialog(false)} />
     </div>
   );

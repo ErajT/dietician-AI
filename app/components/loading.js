@@ -21,7 +21,7 @@ const Loading = () => {
         sx={{
           backgroundColor: '#102820',  // Green background color
           borderRadius: '5%',  // Rounded corners
-          border: '2px solid',             // Base for the 3D border effect
+          border: '2px solid',             
           borderTopColor: '#ffffff',       // Light color on top (simulates light source)
           borderLeftColor: '#ffffff',      // Light color on left
           borderBottomColor: '#555555',    // Dark color on bottom (simulates shadow)
