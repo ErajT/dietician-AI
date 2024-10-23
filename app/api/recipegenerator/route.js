@@ -20,7 +20,7 @@ export async function POST(req, res) {
         const apiResponse = await fetch(
             `https://api.edamam.com/api/recipes/v2?q=${dish}&app_id=26b2e150&app_key=c0257cc4bd0eb717b3c2886acfaf1b01&type=public`
         );
-        
+           
         if (!apiResponse.ok) {
             throw new Error("Edamam API not working");
         }
@@ -29,7 +29,7 @@ export async function POST(req, res) {
         const data = await apiResponse.json();
         // console.log(data);
         const hits = data["hits"];
-        console.log(hits);
+        // console.log(hits);
 
 
         // Process each recipe and fetch instructions for it

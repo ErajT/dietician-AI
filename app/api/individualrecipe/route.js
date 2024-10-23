@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 
 // Helper function to fetch recipe instructions from OpenRouter API
 async function getRecipeInstructions(recipeDetails) {
+    console.log(recipeDetails)
     const content = "Act as a chef and return a list of steps needed to create the dish using the ingredients specified, don't include any introduction or conclusion, just return the list with all of the steps.";
     
     try {
@@ -25,10 +26,10 @@ async function getRecipeInstructions(recipeDetails) {
         }
 
         const result = await response.json();
-        console.log(result);
-        console.log(result.choices[0].message.content);
-        console.log("genAI response");
-        return result;
+        // console.log(result);
+        // console.log(result.choices[0].message.content);
+        // console.log("genAI response");
+        return result.choices[0].message.content;
     } catch (error) {
         // console.error("Error fetching recipe instructions:", error.message);
         return NextResponse.json({
@@ -41,7 +42,7 @@ async function getRecipeInstructions(recipeDetails) {
 export async function POST(req, res) {
     try {
         // Parse the JSON body from the request
-        const { recipeDetails } = await req.json();
+        const  recipeDetails  = await req.json();
 
             const instructions = await getRecipeInstructions(recipeDetails);
             console.log("recipe instructions gotten")
