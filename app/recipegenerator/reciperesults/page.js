@@ -61,8 +61,10 @@ export default function RecipeResultsPage() {
  
 
   return (
-    <div>
-      <SearchBar onSearch={handleSearch} className="search-bar-top" loading={loading} />
+    <div 
+    >
+      <div className="search-bar-top">
+      <SearchBar onSearch={handleSearch}  loading={loading} /></div>
 
       {loading ? (
         <div style={{

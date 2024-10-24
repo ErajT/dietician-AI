@@ -9,173 +9,10 @@ html, body {
   background-color: #cee2d2;
 
 }
-.searchForm {
-    display: flex;
-    justify-content: flex-start;
-    position: absolute;
-    margin-left: 20rem;
-    margin-top: 15rem;
-    width: 100%; 
-    
-  transition: all 0.8s ease-in-out;
-}
 
 
-/* Input box styles with rounded corners */
-.searchInput {
-    padding: 1rem;
-    font-size: 1rem;
-    border: 0.1rem solid #ccc;
-    border-radius: 5rem; 
-    width: 60%; 
-    max-width: 600px; 
-}
-
-.searchButton {
-    padding: 1rem 2rem;
-    font-size: 16px;
-    background-color:#102820;
-    color:#cee2d2 ;
-
-    border: none;
-    border-radius: 5rem; /* Round the corners */
-    margin-left: 2rem; /* Adds space between the input and button */
-    cursor: pointer;
-
-}
-
-.searchButton:hover {
-    background-color: #87dc98;
-    color: #102820;
-}
-
-.search-bar-top {
-  display: flex;
-  justify-content: flex-start; /* Align to the top-left */
-  position: relative; /* Relative to its container */
-  margin-top: 5vh; /* Adjust space from the top */
-  margin-left: 37vw;
-  width: 100%;
-}
-
-.search-bar-top .searchInput {
-  width: 80%; /* Adjust the width as necessary */
-}
-
-.search-bar-top .searchButton {
-  margin-left: 1rem; /* Adjust space between the input and button */
-}
-
-
-
-
-.loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-
-
-
-.recipe-generator {
-    color: #102820; 
-    font-size: 4rem; 
-    font-weight: bold; 
-    text-align: start; 
-    margin: 0; 
-    position: absolute;
-    top: 10%;
-    left: 30%;
-    transform: translateX(-50%); 
-    z-index: 2; 
-    font-family: "Bangers", system-ui;
-  font-weight: 700;
-  font-style: normal;
-    
-      
-}
-
-.recipe-subheading {
-    color: #102820; 
-    font-size: 2rem; 
-    font-weight: normal; 
-    text-align: center; 
-    margin-top: -5vh; 
-    margin-left: -10vw;
-    position: absolute;
-    top: 30%; 
-    left: 60%;
-    transform: translateX(-50%); 
-    z-index: 2;
-}
-
-.recipe-background {
-  background-color: #cee2d2;
-  background-image: url('/images/bg.png'); /* Replace with your image path */
-  background-size: cover; 
- /* Ensures the image covers the container */
-  background-position: center; /* Centers the image */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
-  height: 100vh; /* Full viewport height */
-  width: 100%; /* Full width */
-}
-
-
-
-
-
-/* Styling for when loading is true, adding blur effect */
-.blur {
-  filter: blur(8px);
-}
-
-
-  .recipe-background, .recipe-cart-background {
-    transition: opacity 0.5s ease-in-out;
-  }
-  
-  .recipe-background.hidden {
-    opacity: 0;
-    visibility: hidden;
-  }
-  
-  .recipe-cart-background {
-    opacity: 1;
-  }
   
   
- 
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(42, 217, 106, 0.753); /* Adjust the opacity for the blackish effect */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-  }
-  
-
-  
-  .recipe-cart-background {
-    width: 100vw;
-    height: 100vh;
-    /* background-image: url('/images/recipe4.jpg');  */
-    background-size: cover; /* Ensures the image covers the entire background */
-    background-position: center; /* Centers the image in the background */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    display: flex;
-    
-    box-sizing: border-box;
-    overflow-y: auto;
-  }s
-
 
 .cart-search-bar {
   display: flex;
@@ -205,7 +42,11 @@ html, body {
   max-width: 700px; /* Set a maximum width */
 }
 
+.search-bar-top {
+ margin-top: 2%;
+ margin-left: 45%;
 
+}
 
 
   .failed-recipe {

@@ -1,8 +1,13 @@
 "use client";  // Ensure it's a client-side component
 
 import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
-const SearchBar = ({ onSearch = () => {}, loading, className = "" }) => {
+import '../styling/recipepage.css'; 
+
+const SearchField = ({ onSearch = () => {}, loading, className = "" }) => {
   const [query, setQuery] = useState('');
 
   const handleInputChange = (event) => {
@@ -21,22 +26,55 @@ const SearchBar = ({ onSearch = () => {}, loading, className = "" }) => {
   };
 
   return (
-    <form 
+    <Box
+      component="form"
       onSubmit={handleSubmit} 
       className={`${className} searchForm ${loading ? 'move-to-top-right' : ''}`}
+      sx={{ '& .MuiTextField-root': { m: 1, width: '90ch', borderRadius: '25px' }, display: 'flex', alignItems: 'center' }}
+      noValidate
+      autoComplete="off"
     >
-      <input
-        type="text"
+      <TextField
+        id="outlined-search"
+        label="Search for a recipe..."
+        type="search"
+        variant="outlined"
         value={query}
         onChange={handleInputChange}
-        placeholder="Search for a recipe..."
         className="searchInput"
+        InputProps={{
+          style: { borderRadius: '20rem' }, // This applies border-radius to the input element
+        }}
+        style={{ width: '40em' , backgroundColor:'white'}} 
+        sx={{
+          width: '30em', // Custom width
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: 'gray', // Default border color
+            },
+            '&:hover fieldset': {
+              borderColor: 'blue', // Border color on hover
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: 'green', // Border color when focused
+            },
+          },
+        }}
       />
-      <button type="submit" className="searchButton" disabled={loading}>
+      <Button 
+        type="submit" 
+        variant="contained" 
+        color="primary" 
+        disabled={loading} 
+        className="searchButton"
+        style={{ borderRadius: '25px', marginLeft: '10px', width: '30%',height:'50px',backgroundColor:'green' }} 
+        
+        
+      >
         {loading ? 'Searching...' : 'Search'}
-      </button>
-    </form>
+      </Button>
+    </Box>
   );
 };
 
-export default SearchBar;
+export default SearchField;

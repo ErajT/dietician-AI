@@ -28,11 +28,11 @@ export default function RecipeTable({ recipe }) {
         <TableBody>
           <TableRow>
             <TableCell>Calories</TableCell>
-            <TableCell align="right">{recipe.calories}</TableCell>
+            <TableCell align="right">{parseFloat(recipe.calories).toFixed(2)}g</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Total Weight</TableCell>
-            <TableCell align="right">{recipe.totalWeight}g</TableCell>
+            <TableCell align="right">{parseFloat(recipe.totalWeight).toFixed(2)}g</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Cuisine Type</TableCell>
