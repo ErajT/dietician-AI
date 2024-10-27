@@ -6,6 +6,7 @@ import RecipeTable from '../../components/recipedetails';
 import IngredientsTable from '../../components/ingredients';
 import AccordionTransition from '../../components/recipeinstruction';
 import MediaCard from '../../components/ad';
+import VideoLoading from '../../components/VideoLoading'
 import '../../styling/recipegenerator.css';
 
 const IndividualRecipe = () => {
@@ -16,7 +17,8 @@ const IndividualRecipe = () => {
   const [dish, setDish] = useState(null);
   const [id, setId] = useState(null); 
   const [openDialog, setOpenDialog] = useState(false); 
-  const [mediaCardAnimation, setMediaCardAnimation] = useState(false); // New state for animation control
+  const [mediaCardAnimation, setMediaCardAnimation] = useState(false); 
+  const [instructions, setInstructions] = useState(null); // New state for recipe instructions
 
   useEffect(() => {
     const storedDish = sessionStorage.getItem('dish');
@@ -28,7 +30,6 @@ const IndividualRecipe = () => {
       fetchRecipes(storedDish, storedId); 
     }
 
-    // Trigger animation on page load
     setMediaCardAnimation(true);
   }, []);
 
@@ -52,6 +53,10 @@ const IndividualRecipe = () => {
         if (selectedRecipe.calories < 600) {
           setOpenDialog(true); 
         }
+
+        // Fetch recipe instructions from the new API
+        fetchRecipeInstructions(selectedRecipe);
+
       } else {
         setRecipe(null); 
       }
@@ -63,7 +68,35 @@ const IndividualRecipe = () => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  // New function to fetch recipe instructions
+  const fetchRecipeInstructions = async (recipeData) => {
+    try {
+      const response = await fetch('/api/indivivualrecipe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(recipeData), 
+      });
+
+      const jsonData = await response.json();
+      if (jsonData.status === "Success") {
+        setInstructions(jsonData.message); // Store the instructions
+      } else {
+        throw new Error(jsonData.message);
+      }
+    } catch (error) {
+      console.error("Error fetching recipe instructions:", error);
+      setInstructions("Could not retrieve instructions.");
+    }
+  };
+
+  if (loading) return (
+    <div style={{ backgroundColor: 'transparent' }}>
+      <VideoLoading videoUrl={'/images/bg5.mp4'} comment={'Just a moment while we whip up something tasty'} />
+    </div>
+  );
+
   if (error) return <div>Error fetching recipes.</div>;
 
   return (
@@ -76,7 +109,7 @@ const IndividualRecipe = () => {
           width: '60%',
           marginTop: '3%',
           backgroundColor: '#7c9c81',
-          marginBottom:'10%',
+          marginBottom: '10%',
         }}>
           <h1 style={{ display: 'flex', justifyContent: 'center' }}>{recipe.name}</h1>
           
@@ -86,11 +119,12 @@ const IndividualRecipe = () => {
               color: 'white',
               display: 'flex',
               justifyContent: 'center',
-              width: '15%',
-              height: '15%',
+              width: '20%',
+              height: '%',
               borderRadius: '50%',
               marginLeft: '40%',
               overflow: 'hidden',
+              marginTop:'5%',
               transition: 'transform 0.3s ease-in-out',
             }}
             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.4)'}
@@ -111,7 +145,7 @@ const IndividualRecipe = () => {
             <div style={{ alignItems: 'center', alignContent: 'center' }}>
               <IngredientsTable recipe={recipe} style={{ margin: '0 auto', textAlign: 'left' }} />
               <div style={{ margin: '10% 10%' }}>
-                <AccordionTransition />
+                <AccordionTransition instructions={instructions} /> {/* Pass instructions here */}
               </div>
             </div>
           </div>
@@ -137,7 +171,7 @@ const IndividualRecipe = () => {
             alignItems: 'left',
             backgroundColor: 'green',
             marginBottom: '3%',
-            animation: mediaCardAnimation ? 'slideDown 1s ease-out' : 'none', // Trigger animation
+            animation: mediaCardAnimation ? 'slideDown 1s ease-out' : 'none',
           }}
         >
           <MediaCard videoUrl={'/images/food1.mp4'} />
@@ -149,7 +183,7 @@ const IndividualRecipe = () => {
   );
 };
 
-// Add the keyframes CSS for the slide down animation
+// Add the keyframes CSS for the slide-down animation
 const css = `
 @keyframes slideDown {
   0% {

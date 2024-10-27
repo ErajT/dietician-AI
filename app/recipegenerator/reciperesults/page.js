@@ -6,7 +6,7 @@ import '../../styling/recipegenerator.css';
 import '../../styling/NoResults.css';
 import ActionAreaCard from '../../components/cards';
 import { Typography } from '@mui/material';
-import Loading from '../../components/loading'
+import VideoLoading from '../../components/VideoLoading'
 import NoResults from '../../components/noresults';
 
 export default function RecipeResultsPage() {
@@ -61,34 +61,18 @@ export default function RecipeResultsPage() {
  
 
   return (
-    <div 
-    >
-      <div className="search-bar-top">
-      <SearchBar onSearch={handleSearch}  loading={loading} /></div>
+    <div>
+      {!loading && (
+        <div className="search-bar-top">
+          <SearchBar onSearch={handleSearch} loading={loading} />
+        </div>
+      )}
 
       {loading ? (
-        <div style={{
-          display: 'grid',  
-          marginLeft:"5vw",
-          marginTop:"10vh",
-          
-          gridTemplateColumns: 'repeat(4, 1fr)', // Three columns
-          gap: '16px',                  
-                     
-        }}
-        >
-        <Loading />
-        <Loading />
-        <Loading />
-        <Loading />
-        <Loading />
-        <Loading />
-        <Loading />
-        <Loading />
-        <Loading />
+        <div style={{ backgroundColor: 'transparent' }}>
+          <VideoLoading videoUrl={'/images/bg4.mp4'} comment={'Just a moment! Finding the perfect recipe for you...'}/>
         </div>
-        
-      ) : error ? (<div className="no-result">
+      ): error ? (<div className="no-result">
         <Typography variant="h5" component="h3" className="custom-typography">Oops!There seems to be a network issue.</Typography>
      
        <NoResults /></div>
