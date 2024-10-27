@@ -2,14 +2,15 @@
 .hexagon-gallery {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Align to the left for a staggered layout */
-  gap: 20px; /* Maintain the overall gap between hexagons */
+  align-items: flex-center; /* Align to the left for a staggered layout */
+  gap: 30px; /* Maintain the overall gap between hexagons */
   padding-left: 0;
   position: absolute; /* Position it absolutely to control its placement */
   left: 0; /* Align to the left */
-  top: 100px; /* Align to the top */
+  top: 130px; /* Align to the top */
+  bottom: 100px;
   width: 30%; /* Adjust width to fit design */
-  margin-left: 40px; /* Increased left margin */
+  margin-left: 70px; /* Increased left margin */
 }
 
 /* Hexagon shape */
@@ -60,7 +61,7 @@
 
 /* Even hexagons */
 .hexagon:nth-child(even) {
-  margin-left: 140px; /* Increased left margin for even hexagons */
+  margin-left: 160px; /* Increased left margin for even hexagons */
   margin-top: -40px; /* Reduced top spacing for even hexagons */
   animation-delay: 1.25s;
 }

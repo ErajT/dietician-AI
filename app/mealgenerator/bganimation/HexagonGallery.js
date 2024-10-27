@@ -1,5 +1,5 @@
 import React from 'react';
-import './HexagonGallery.css'; // Importing CSS for hexagon shapes and animations
+import './HexagonGallery.css';
 
 const hexagons = [
   { id: 1, imgSrc: '/images/meal9.jpg', quote: 'Food is essential to life. Enjoy it.' },
@@ -10,6 +10,7 @@ const hexagons = [
   { id: 6, imgSrc: '/images/meal6.jpg', quote: 'The only thing I like better than talking about food is eating.' },
   { id: 7, imgSrc: '/images/meal12.jpg', quote: 'A recipe has no soul. You as the cook must bring soul to the recipe.' },
   { id: 8, imgSrc: '/images/meal11.jpg', quote: 'Life is a combination of magic and pasta.' },
+  { id: 9, imgSrc: '/images/meal3.jpg', quote: 'Life is a combination of flavors and spices.' } // New hexagon
 ];
 
 const HexagonGallery = () => {
@@ -21,7 +22,7 @@ const HexagonGallery = () => {
             className="hexagon-image"
             style={{ backgroundImage: `url(${hexagon.imgSrc})` }}
           ></div>
-          <div className="quote">{hexagon.quote}</div> {/* Add this line */}
+          <div className="quote">{hexagon.quote}</div>
         </div>
       ))}
     </div>
