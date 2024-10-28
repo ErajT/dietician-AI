@@ -1,5 +1,3 @@
-
-
 "use client";
 import React, { useState, useEffect } from 'react';
 import Spline from '@splinetool/react-spline';
@@ -15,16 +13,28 @@ const ExercisePlanner = () => {
     document.body.style.background = isModalOpen ? '#cee2d2' : '#cee2d2';
   }, [isModalOpen]);
 
+  // Updated muscle options with the given muscle group values
   const muscleOptions = [
-    { name: 'chest', image: '/images/chest.jpg' },
-    { name: 'back', image: '/images/back.jpg' },
-    { name: 'legs', image: '/images/legs.jpg' },
-    { name: 'arms', image: '/images/arms.jpg' },
-    { name: 'shoulders', image: '/images/shoulders.jpg' }
+    { name: 'Abdominals', value: 'abdominals', image: '/images/abdominals.jpg' },
+    { name: 'Abductors', value: 'abductors', image: '/images/abductors.jpg' },
+    { name: 'Adductors', value: 'adductors', image: '/images/adductors.jpg' },
+    { name: 'Biceps', value: 'biceps', image: '/images/biceps.jpg' },
+    { name: 'Calves', value: 'calves', image: '/images/calves.jpg' },
+    { name: 'Chest', value: 'chest', image: '/images/chest.jpg' },
+    { name: 'Forearms', value: 'forearms', image: '/images/forearms.jpg' },
+    { name: 'Glutes', value: 'glutes', image: '/images/glutes.jpg' },
+    { name: 'Hamstrings', value: 'hamstrings', image: '/images/hamstrings.jpg' },
+    { name: 'Lats', value: 'lats', image: '/images/lats.jpg' },
+    { name: 'Lower Back', value: 'lower_back', image: '/images/lower_back.jpg' },
+    { name: 'Middle Back', value: 'middle_back', image: '/images/middle_back.jpg' },
+    { name: 'Neck', value: 'neck', image: '/images/neck.jpg' },
+    { name: 'Quadriceps', value: 'quadriceps', image: '/images/quadriceps.jpg' },
+    { name: 'Traps', value: 'traps', image: '/images/traps.jpg' },
+    { name: 'Triceps', value: 'triceps', image: '/images/triceps.jpg' }
   ];
 
-  const handleMuscleSelect = async (muscle) => {
-    setMuscle(muscle);
+  const handleMuscleSelect = async (muscleValue) => {
+    setMuscle(muscleValue);
     setIsModalOpen(false);
     setLoading(true);
     setError('');
@@ -33,7 +43,7 @@ const ExercisePlanner = () => {
       const res = await fetch("/api/exerciseplanner", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ muscle }),
+        body: JSON.stringify({ muscle: muscleValue }), // sending muscle value to the API
       });
 
       if (!res.ok) {
@@ -79,8 +89,9 @@ const ExercisePlanner = () => {
               {muscleOptions.map((muscle, index) => (
                 <button
                   key={index}
-                  onClick={() => handleMuscleSelect(muscle.name)}
+                  onClick={() => handleMuscleSelect(muscle.value)}
                   style={styles.muscleButton}
+                  className="muscle-button" // Add a class for hover effect
                 >
                   <img src={muscle.image} alt={muscle.name} style={styles.muscleImage} />
                   <span>{muscle.name}</span>
@@ -104,7 +115,7 @@ const ExercisePlanner = () => {
                   style={styles.exerciseCard}
                   onClick={() => handleExerciseClick(exercise)}
                 >
-                  <h3 style={styles.exerciseName}>Name: {exercise.name}</h3>
+                  <h3  style={{color:'black'}}>Name: {exercise.name} </h3>
                   <p style={styles.exerciseInfo}>Type: {exercise.type}</p>
                   <p style={styles.exerciseInfo}>Muscle: {exercise.muscle}</p>
                 </div>
@@ -129,7 +140,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '100vh',
-    padding: '40px', // Increased padding for breathing space
+    padding: '40px',
     backgroundColor: '#cee2d2',
     overflow: 'hidden',
   },
@@ -186,8 +197,11 @@ const styles = {
     borderRadius: '15px',
     backgroundColor: '#102820',
     color: '#ffffff',
-    width: '90%', // Increased width for better grid space
+    width: '90%',
   },
+
+ 
+
   exerciseHeader: {
     fontSize: '2.5rem',
     color: '#ffffff',
@@ -195,13 +209,14 @@ const styles = {
   },
   exerciseGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', // Adjusts based on screen size
-    gap: '30px', // Increased gap for better spacing
-    justifyContent: 'center', // Centers the grid
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: '30px',
+    justifyContent: 'center',
   },
+
   exerciseCard: {
     backgroundColor: '#ffffff',
-    padding: '20px', // Slightly increased padding for uniformity
+    padding: '20px',
     borderRadius: '15px',
     boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
     cursor: 'pointer',
@@ -232,8 +247,20 @@ const styles = {
   error: {
     color: 'red',
     marginTop: '20px',
-    fontSize: '1.5rem',
   },
 };
 
+// Add the following CSS for hover effect
+const muscleButtonHover = {
+  transform: 'scale(1.1)',
+};
+
 export default ExercisePlanner;
+
+// CSS to be added in your CSS file
+/*
+.muscle-button:hover {
+  transform: scale(1.1);
+}
+*/
+
