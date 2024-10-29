@@ -1,0 +1,254 @@
+/* Search form container */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+.searchForm {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%; /* Ensure the form container is full width */
+}
+
+/* Input box styles with rounded corners */
+.searchInput {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 25px; /* Round the corners */
+    width: 60%; /* Adjust the width of the input */
+    max-width: 600px; /* Set a maximum width to prevent it from being too wide */
+}
+
+/* Search button styles with separation */
+.searchButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 25px; /* Round the corners */
+    margin-left: 20px; /* Adds space between the input and button */
+    cursor: pointer;
+}
+
+.searchButton:hover {
+    background-color: #45a049;
+}
+/* Full-screen container */
+
+  
+
+/* Make sure the images cover the entire background area without stretching */
+.full-screen-image {
+  object-fit: cover;
+  object-position: center;
+}
+
+
+/* Set the body and html to have no margin and padding for a true full-screen effect */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;  /* Prevent any scrollbars */
+}
+
+
+
+/* Ensure the carousel covers the full screen */
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+
+
+  /* Style for the main heading (h1) */
+.recipe-generator {
+    color: #ffffff; /* White text to stand out against the background */
+    font-size: 4rem; /* Large font size for the main heading */
+    font-weight: bold; /* Make the heading bold */
+    text-align: center; /* Center the heading */
+    margin: 0; /* Remove margin to align it better */
+    position: absolute;
+    top: 20%; /* Adjust the positioning of the heading */
+    left: 50%;
+    transform: translateX(-50%); /* Center the heading horizontally */
+    z-index: 2; /* Ensure it stays above the carousel */
+    font-family: "Bangers", system-ui;
+  font-weight: 700;
+  font-style: normal;
+    
+      
+}
+
+/* Style for the subheading (h3) */
+.recipe-subheading {
+    color: #ffffff; /* White text */
+    font-size: 2rem; /* Slightly smaller font for subheading */
+    font-weight: normal; /* Normal font weight to distinguish from the heading */
+    text-align: center; /* Center the subheading */
+    margin-top: 0.5rem; /* Small margin between heading and subheading */
+    position: absolute;
+    top: 30%; /* Position it under the heading */
+    left: 60%;
+    transform: translateX(-50%); /* Center the subheading horizontally */
+    z-index: 2; /* Ensure it stays above the carousel */
+}
+
+.recipe-background {
+    width: 100vw;
+    height: 100vh;
+    background-color: #45a049;
+    /* background-image: url('/images/recipe2.jpg'); */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image */
+    position: relative; /* Relative positioning for the overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Blackish overlay */
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(33, 25, 25, 0.753); /* Adjust the opacity for the blackish effect */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Ensure overlay is above the background */
+  }
+  
+
+  
+  .recipe-cart-background {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/images/recipe4.jpg'); /* Path to your background image */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image in the background */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    display: flex;
+    background-color: #67cf6c; /* Fallback color if the image doesn't load */
+    box-sizing: border-box;
+    overflow-y: auto;
+  }s
+
+
+.cart-search-bar {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap */
+  justify-content: space-between; /* Spread items across the row */
+  align-items: flex-start; /* Align items to the top of the flex container */
+  gap: 20px; /* Add space between each card */
+  margin: 20px;
+}
+
+/* Search form container (within cart-search-bar) */
+.cart-search-bar .searchForm {
+  display: flex;
+  justify-content: flex-start; /* Move search bar to the left */
+  width: 200%; /* Ensure it takes the full width */
+  max-width: 200vw; /* Responsive full width */
+  margin-left: 34vw;
+}
+
+/* Input box styles with larger width */
+.cart-search-bar .searchInput {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  width: 100%; /* Set initial width to 50% of the container */
+  max-width: 700px; /* Set a maximum width */
+}
+
+
+/* Search button styles */
+.cart-search-bar .searchButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #154b18;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+/* Hover effect for button */
+.cart-search-bar .searchButton:hover {
+  background-color: #45a049;
+}
+
+/* Media queries to make the search bar responsive */
+@media (max-width: 1200px) {
+  .cart-search-bar .searchInput {
+    width: 60%; /* Make the width smaller on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .cart-search-bar .searchInput {
+    width: 70%; /* Even smaller on small screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .cart-search-bar .searchInput {
+    width: 80%; /* Full width on very small screens */
+  }
+
+  .cart-search-bar .searchButton {
+    width: 100px; /* Ensure button is a reasonable size */
+  }
+}
+
+
+  .all-carts {
+    display: flex;
+    flex-wrap: wrap; /* Allows the cards to wrap to the next line if necessary */
+    justify-content: space-between; /* Spreads the cards evenly across the row */
+    gap: 20px; /* Adds space between cards */
+    margin-top: 20px; /* Pushes the cards down a bit from the search bar */
+  }
+ 
+
+
+
+  .card-container {
+    width: 100%; /* Use 100% of the grid column width */
+    margin-bottom: 20px; /* Add some space between the cards */
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 200px; /* Adjust height to make the card larger */
+    object-fit: cover;
+  }
+  
+  .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-overlay:hover {
+    opacity: 1;
+  }
+  
+  .card-image:hover {
+    filter: blur(4px);
+  }
