@@ -1,6 +1,19 @@
 "use client";
 import { useState, useEffect } from 'react';
+import styled, { createGlobalStyle } from 'styled-components';
 
+// Global styles to reset body and html
+const GlobalStyles = createGlobalStyle`
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  html {
+    padding: 0;
+    margin: 0;
+  }
+`;
 
 const ExerciseDetailsPage = () => {
   const [exerciseDetails, setExerciseDetails] = useState({
@@ -25,7 +38,7 @@ const ExerciseDetailsPage = () => {
         type: exercise.type || '',
         equipment: exercise.equipment || '',
         difficulty: exercise.difficulty || '',
-        videoId: videoId
+        videoId: exercise.videoID
       });
     }
   }, []);
@@ -33,24 +46,26 @@ const ExerciseDetailsPage = () => {
   const { name, muscle, type, equipment, difficulty, videoId } = exerciseDetails;
 
   if (!name || !videoId) {
-    return <div>Loading...</div>;
+    return <Spinner>Loading...</Spinner>;
   }
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>{name}</h1>
-      <p className={styles.muscleGroup}><strong>Targeted Muscle Group:</strong> {muscle}</p>
-      <p className={styles.exerciseType}><strong>Exercise Type:</strong> {type}</p>
-      <p className={styles.equipment}><strong>Equipment Needed:</strong> {equipment || 'None'}</p>
-      <p className={styles.difficulty}><strong>Difficulty Level:</strong> {difficulty}</p>
-      
-      <div className={styles.videoContainer}>
-      <VideoPlayer videoId={videoId} />
-      </div>
-    </div>
+    <>
+      <GlobalStyles />
+      <Container>
+        <Title>{name}</Title>
+        <MuscleGroup><strong>Targeted Muscle Group:</strong> {muscle}</MuscleGroup>
+        <ExerciseType><strong>Exercise Type:</strong> {type}</ExerciseType>
+        <Equipment><strong>Equipment Needed:</strong> {equipment || 'None'}</Equipment>
+        <Difficulty><strong>Difficulty Level:</strong> {difficulty}</Difficulty>
+
+        <VideoContainer>
+          <VideoPlayer videoId={videoId} />
+        </VideoContainer>
+      </Container>
+    </>
   );
 };
-// src={`https://www.youtube.com/embed/${videoId}`}
 
 const VideoPlayer = ({ videoId }) => {
   const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
@@ -70,134 +85,66 @@ const VideoPlayer = ({ videoId }) => {
   );
 };
 
-const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
-    padding: '40px',
-    backgroundColor: '#cee2d2',
-    overflow: 'hidden',
-  },
-  content: {
-    flex: 1,
-    maxWidth: '1200px',
-    zIndex: 1,
-    textAlign: 'center',
-  },
-  title: {
-    fontSize: '4rem',
-    fontWeight: 'bold',
-    color: '#102820',
-    marginBottom: '40px',
-    textShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-  },
-  modal: {
-    padding: '20px',
-    maxWidth: '1000px',
-    width: '100%',
-  },
-  modalTitle: {
-    fontSize: '2rem',
-    color: '#102820',
-    marginBottom: '30px',
-  },
-  muscleOptions: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-    gap: '30px',
-  },
-  muscleButton: {
-    backgroundColor: '#102820',
-    color: '#fff',
-    border: 'none',
-    padding: '20px',
-    borderRadius: '15px',
-    cursor: 'pointer',
-    fontSize: '1.4rem',
-    transition: 'transform 0.3s, background-color 0.3s',
-    boxShadow: '0 5px 10px rgba(0, 0, 0, 0.1)',
-    textAlign: 'center',
-  },
-  muscleImage: {
-    width: '120px',
-    height: '120px',
-    objectFit: 'cover',
-    marginBottom: '10px',
-    borderRadius: '50%',
-  },
-  exerciseContainer: {
-    marginTop: '30px',
-    padding: '40px',
-    borderRadius: '15px',
-    backgroundColor: '#102820',
-    color: '#ffffff',
-    width: '90%',
-  },
+// Styled components
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 100vh;
+  min-height: 100vh;
+  height: 100vh;
+  padding: 40px;
+  // background-image: url('/detailsbg.png'); /* Ensure the path is correct */
+  background-size: cover;
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #2b6777; /* Text color as per request */
+`;
 
- 
+const Title = styled.h1`
+  font-size: 3rem;
+  font-weight: bold;
+  color: #2b6777;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+`;
 
-  exerciseHeader: {
-    fontSize: '2.5rem',
-    color: '#ffffff',
-    marginBottom: '30px',
-  },
-  exerciseGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-    gap: '30px',
-    justifyContent: 'center',
-  },
+const MuscleGroup = styled.p`
+  font-size: 1.2rem;
+  color: #2b6777;
+  margin-bottom: 10px;
+`;
 
-  exerciseCard: {
-    backgroundColor: '#ffffff',
-    padding: '20px',
-    borderRadius: '15px',
-    boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
-    cursor: 'pointer',
-    transition: 'transform 0.3s, background-color 0.3s',
-    textAlign: 'center',
-  },
-  exerciseName: {
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-    marginBottom: '10px',
-  },
-  exerciseInfo: {
-    fontSize: '1.2rem',
-    color: '#102820',
-  },
-  splineContainer: {
-    width: '50%',
-    height: '100vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  spinner: {
-    fontSize: '1.5rem',
-    color: '#102820',
-    marginTop: '20px',
-  },
-  error: {
-    color: 'red',
-    marginTop: '20px',
-  },
-};
+const ExerciseType = styled.p`
+  font-size: 1.2rem;
+  color: #2b6777;
+  margin-bottom: 10px;
+`;
 
-// Add the following CSS for hover effect
-const muscleButtonHover = {
-  transform: 'scale(1.1)',
-};
+const Equipment = styled.p`
+  font-size: 1.2rem;
+  color: #2b6777;
+  margin-bottom: 10px;
+`;
 
-// CSS to be added in your CSS file
-/*
-.muscle-button:hover {
-  transform: scale(1.1);
-}
-*/
+const Difficulty = styled.p`
+  font-size: 1.2rem;
+  color: #2b6777;
+  margin-bottom: 20px;
+`;
 
+const VideoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
 
+const Spinner = styled.div`
+  font-size: 1.5rem;
+  color: #2b6777;
+  text-align: center;
+`;
 
 export default ExerciseDetailsPage;
