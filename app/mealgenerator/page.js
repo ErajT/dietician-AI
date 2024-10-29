@@ -4,6 +4,8 @@ import { Box, Button, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { TypeAnimation } from "react-type-animation";
 import { useTheme } from "@mui/material/styles";
+import './globals.css';
+
 
 const MealGeneratorHome = () => {
   const router = useRouter();
@@ -14,7 +16,7 @@ const MealGeneratorHome = () => {
   };
 
   const handleExistingMealPlan = () => {
-    router.push("/mealgenerator/planner");
+    router.push("/mealgenerator/SavedMealPlan");
   };
 
   return (
@@ -59,28 +61,39 @@ const MealGeneratorHome = () => {
           paddingLeft: theme.spacing(4),
         }}
       >
-        <Typography variant="h5" sx={{ color: "#ffffff", marginBottom: 1 }}>
-          Welcome to
-        </Typography>
-        <Typography variant="h2" sx={{ fontWeight: "bold", color: "#ffffff", marginBottom: 0 }}>
-            <TypeAnimation
-              sequence={["Meal Generator", 500]}
-              speed={50}
-              repeat={Infinity}
-              // cursor={false}
-            />
-          </Typography>
+<Typography
+  variant="h5"
+  sx={{ color: "#ffffff", marginBottom: -2,fontSize:"3.5rem" }}
+  className="jelligun-font"
+>
+  Welcome to
+</Typography>
+<Typography
+  variant="h2"
+  sx={{ fontWeight: "bold", color: "#ffffff", marginBottom: 0,fontSize:"7rem" ,marginTop:-2}}
+>
+  <span className="jelligun-font">
+    <TypeAnimation
+      sequence={["Meal Generator", 500]}
+      speed={50}
+      repeat={Infinity}
+    />
+  </span>
+</Typography>
+
           
           {/* Slogan below the heading */}
           <Typography
             variant="subtitle1"
             sx={{
               color: "#ffffff",
-              marginTop: theme.spacing(15),
+              marginTop: theme.spacing(18),
               fontStyle: "none",
               width: '100%', // Match the width of the heading
               textAlign: "left", // Align to the left for a consistent look
-              position:"fixed"
+              position:"fixed",
+              fontFamily:"Jelligun",
+              fontSize:"2.2rem"
             }}
           >
             <TypeAnimation
@@ -97,8 +110,8 @@ const MealGeneratorHome = () => {
       <Box
         sx={{
           position: "absolute",
-          right: theme.spacing(6),
-          bottom: theme.spacing(10),
+          right: theme.spacing(8),
+          bottom: theme.spacing(12),
           display: "flex",
           gap: theme.spacing(2),
           zIndex: 2,
@@ -109,13 +122,16 @@ const MealGeneratorHome = () => {
           color="primary"
           onClick={handleNewMealPlan}
           sx={{
-            padding: 2,
-            width: "200px",
+            padding: 1,
+            width: "230px",
             borderRadius: "15px",
-            backgroundColor: "#4CAF50",
+            backgroundColor: "#2b6777",
             color:"white",
+            fontFamily:"Jelligun",
+            fontSize:"1.3rem",
+            fontWeight:'bold',
             "&:hover": {
-              backgroundColor: "#45a049",
+              backgroundColor: "#2b6777",
               transform: "scale(1.05)",
             },
           }}
@@ -128,13 +144,16 @@ const MealGeneratorHome = () => {
           color="primary"
           onClick={handleExistingMealPlan}
           sx={{
-            padding: 2,
-            width: "200px",
+            padding: 1,
+            width: "230px",
             borderRadius: "15px",
-            backgroundColor: "#4CAF50",
+            backgroundColor: "#2b6777",
             color:"white",
+            fontFamily:"Jelligun",
+            fontSize:"1.3rem",
+            fontWeight:'bold',
             "&:hover": {
-              backgroundColor: "#45a049",
+              backgroundColor: "#2b6777",
               transform: "scale(1.05)",
             },
           }}

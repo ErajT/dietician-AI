@@ -1,5 +1,5 @@
 .flip-card {
-  background-color: #cee2d2;
+  background-color: #e0f7f3;
   width: 20vw;
   height: 40vh;
   perspective: 1000px;
@@ -32,14 +32,14 @@
 
 /* Style for the front side */
 .flip-card-front {
-  background-color: #cee2d2;
+  background-color: #e0f7f3;
 }
 
 .flip-card-back {
-  background-color: #102820;
-  color: #f8fdfb;
+  background-color: #2b6777;
+  color: white;
   transform: rotateY(180deg);
-  padding: 10px;
+  padding: 2;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -54,7 +54,7 @@
   position: absolute; /* Position the link absolutely within the card */
   bottom: 20px; /* Distance from the bottom */
   left: 20px; /* Distance from the left */
-  color: #f8fdfb; /* Link color */
+  color: black; /* Link color */
   text-decoration: none; /* Remove underline */
   transition: transform 0.3s ease, color 0.3s ease; /* Animation for hover */
 }
@@ -62,22 +62,22 @@
 /* Hover effect for link */
 .flip-card-back .details-link:hover {
   transform: translateY(-5px); /* Move link up slightly on hover */
-  color: #123cf7; /* Change color on hover */
+  color: black; /* Change color on hover */
 }
 
 /* Example content styling inside flip-card-back */
 .flip-card-back .content {
   flex-grow: 0; /* Prevents the content from growing */
   flex-shrink: 1; /* Allows the content to shrink */
-  padding: 10px;
+  padding: 0;
   max-height: 100%; /* Limits the height */
   overflow: hidden; /* Prevents overflow */
-  text-overflow: ellipsis; /* Adds ellipsis if text overflows */
+  /* text-overflow: ellipsis;  */
 }
 
 /* Dynamic font size adjustment */
 .flip-card-back .heading {
-  font-size: clamp(0.8rem, 4vw, 1.5rem); /* Adjusts font size based on viewport width */
+  font-size: clamp(0.5rem, 2vw, 1.5rem); /* Adjusts font size based on viewport width */
   transition: font-size 0.3s; /* Smooth transition */
   margin-bottom: 10px;
 }

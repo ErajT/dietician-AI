@@ -1,9 +1,10 @@
 // components/VideoLoading.js
 
 import React from 'react';
+import '../globals.css';
 import { Box, CircularProgress, Typography } from '@mui/material';
 
-const VideoLoading = ({ videoUrl }) => {
+const VideoLoading = ({ videoUrl , comment }) => {
   return (
     <Box
       sx={{
@@ -51,6 +52,7 @@ const VideoLoading = ({ videoUrl }) => {
           left: 0,
           width: '100%',
           height: '100%',
+          color:'white',
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
           zIndex: -1,
         }}
@@ -58,11 +60,12 @@ const VideoLoading = ({ videoUrl }) => {
 
       {/* Loading Spinner and Text */}
       <CircularProgress sx={{ color: 'white' }} />
-      <Typography variant="h6" sx={{ marginTop: 2, color: 'white' }}>
-        Please Wait while we make your Delicious Meal Plan....
+      <Typography variant="h6" sx={{ marginTop: 2, color: 'white',fontFamily: 'Jelligun, cursive',fontSize:"2.5rem" }}>
+      {comment}
       </Typography>
+       
     </Box>
   );
 };
 
-export default VideoLoading; // Ensure this line is present
+export default VideoLoading;

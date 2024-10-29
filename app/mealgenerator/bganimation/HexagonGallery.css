@@ -13,6 +13,12 @@
   margin-left: 70px; /* Increased left margin */
 }
 
+@font-face {
+  font-family: 'Jelligun';
+  src: url('/jelligun-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 /* Hexagon shape */
 .hexagon {
   position: relative;
@@ -32,7 +38,6 @@
 .hexagon .quote {
   position: absolute;
   color: whitesmoke; /* Text color */
-  font-size: 16px; /* Font size for the quote */
   text-align: center; /* Center text */
   padding: 10px; /* Padding for the quote */
   background-color:transparent; /* Light background for readability */
@@ -40,6 +45,10 @@
   visibility: hidden; /* Hide by default */
   opacity: 0; /* Start with no opacity */
   transition: visibility 0s, opacity 0.3s ease-in-out; /* Smooth transition */
+  font-family: 'Jelligun';
+  font-size: 1.3rem;
+  font-weight: "bold";
+
 }
 
 /* Show the quote text on hover */

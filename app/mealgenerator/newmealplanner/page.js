@@ -18,7 +18,7 @@ import {
   Checkbox,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import '../../globals.css';
+import '../globals.css';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import HexagonGallery from "../bganimation/HexagonGallery"; // Adjust path as needed
 
@@ -89,8 +89,8 @@ const MealGeneratorPage = () => {
       alignItems: "center", // Center the heading horizontally
       position: "relative",
       padding: 4,
-      backgroundColor: "#f5f5f5",
-    }}
+      backgroundColor: '#e0f7f3',
+      }}
 
     >
       {/* Hexagon Gallery Background */}
@@ -100,11 +100,15 @@ const MealGeneratorPage = () => {
       <Typography
         variant="h4"
         sx={{
-          color: "#000",
+          color: "#2b6777",
           marginBottom: 1,
           textAlign: "center", // Center the text
           marginTop: 0,
           width: "100%", // Ensure the heading takes the full width
+          fontFamily:"Jelligun",
+          fontSize:"4rem",
+          fontWeight:"bold"
+
         }}
       >
         Meal Plan Generator
@@ -122,6 +126,7 @@ const MealGeneratorPage = () => {
           justifyContent: "flex-start",
           alignItems: "center", // Aligns the form to the right
           marginLeft: "auto", // Aligns form to the right
+
         }}
       
       >
@@ -137,8 +142,9 @@ const MealGeneratorPage = () => {
           <Container
             sx={{
               padding: 5,
+              color: "white",
               paddingTop: 3, // Adds padding from the top
-              backgroundColor: "#cee2d2",
+              backgroundColor: "#2b6777",
               borderRadius: "12px",
               justifyContent: "center",
               boxShadow: "0 8px 8px rgba(0, 0, 0, 0.25)",
@@ -146,6 +152,7 @@ const MealGeneratorPage = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center", // Centers all input fields within the form
+
             }}
           >
 
@@ -154,7 +161,7 @@ const MealGeneratorPage = () => {
             <Typography
   variant="subtitle1"
   sx={{
-    color: "#333",
+    color: "white",
     marginBottom: 2,
     textAlign: "center",
     width: "100%",
@@ -162,10 +169,14 @@ const MealGeneratorPage = () => {
     justifyContent: "center",
     alignItems: "center",
      fontStyle:"italic",
+     fontFamily:"Jelligun",
+     fontSize:"1.7rem"
+
+
   }}
 >
   Taste Meets Health
-  <RestaurantIcon sx={{ fontSize: 24, color: "black", marginLeft: 1, marginRight: 1  }} />
+  <RestaurantIcon sx={{ fontSize: 24, color: "white", marginLeft: 1, marginRight: 1  }} />
   Design Your Ideal Meal Plan!
 </Typography>
 
@@ -180,8 +191,22 @@ const MealGeneratorPage = () => {
                 }
                 sx={{
                   marginBottom: 2,
-                  input: { color: "#000" },
-                  label: { color: "#000" },
+                  input: { color: "white" },
+                  label: { color: "white" },
+                  '& label.Mui-focused': {
+                    color: 'white', // Keep label text white when focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'white', // White outline
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'white', // White outline on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'white', // White outline when focused
+                    },
+                  },
                 }}
               />
 
@@ -194,7 +219,7 @@ const MealGeneratorPage = () => {
                   justifyContent: "center", // Center contents
                 }}
               >
-                <Typography sx={{ color: "#000", marginRight: 2, textAlign: "left", width: "100%",fontWeight:"bold" }}>
+                <Typography sx={{ color: "white", marginRight: 2, textAlign: "left", width: "100%",fontWeight:"bold" }}>
             Health Conditions:
           </Typography>
                 {[
@@ -210,10 +235,30 @@ const MealGeneratorPage = () => {
                         checked={formData.health.includes(condition)}
                         onChange={(e) => handleCheckboxChange(e, "health")}
                         value={condition}
+                        sx={{
+                          '&.MuiCheckbox-root': {
+                            position: "relative",
+                            color: "white",
+                            
+                          },
+                          '&.MuiCheckbox-root:before': {
+                            content: '""',
+                            position: "absolute",
+                            top: -2,
+                            left: -2,
+                            right: -2,
+                            bottom: -2,
+                            // border: "2px solid white", // White border effect
+                            borderRadius: "4px",
+                          },
+                          '&.Mui-checked': {
+                            color: "white",
+                          },
+                        }}
                       />
                     }
                     label={condition.charAt(0).toUpperCase() + condition.slice(1)}
-                    sx={{ color: "#000", marginRight: 2 }}
+                    sx={{ color: "white", marginRight: 2 }}
                   />
                 ))}
                 <TextField
@@ -237,9 +282,23 @@ const MealGeneratorPage = () => {
                     }));
                   }}
                   sx={{
-                    input: { color: "#000" },
-                    label: { color: "#000" },
                     marginBottom: 2,
+                    input: { color: "white" },
+                    label: { color: "white" },
+                    '& label.Mui-focused': {
+                      color: 'white', // Keep label text white when focused
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: 'white', // White outline
+                      },
+                      '&:hover fieldset': {
+                        borderColor: 'white', // White outline on hover
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: 'white', // White outline when focused
+                      },
+                    },
                   }}
                 />
               </FormGroup>
@@ -253,7 +312,7 @@ const MealGeneratorPage = () => {
                   justifyContent: "center", // Center contents
                 }}
               >
-                <Typography sx={{ color: "#000", marginRight: 2, textAlign: "left", width: "100%" ,fontWeight:"bold"}}>
+                <Typography sx={{ color: "white", marginRight: 2, textAlign: "left", width: "100%" ,fontWeight:"bold"}}>
             Cuisine Type:
           </Typography>
                 {[
@@ -267,13 +326,32 @@ const MealGeneratorPage = () => {
                     key={cuisine}
                     control={
                       <Checkbox
-                        checked={formData.cuisineType.includes(cuisine)}
-                        onChange={(e) => handleCheckboxChange(e, "cuisineType")}
-                        value={cuisine}
-                      />
+                  checked={formData.cuisineType.includes(cuisine)}
+                  onChange={(e) => handleCheckboxChange(e, "cuisineType")}
+                  value={cuisine}
+                  sx={{
+                    '&.MuiCheckbox-root': {
+                      position: "relative",
+                      color: "white",
+                    },
+                    '&.MuiCheckbox-root:before': {
+                      content: '""',
+                      position: "absolute",
+                      top: -2,
+                      left: -2,
+                      right: -2,
+                      bottom: -2,
+                      // border: "2px solid white", // White border effect
+                      borderRadius: "4px",
+                    },
+                    '&.Mui-checked': {
+                      color: "white",
+                    },
+                  }}
+                />
                     }
                     label={cuisine.charAt(0).toUpperCase() + cuisine.slice(1)}
-                    sx={{ color: "#000", marginRight: 2 }}
+                    sx={{ color: "white", marginRight: 2 }}
                   />
                 ))}
                 <TextField
@@ -297,9 +375,23 @@ const MealGeneratorPage = () => {
                     }));
                   }}
                   sx={{
-                    input: { color: "#000" },
-                    label: { color: "#000" },
                     marginBottom: 2,
+                    input: { color: "white" },
+                    label: { color: "white" },
+                    '& label.Mui-focused': {
+                      color: 'white', // Keep label text white when focused
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: 'white', // White outline
+                      },
+                      '&:hover fieldset': {
+                        borderColor: 'white', // White outline on hover
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: 'white', // White outline when focused
+                      },
+                    },
                   }}
                 />
               </FormGroup>
@@ -313,7 +405,7 @@ const MealGeneratorPage = () => {
                   justifyContent: "center", // Center contents
                 }}
               >
-                <Typography sx={{ color: "#000", marginRight: 2, textAlign: "left", width: "100%",fontWeight:"bold" }}>
+                <Typography sx={{ color: "white", marginRight: 2, textAlign: "left", width: "100%",fontWeight:"bold"}}>
             Meal Type:
           </Typography>
                 {["Breakfast", "Lunch", "Dinner", "Snack", "Teatime"].map((meal) => (
@@ -321,13 +413,32 @@ const MealGeneratorPage = () => {
                     key={meal}
                     control={
                       <Checkbox
-                        checked={formData.mealType.includes(meal)}
-                        onChange={(e) => handleCheckboxChange(e, "mealType")}
-                        value={meal}
-                      />
+                  checked={formData.mealType.includes(meal)}
+                  onChange={(e) => handleCheckboxChange(e, "mealType")}
+                  value={meal}
+                  sx={{
+                    '&.MuiCheckbox-root': {
+                      position: "relative",
+                      color: "white",
+                    },
+                    '&.MuiCheckbox-root:before': {
+                      content: '""',
+                      position: "absolute",
+                      top: -2,
+                      left: -2,
+                      right: -2,
+                      bottom: -2,
+                      // border: "2px solid white", // White border effect
+                      borderRadius: "4px",
+                    },
+                    '&.Mui-checked': {
+                      color: "white",
+                    },
+                  }}
+                />
                     }
                     label={meal}
-                    sx={{ color: "#000", marginRight: 2 }}
+                    sx={{ color: "white", marginRight: 2 }}
                   />
                 ))}
               </FormGroup>
@@ -343,25 +454,54 @@ const MealGeneratorPage = () => {
                 }
                 sx={{
                   marginBottom: 2,
-                  input: { color: "#000" },
-                  label: { color: "#000" },
+                  input: { color: "white" },
+                  label: { color: "white" },
+                  '& label.Mui-focused': {
+                    color: 'white', // Keep label text white when focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'white', // White outline
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'white', // White outline on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'white', // White outline when focused
+                    },
+                  },
                 }}
               />
 
               {/* Excluded Ingredients */}
               <TextField
-                label="Excluded Ingredients"
-                fullWidth
-                value={formData.excluded}
-                onChange={(e) =>
-                  setFormData({ ...formData, excluded: e.target.value })
-                }
-                sx={{
-                  marginBottom: 2,
-                  input: { color: "#000" },
-                  label: { color: "#000" },
-                }}
-              />
+  label="Excluded Ingredients"
+  fullWidth
+  value={formData.excluded}
+  onChange={(e) =>
+    setFormData({ ...formData, excluded: e.target.value })
+  }
+  sx={{
+    marginBottom: 2,
+    input: { color: "white" },
+    label: { color: "white" },
+    '& label.Mui-focused': {
+      color: 'white', // Keep label text white when focused
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'white', // White outline
+      },
+      '&:hover fieldset': {
+        borderColor: 'white', // White outline on hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white', // White outline when focused
+      },
+    },
+  }}
+/>
+
 
               {/* Submit Button */}
 <Box
@@ -375,9 +515,12 @@ const MealGeneratorPage = () => {
     variant="contained"
     type="submit"
     sx={{
-      backgroundColor: "#4caf50",
+      backgroundColor: "white",
+      color:"#2b6777 ",
+      
+
       "&:hover": {
-        backgroundColor: "#388e3c",
+        backgroundColor: "#efefef",
       },
     }}
   >
