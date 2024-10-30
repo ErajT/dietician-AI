@@ -23,6 +23,7 @@ async function generateMealPlan(mealDetails) {
         // Diet (array)
         if (diet && diet.length > 0) {
         diet.forEach(item => {
+            item = item.replace(/^"|"$/g, '');
             allother += `&diet=${encodeURIComponent(item)}`;
         });
         }
@@ -56,12 +57,14 @@ async function generateMealPlan(mealDetails) {
         allother += `&excluded=${encodeURIComponent(excluded)}`;
         }
 
-        // console.log(allother);
+        console.log(allother);
 
         // Fetch data from the external API
         const apiResponse = await fetch(
             `https://api.edamam.com/api/recipes/v2?type=public&app_id=96d9dd87&app_key=45d8152fa5e12eb7e048665a448bbfd7${allother}`
         );
+
+        // console.log(apiResponse);
            
         if (!apiResponse.ok) {
             throw new Error("Edamam API not working");
@@ -71,7 +74,7 @@ async function generateMealPlan(mealDetails) {
         const data = await apiResponse.json();
         // console.log(data);
         const hits = data["hits"];
-        console.log(hits);
+        // console.log(hits);
 
 
         // Process each recipe and fetch instructions for it
@@ -142,7 +145,7 @@ export async function POST(req) {
             }
         }
 
-        console.log(mealPlanResult);
+        // console.log(mealPlanResult);
 
 
         return NextResponse.json({

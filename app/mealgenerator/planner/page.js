@@ -22,7 +22,7 @@ const PlannerPage = ({ videoUrl }) => {
 
   useEffect(() => {
     const fetchMealPlan = async () => {
-      const diet = searchParams.get('diet');
+      const diet = [searchParams.get('diet')];
       const health = JSON.parse(searchParams.get('health') || '[]');
       const cuisineType = JSON.parse(searchParams.get('cuisineType') || '[]');
       const mealType = JSON.parse(searchParams.get('mealType') || '[]');
@@ -33,6 +33,12 @@ const PlannerPage = ({ videoUrl }) => {
 
       try {
         setLoading(true);
+        console.log(diet,
+          health,
+          cuisineType,
+          mealType,
+          calories,
+          excluded)
         const response = await fetch(`/api/mealplanner`, {
           method: 'POST',
           headers: {
