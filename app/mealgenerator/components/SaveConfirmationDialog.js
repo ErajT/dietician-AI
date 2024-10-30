@@ -23,7 +23,7 @@ const SaveConfirmationDialog = ({ open, onClose }) => {
       <DialogTitle 
         sx={{ 
           fontFamily: 'Jelligun, cursive', 
-          fontSize: '2.5rem', 
+          fontSize: '3rem', 
           color: '#e0f7f3', 
           fontWeight: 'bold', 
           textAlign: 'center',

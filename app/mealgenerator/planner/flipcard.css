@@ -39,45 +39,48 @@
   background-color: #2b6777;
   color: white;
   transform: rotateY(180deg);
-  padding: 2;
+  padding: 0.5rem; /* Ensure consistent padding */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between; /* Distribute space between content and link */
   height: 100%; /* Full height */
   overflow: hidden; /* Prevent overflow from child elements */
   position: relative; /* Position relative for absolute positioning of link */
 }
 
-/* New styles for the link */
+.flip-card-back .content {
+  flex-grow: 1; /* Allow content to grow */
+  flex-shrink: 0; /* Prevent shrinking */
+  overflow: hidden; /* Hide overflow */
+}
+
 .flip-card-back .details-link {
-  position: absolute; /* Position the link absolutely within the card */
-  bottom: 20px; /* Distance from the bottom */
-  left: 20px; /* Distance from the left */
-  color: black; /* Link color */
+  color: white; /* Link color */
   text-decoration: none; /* Remove underline */
   transition: transform 0.3s ease, color 0.3s ease; /* Animation for hover */
+  margin-top: 1.5rem; /* Add margin to separate from content */
 }
 
 /* Hover effect for link */
 .flip-card-back .details-link:hover {
   transform: translateY(-5px); /* Move link up slightly on hover */
-  color: black; /* Change color on hover */
+  color: white; /* Change color on hover for visibility */
 }
 
-/* Example content styling inside flip-card-back */
-.flip-card-back .content {
-  flex-grow: 0; /* Prevents the content from growing */
-  flex-shrink: 1; /* Allows the content to shrink */
-  padding: 0;
-  max-height: 100%; /* Limits the height */
-  overflow: hidden; /* Prevents overflow */
-  /* text-overflow: ellipsis;  */
+.flip-card-back .heading-container {
+  width: 100%; /* Set width to 80% of the card back */
+  margin: 0 auto; /* Center the container */
+  text-align: center; /* Center text within the container */
 }
 
-/* Dynamic font size adjustment */
+/* Adjust heading line spacing */
 .flip-card-back .heading {
-  font-size: clamp(0.5rem, 2vw, 1.5rem); /* Adjusts font size based on viewport width */
-  transition: font-size 0.3s; /* Smooth transition */
-  margin-bottom: 10px;
+  font-size: clamp(1.5rem, 5vw, 3rem); /* Increased the maximum font size */
+  transition: font-size 0.3s;
+  margin-bottom: 0.5rem; /* Add space below the heading */
+  margin-top: 0rem; /* Ensure no top margin */
+  line-height: 1; /* Set line height to reduce spacing */
 }
+
+

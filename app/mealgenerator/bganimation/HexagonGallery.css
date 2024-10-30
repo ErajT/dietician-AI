@@ -2,14 +2,14 @@
 .hexagon-gallery {
   display: flex;
   flex-direction: column;
-  align-items: flex-center; /* Align to the left for a staggered layout */
+  align-items: flex-start; /* Correct alignment to the left */
   gap: 30px; /* Maintain the overall gap between hexagons */
   padding-left: 0;
-  position: absolute; /* Position it absolutely to control its placement */
+  position: absolute;
   left: 0; /* Align to the left */
-  top: 130px; /* Align to the top */
+  top: 140px; /* Align to the top */
   bottom: 100px;
-  width: 30%; /* Adjust width to fit design */
+  width: 35%; /* Adjust width to fit new design */
   margin-left: 70px; /* Increased left margin */
 }
 
@@ -19,13 +19,14 @@
   font-weight: normal;
   font-style: normal;
 }
+
 /* Hexagon shape */
 .hexagon {
   position: relative;
-  width: 200px; /* Reduced width */
-  height: 173.2px; /* Adjusted height for proper alignment */
+  width: 300px; /* Increased width */
+  height: 260px; /* Adjusted height for alignment */
   background-color: transparent;
-  margin: -20px 0; /* Reduce negative margin for less overlap */
+  margin: -20px 0; /* Adjust negative margin for overlap */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,44 +35,46 @@
   overflow: hidden; /* Ensure quotes don't overflow */
 }
 
-/* Quote text inside hexagon */
 .hexagon .quote {
   position: absolute;
-  color: whitesmoke; /* Text color */
-  text-align: center; /* Center text */
-  padding: 10px; /* Padding for the quote */
-  background-color:transparent; /* Light background for readability */
-  border-radius: 5px; /* Rounded corners */
+  color: whitesmoke;
+  text-align: center;
+  padding: 10px; /* Adjust padding if necessary */
+  background-color: transparent;
+  border-radius: 5px;
   visibility: hidden; /* Hide by default */
-  opacity: 0; /* Start with no opacity */
-  transition: visibility 0s, opacity 0.3s ease-in-out; /* Smooth transition */
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
   font-family: 'Jelligun';
-  font-size: 1.3rem;
-  font-weight: "bold";
-
+  font-size: 1.8rem; /* Adjust size to fit hexagon */
+  line-height: 1.2; /* Reduce line height for a better fit */
+  max-width: 50%; /* Prevent overflow from edges */
+  word-wrap: break-word; /* Break long words */
+  font-weight: normal;
 }
 
 /* Show the quote text on hover */
 .hexagon:hover .quote {
-  visibility: visible; /* Show quote on hover */
-  opacity: 2; /* Make it visible */
+  visibility: visible;
+  opacity: 1; /* Correct opacity to fully visible */
 }
 
 /* Blur the image on hover */
 .hexagon:hover .hexagon-image {
-  filter: blur(3px) brightness(0.75); /* Apply blur effect and reduce brightness */
+  filter: blur(3px) brightness(0.75);
 }
+
 /* Odd hexagons */
 .hexagon:nth-child(odd) {
-  margin-left: -20px; /* Align to the left */
+  margin-left: -50px; /* Adjusted left margin */
   animation-delay: 0s;
-  margin-top: -50px; /* Reduced top spacing for even hexagons */
+  margin-top: -70px; /* Adjusted top spacing */
 }
 
 /* Even hexagons */
 .hexagon:nth-child(even) {
-  margin-left: 160px; /* Increased left margin for even hexagons */
-  margin-top: -40px; /* Reduced top spacing for even hexagons */
+  margin-left: 150px; /* Adjusted left margin for stagger */
+  margin-top: -70px; /* Adjusted top spacing */
   animation-delay: 1.25s;
 }
 
@@ -80,28 +83,28 @@
   content: "";
   position: absolute;
   width: 0;
-  border-left: 100px solid transparent; /* Adjusted for smaller hexagons */
-  border-right: 100px solid transparent; /* Adjusted for smaller hexagons */
+  border-left: 120px solid transparent; /* Increased size for larger hexagons */
+  border-right: 120px solid transparent;
 }
 
 .hexagon::before {
   bottom: 100%;
-  border-bottom: 86.6px solid transparent; /* Adjusted for smaller hexagons */
+  border-bottom: 100px solid transparent;
 }
 
 .hexagon::after {
   top: 100%;
-  border-top: 86.6px solid transparent; /* Adjusted for smaller hexagons */
+  border-top: 100px solid transparent;
 }
 
 /* Hexagon image */
 .hexagon-image {
-  width: 200px; /* Reduced width */
-  height: 200px; /* Reduced height */
+  width: 240px; /* Increased width */
+  height: 240px; /* Increased height */
   background-size: cover;
   background-position: center;
   clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
-  transition: filter 0.3s ease-in-out; /* Smooth transition for blur effect */
+  transition: filter 0.3s ease-in-out;
 }
 
 /* Keyframes for pop animation */

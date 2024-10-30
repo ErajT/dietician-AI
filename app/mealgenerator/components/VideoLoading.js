@@ -60,7 +60,7 @@ const VideoLoading = ({ videoUrl , comment }) => {
 
       {/* Loading Spinner and Text */}
       <CircularProgress sx={{ color: 'white' }} />
-      <Typography variant="h6" sx={{ marginTop: 2, color: 'white',fontFamily: 'Jelligun, cursive',fontSize:"2.5rem" }}>
+      <Typography variant="h6" sx={{ marginTop: 2, color: 'white',fontFamily: 'Jelligun, cursive',fontSize:"3rem" }}>
       {comment}
       </Typography>
        
