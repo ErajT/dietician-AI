@@ -10,13 +10,13 @@
   }
 }
 
-.body{
-  padding: 0;
+
+
+html, body {
+  height: 100%; /* Ensures html and body fill the screen */
   margin: 0;
+  padding: 0;
+  /* overflow: hidden; Prevents scrolling */
 }
 
-.html{
-  padding: 0;
-  margin: 0;
-}
 

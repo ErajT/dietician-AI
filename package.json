@@ -11,7 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^6.1.4",
+    "@mui/icons-material": "^6.1.5",
     "@mui/material": "^6.1.4",
     "@react-three/drei": "^9.114.3",
     "@react-three/fiber": "^8.17.10",
@@ -32,6 +32,9 @@
     "react-slick": "^0.30.2",
     "react-spring": "^9.7.4",
     "react-tsparticles": "^2.12.2",
+    "react-lottie-player": "^2.1.0",
+    "react-type-animation": "^3.2.0",
+    "react-typed": "^2.0.12",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.13",
     "swiper": "^11.1.14"

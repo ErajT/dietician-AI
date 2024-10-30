@@ -1,78 +1,168 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Box, Button, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { TypeAnimation } from "react-type-animation";
+import { useTheme } from "@mui/material/styles";
+import './globals.css';
 
-const MealGeneratorPage = () => {
+
+const MealGeneratorHome = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    age: '',
-    gender: '',
-    dietType: '',
-    mealsPerDay: 3
-  });
+  const theme = useTheme();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Navigate to planner page with query params
-    router.push(`/mealgenerator/planner?page=1&age=${formData.age}&gender=${formData.gender}&dietType=${formData.dietType}&mealsPerDay=${formData.mealsPerDay}`);
+  const handleNewMealPlan = () => {
+    router.push("/mealgenerator/newmealplanner");
+  };
+
+  const handleExistingMealPlan = () => {
+    router.push("/mealgenerator/SavedMealPlan");
   };
 
   return (
-    <div>
-      <h1>Meal Generator</h1>
-      <form onSubmit={handleSubmit}>
-        {/* Age */}
-        <div>
-          <label>Age:</label>
-          <input
-            type="number"
-            value={formData.age}
-            onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-            required
-          />
-        </div>
+    <Box
+      sx={{
+        position: "relative",
+        height: "100vh",
+        maxHeight: "100vh",
+        overflow: "hidden",
+        backgroundImage: `url("/images/mainbg.jpg")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        display: "flex",
+        flexDirection: "column",
+        padding: theme.spacing(0),
+      }}
+    >
+      {/* Dark overlay for better text visibility */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.4)", // Semi-transparent overlay
+          zIndex: 1,
+        }}
+      />
 
-        {/* Gender */}
-        <div>
-          <label>Gender:</label>
-          <select
-            value={formData.gender}
-            onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-            required
+      {/* Content */}
+      <Box
+        sx={{
+          position: "relative",
+          zIndex: 2,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          justifyContent: "flex-start",
+          paddingTop: theme.spacing(10),
+          paddingLeft: theme.spacing(4),
+        }}
+      >
+<Typography
+  variant="h5"
+  sx={{ color: "#ffffff", marginBottom: -2,fontSize:"3.5rem" }}
+  className="jelligun-font"
+>
+  Welcome to
+</Typography>
+<Typography
+  variant="h2"
+  sx={{ fontWeight: "bold", color: "#ffffff", marginBottom: 0,fontSize:"7rem" ,marginTop:-2}}
+>
+  <span className="jelligun-font">
+    <TypeAnimation
+      sequence={["Meal Generator", 500]}
+      speed={50}
+      repeat={Infinity}
+    />
+  </span>
+</Typography>
+
+          
+          {/* Slogan below the heading */}
+          <Typography
+            variant="subtitle1"
+            sx={{
+              color: "#ffffff",
+              marginTop: theme.spacing(18),
+              fontStyle: "none",
+              width: '100%', // Match the width of the heading
+              textAlign: "left", // Align to the left for a consistent look
+              position:"fixed",
+              fontFamily:"Jelligun",
+              fontSize:"2.2rem"
+            }}
           >
-            <option value="">Select</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div>
+            <TypeAnimation
+              sequence={["Your journey to a healthier lifestyle starts here", 500]}
+              speed={50}
+              repeat={Infinity}
+              cursor={false}
+            />
+            
+          </Typography>
+      </Box>
 
-        {/* Diet Type */}
-        <div>
-          <label>Diet Type:</label>
-          <input
-            type="text"
-            value={formData.dietType}
-            onChange={(e) => setFormData({ ...formData, dietType: e.target.value })}
-            required
-          />
-        </div>
+      {/* Buttons positioned at the bottom-right */}
+      <Box
+        sx={{
+          position: "absolute",
+          right: theme.spacing(8),
+          bottom: theme.spacing(12),
+          display: "flex",
+          gap: theme.spacing(2),
+          zIndex: 2,
+        }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleNewMealPlan}
+          sx={{
+            padding: 1,
+            width: "230px",
+            borderRadius: "15px",
+            backgroundColor: "#2b6777",
+            color:"white",
+            fontFamily:"Jelligun",
+            fontSize:"1.3rem",
+            fontWeight:'bold',
+            "&:hover": {
+              backgroundColor: "#2b6777",
+              transform: "scale(1.05)",
+            },
+          }}
+        >
+          Generate New Meal Plan
+        </Button>
 
-        {/* Meals Per Day */}
-        <div>
-          <label>Meals Per Day:</label>
-          <input
-            type="number"
-            value={formData.mealsPerDay}
-            onChange={(e) => setFormData({ ...formData, mealsPerDay: e.target.value })}
-            required
-          />
-        </div>
-
-        <button type="submit">Generate Meal Plan</button>
-      </form>
-    </div>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleExistingMealPlan}
+          sx={{
+            padding: 1,
+            width: "230px",
+            borderRadius: "15px",
+            backgroundColor: "#2b6777",
+            color:"white",
+            fontFamily:"Jelligun",
+            fontSize:"1.3rem",
+            fontWeight:'bold',
+            "&:hover": {
+              backgroundColor: "#2b6777",
+              transform: "scale(1.05)",
+            },
+          }}
+        >
+          View Existing Meal Plan
+        </Button>
+      </Box>
+    </Box>
   );
 };
 
-export default MealGeneratorPage;
+export default MealGeneratorHome;

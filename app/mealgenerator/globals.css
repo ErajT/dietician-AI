@@ -1,0 +1,22 @@
+html, body {
+    height: 100%; /* Ensures html and body fill the screen */
+    margin: 0;
+    padding: 0;
+    /* background-color: '#e0f7f3'; */
+    /* overflow: hidden; Prevents scrolling */
+  }
+
+
+  @font-face {
+    font-family: 'Jelligun';
+    src: url('/jelligun-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  .jelligun-font {
+    font-family: 'Jelligun', cursive;
+
+  }
+
+  
