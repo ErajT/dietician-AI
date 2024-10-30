@@ -69,8 +69,8 @@ export default function RecipeResultsPage() {
       )}
 
       {loading ? (
-        <div style={{ backgroundColor: 'transparent' }}>
-          <VideoLoading videoUrl={'/images/bg4.mp4'} comment={'Just a moment! Finding the perfect recipe for you...'}/>
+        <div style={{ backgroundColor: 'transparent', fontFamily: 'Jelligun, cursive', }}>
+          <VideoLoading videoUrl={'/images/bg4.mp4'} comment={'Just a moment! Finding the perfect recipe for you...'} />
         </div>
       ): error ? (<div className="no-result">
         <Typography variant="h5" component="h3" className="custom-typography">Oops!There seems to be a network issue.</Typography>
@@ -83,8 +83,8 @@ export default function RecipeResultsPage() {
           <NoResults /></div>
       ) : (
         <div>
-          <Typography variant="h5" component="h3">
-            Recipe Results for: {dishQuery}
+          <Typography variant="h5" component="h3" style={{ color: '#2b6777' ,fontFamily: "Jelligun, sans-serif",fontSize:'2rem' }}>
+            Recipe Results for:  {dishQuery}
           </Typography>
           <div className="recipe-cards-container">
             {recipes.map((recipe, index) => (

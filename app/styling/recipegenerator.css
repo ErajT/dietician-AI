@@ -6,7 +6,7 @@ html, body {
   padding: 0;
   overflow-x: hidden;
   overflow-y: scroll;
-  background-color: #cee2d2;
+  background: linear-gradient(135deg, #e0f7f3 0%, #f0f8f7 100%);
 
 }
 
@@ -64,6 +64,7 @@ html, body {
     grid-template-columns: repeat(4, 1fr); 
     gap: 2vw; 
     box-sizing: border-box;
+    padding-bottom: 5%;
     
    
   }
@@ -74,7 +75,7 @@ html, body {
   
 
   .flip-card {
-    background-color:#cee2d2  ;
+    background: linear-gradient(to bottom, #e0f7f3, #f0f8f7);  ;
  
     width: 20vw;
     height: 40vh;
@@ -92,7 +93,8 @@ html, body {
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-    background-color:#cee2d2  ;
+    background: linear-gradient(to bottom, #e0f7f3, #f0f8f7);
+    
   }
   
 
@@ -112,16 +114,17 @@ html, body {
   
   /* Style the front side (fallback if image is missing) */
   .flip-card-front {
-    background-color:#cee2d2  ;
+    background: linear-gradient(to bottom, #e0f7f3, #f0f8f7);;
     
    
   }
   
   /* Style the back side */
   .flip-card-back {
-    background-color:#102820 ;
+    background-color:#2b6777 ;
     color: #f8fdfb;
     transform: rotateY(180deg);
+    overflow-y: auto;
   }
 
  

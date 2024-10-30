@@ -108,10 +108,11 @@ const IndividualRecipe = () => {
           marginLeft: '4vw',
           width: '60%',
           marginTop: '3%',
-          backgroundColor: '#7c9c81',
+          backgroundColor: '#2b6777',
+          color:'white',
           marginBottom: '10%',
         }}>
-          <h1 style={{ display: 'flex', justifyContent: 'center' }}>{recipe.name}</h1>
+          <h1 style={{ display: 'flex', justifyContent: 'center' ,fontFamily: 'Jelligun, cursive',fontSize:'4rem'}}>{recipe.name}</h1>
           
           <div>
             <div style={{

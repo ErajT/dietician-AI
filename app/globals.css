@@ -11,3 +11,18 @@
   }
 }
 
+@font-face {
+  font-family: 'Jelligun';
+  src: url('/Jelligun-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: bold;
+}
+
+h2 {
+  font-size: 6rem;
+  margin-top: -10px;
+  margin-bottom: 60px;
+  color: #2b6777;
+  font-family: "Jelligun", cursive;
+  font-weight: bold;
+}

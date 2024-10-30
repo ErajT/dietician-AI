@@ -28,7 +28,7 @@ export default function IngredientsList({ recipe }) {
             marginBottom: '1em',
             padding: '0.5em',
             borderRadius: '8px',
-            backgroundColor: index % 2 === 0 ? '#9ab89e' : '#afc7b3', // Alternating background colors
+            backgroundColor: index % 2 === 0 ? '#5c9db5' : '#497e91', // Alternating background colors
           }}
         >
           <div style={{ fontWeight: 'bold', marginRight: '1em' }}>{index + 1}.</div>

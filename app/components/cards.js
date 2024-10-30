@@ -30,7 +30,7 @@ export default function ActionAreaCard({ id, name, image, cuisine, calories, dis
               component="img"
               image={image}  
               alt={name}
-              style={{ width: 260, height: 260 }}  
+              style={{ width: 260, height: 300 }}  
             />
           </CardActionArea>
         </Card>
@@ -39,18 +39,18 @@ export default function ActionAreaCard({ id, name, image, cuisine, calories, dis
         <Card className="flip-card-back">
           <CardContent
             style={{
-              maxHeight: '10rem', // Limit the height of the content
-              overflowY: 'auto',  // Enable vertical scroll if content exceeds max height
+              maxHeight: 'auto', // Limit the height of the content
+               // Enable vertical scroll if content exceeds max height
             }}
           >
-            <Typography variant="h5" component="h1" fontWeight="bold" style={{ fontSize: '2rem' }}>
+            <Typography variant="h5" component="h1" fontWeight="bold" style={{ fontSize: '2rem' , fontFamily: 'Jelligun, cursive',paddingBottom:'8%'}}>
               {name}  {/* Dynamic name */}
             </Typography>
-            <Typography variant="body2">
-              <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>Cuisine:</span> {cuisine}  {/* Dynamic cuisine */}
+            <Typography variant="body2" style={{ontWeight: 'bold', fontSize: '2rem',fontFamily: 'Jelligun, cursive'}}>
+              <span style={{ fontWeight: 'bold', fontSize: '2rem',fontFamily: 'Jelligun, cursive' }}>Cuisine:</span> {cuisine}  {/* Dynamic cuisine */}
             </Typography>
             <Typography variant="body2">
-              <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>Calories:</span> {Number(calories).toFixed(2)}  {/* Dynamic calories */}
+              <span style={{ fontWeight: 'bold', fontSize: '2rem',fontFamily: 'Jelligun, cursive' }}>Calories:</span> {Number(calories).toFixed(2)}  {/* Dynamic calories */}
             </Typography>
           </CardContent>
         </Card>

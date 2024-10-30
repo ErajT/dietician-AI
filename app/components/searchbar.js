@@ -43,14 +43,15 @@ const SearchField = ({ onSearch = () => {}, loading, className = "" }) => {
         onChange={handleInputChange}
         className="searchInput"
         InputProps={{
-          style: { borderRadius: '20rem' }, // This applies border-radius to the input element
+          style: { borderRadius: '20rem', }, // This applies border-radius to the input element
         }}
+        
         style={{ width: '40em' , backgroundColor:'white'}} 
         sx={{
           width: '30em', // Custom width
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              borderColor: 'gray', // Default border color
+              borderColor: 'gray', 
             },
             '&:hover fieldset': {
               borderColor: 'blue', // Border color on hover
@@ -62,17 +63,31 @@ const SearchField = ({ onSearch = () => {}, loading, className = "" }) => {
         }}
       />
       <Button 
-        type="submit" 
-        variant="contained" 
-        color="primary" 
-        disabled={loading} 
-        className="searchButton"
-        style={{ borderRadius: '25px', marginLeft: '10px', width: '30%',height:'50px',backgroundColor:'green' }} 
-        
-        
-      >
-        {loading ? 'Searching...' : 'Search'}
-      </Button>
+  type="submit" 
+  variant="contained" 
+  color="primary" 
+  disabled={loading} 
+  sx={{
+    padding: "1rem",
+    width: "15%",
+    height: '75%',
+    borderRadius: "20px",
+    backgroundColor: "#2b6777",
+    color: "white",
+    fontFamily: "Jelligun, sans-serif",
+    fontSize: "1.3rem",
+    fontWeight: "bold",
+    transition: "transform 0.3s ease",
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "#2b6777",
+      transform: "scale(1.05)",
+    },
+  }}
+>
+  {loading ? 'Searching...' : 'Search'}
+</Button>
+
     </Box>
   );
 };

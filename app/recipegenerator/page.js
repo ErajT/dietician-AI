@@ -36,22 +36,40 @@ export default function RecipeGeneratorPage() {
             alignItems: 'center', 
             height: '90vh', 
             width:'100%',
+            marginTop:'-3rem'
+            
         
             
           }}>
-            <h1 className="recipe-generator" style={{alignItems:'left'}}>
-              <ReactTyped
-                strings={["Recipe Generator"]}
-                typeSpeed={40}
-                backSpeed={50}
-                showCursor={true}
-                cursorChar="_"
-                loop
-              />
-            </h1>
-            <Typography variant="h5" component="h3" className="recipe-subheading">
-              Quick & Easy Recipes
-            </Typography>
+                    <h1 
+          className="recipe-generator" 
+          style={{ fontFamily: 'Jelligun, cursive',
+           
+            alignItems: 'left',
+            fontSize:'7rem',
+            fontWeight:'bold',
+            marginLeft:'-10rem',
+            
+          }}
+        >
+          <ReactTyped
+            strings={["Recipe Generator"]}
+            typeSpeed={100}
+            backSpeed={100}
+            showCursor={true}
+            cursorChar="_"
+            loop
+          />
+        </h1>
+
+        <Typography 
+          variant="h5" 
+          component="h3" 
+          className="recipe-subheading" 
+          style={{ fontFamily: 'Jelligun, cursive',fontSize:'3rem' }}
+        >
+          Quick & Easy Recipes
+        </Typography>
            
             <SearchBar onSearch={handleSearch} loading={false} />
             </div>
