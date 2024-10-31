@@ -21,6 +21,7 @@ import { motion } from "framer-motion";
 import '../globals.css';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import HexagonGallery from "../bganimation/HexagonGallery"; // Adjust path as needed
+import MultiSelectDropdown from '../components/MultiSelectDropdown'; // Adjust path as needed
 
 // Background Images
 const images = [
@@ -41,25 +42,24 @@ const images = [
 const MealGeneratorPage = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    diet: "",
-    health: [],
-    cuisineType: [],
-    mealType: [],
-    calories: "",
-    excluded: "",
+    diet: [],        // Initialize as empty array
+    health: [],      // Initialize as empty array
+    cuisineType: [], // Initialize as empty array
+    calories: "",    // Initialize as an empty string
+    mealType: [],    // Initialize as empty array
+    excluded: ""     // Initialize as an empty string
   });
-
+  
+  
+    
   const [loading, setLoading] = useState(false);
 
-  const handleCheckboxChange = (e, category) => {
-    const { value, checked } = e.target;
-    setFormData((prevData) => {
-      const updatedArray = checked
-        ? [...prevData[category], value]
-        : prevData[category].filter((item) => item !== value);
-      return { ...prevData, [category]: updatedArray };
-    });
+  const handleMultiSelectChange = (key) => (values) => {
+    setFormData((prevData) => ({ ...prevData, [key]: values }));
   };
+
+  
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -114,426 +114,302 @@ const MealGeneratorPage = () => {
         Meal Plan Generator
       </Typography>
 
-      {/* Form Section */}
-      <Box
-        sx={{
-          width: "100%", // Full width for form section on smaller screens
-          maxWidth: "40%", // Limits width for larger screens
-          zIndex: 2,
-          padding: 3,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          alignItems: "center", // Aligns the form to the right
-          marginLeft: "auto", // Aligns form to the right
-
-        }}
-      
-      >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          whileHover={{
-            scale: 1.05,
-            borderRadius: "12px",
-          }}
-        >
-          <Container
-            sx={{
-              padding: 5,
-              color: "white",
-              paddingTop: 3, // Adds padding from the top
-              backgroundColor: "#2b6777",
-              borderRadius: "12px",
-              justifyContent: "center",
-              boxShadow: "0 8px 8px rgba(0, 0, 0, 0.25)",
-              border: "1px solid rgba(255, 255, 255, 0.18)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center", // Centers all input fields within the form
-
-            }}
-          >
-
-
-            {/* Form Heading */}
-            <Typography
-  variant="subtitle1"
-  sx={{
-    color: "white",
-    marginBottom: 2,
-    textAlign: "center",
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-     fontStyle:"italic",
-     fontFamily:"Jelligun",
-     fontSize:"1.7rem"
-
-
-  }}
->
-  Taste Meets Health
-  <RestaurantIcon sx={{ fontSize: 24, color: "white", marginLeft: 1, marginRight: 1  }} />
-  Design Your Ideal Meal Plan!
-</Typography>
-
-            <form onSubmit={handleSubmit} style={{ width: "100%", textAlign: "center"}}>
-              {/* Diet Type */}
-              <TextField
-                label="Diet Type"
-                fullWidth
-                value={formData.diet}
-                onChange={(e) =>
-                  setFormData({ ...formData, diet: e.target.value })
-                }
-                sx={{
-                  marginBottom: 2,
-                  input: { color: "white" },
-                  label: { color: "white" },
-                  '& label.Mui-focused': {
-                    color: 'white', // Keep label text white when focused
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: 'white', // White outline
-                    },
-                    '&:hover fieldset': {
-                      borderColor: 'white', // White outline on hover
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: 'white', // White outline when focused
-                    },
-                  },
-                }}
-              />
-
-              {/* Health Conditions */}
-              <FormGroup
-                sx={{
-                  display: "flex",
-                  flexWrap: "nowrap",
-                  marginBottom: 2,
-                  justifyContent: "center", // Center contents
-                }}
-              >
-                <Typography sx={{ color: "white", marginRight: 2, textAlign: "left", width: "100%",fontWeight:"bold" }}>
-            Health Conditions:
-          </Typography>
-                {[
-                  "alcohol-free",
-                  "sugar-conscious",
-                  "nut-free",
-                  "gluten-free",
-                ].map((condition) => (
-                  <FormControlLabel
-                    key={condition}
-                    control={
-                      <Checkbox
-                        checked={formData.health.includes(condition)}
-                        onChange={(e) => handleCheckboxChange(e, "health")}
-                        value={condition}
-                        sx={{
-                          '&.MuiCheckbox-root': {
-                            position: "relative",
-                            color: "white",
-                            
-                          },
-                          '&.MuiCheckbox-root:before': {
-                            content: '""',
-                            position: "absolute",
-                            top: -2,
-                            left: -2,
-                            right: -2,
-                            bottom: -2,
-                            // border: "2px solid white", // White border effect
-                            borderRadius: "4px",
-                          },
-                          '&.Mui-checked': {
-                            color: "white",
-                          },
-                        }}
-                      />
-                    }
-                    label={condition.charAt(0).toUpperCase() + condition.slice(1)}
-                    sx={{ color: "white", marginRight: 2 }}
-                  />
-                ))}
-                <TextField
-                  label="Other Health Conditions"
-                  fullWidth
-                  value={
-                    formData.health.includes("other")
-                      ? formData.health.find((item) => item !== "other")
-                      : ""
-                  }
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      health: value
-                        ? [
-                            ...prevData.health.filter((item) => item !== "other"),
-                            value,
-                          ]
-                        : prevData.health.filter((item) => item !== "other"),
-                    }));
-                  }}
-                  sx={{
-                    marginBottom: 2,
-                    input: { color: "white" },
-                    label: { color: "white" },
-                    '& label.Mui-focused': {
-                      color: 'white', // Keep label text white when focused
-                    },
-                    '& .MuiOutlinedInput-root': {
-                      '& fieldset': {
-                        borderColor: 'white', // White outline
-                      },
-                      '&:hover fieldset': {
-                        borderColor: 'white', // White outline on hover
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: 'white', // White outline when focused
-                      },
-                    },
-                  }}
-                />
-              </FormGroup>
-
-              {/* Cuisine Type */}
-              <FormGroup
-                sx={{
-                  display: "flex",
-                  flexWrap: "nowrap",
-                  marginBottom: 2,
-                  justifyContent: "center", // Center contents
-                }}
-              >
-                <Typography sx={{ color: "white", marginRight: 2, textAlign: "left", width: "100%" ,fontWeight:"bold"}}>
-            Cuisine Type:
-          </Typography>
-                {[
-                  "Italian",
-                  "Mexican",
-                  "Indian",
-                  "Chinese",
-                  "Mediterranean",
-                ].map((cuisine) => (
-                  <FormControlLabel
-                    key={cuisine}
-                    control={
-                      <Checkbox
-                  checked={formData.cuisineType.includes(cuisine)}
-                  onChange={(e) => handleCheckboxChange(e, "cuisineType")}
-                  value={cuisine}
-                  sx={{
-                    '&.MuiCheckbox-root': {
-                      position: "relative",
-                      color: "white",
-                    },
-                    '&.MuiCheckbox-root:before': {
-                      content: '""',
-                      position: "absolute",
-                      top: -2,
-                      left: -2,
-                      right: -2,
-                      bottom: -2,
-                      // border: "2px solid white", // White border effect
-                      borderRadius: "4px",
-                    },
-                    '&.Mui-checked': {
-                      color: "white",
-                    },
-                  }}
-                />
-                    }
-                    label={cuisine.charAt(0).toUpperCase() + cuisine.slice(1)}
-                    sx={{ color: "white", marginRight: 2 }}
-                  />
-                ))}
-                <TextField
-                  label="Other Cuisine"
-                  fullWidth
-                  value={
-                    formData.cuisineType.includes("other")
-                      ? formData.cuisineType.find((item) => item !== "other")
-                      : ""
-                  }
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      cuisineType: value
-                        ? [
-                            ...prevData.cuisineType.filter((item) => item !== "other"),
-                            value,
-                          ]
-                        : prevData.cuisineType.filter((item) => item !== "other"),
-                    }));
-                  }}
-                  sx={{
-                    marginBottom: 2,
-                    input: { color: "white" },
-                    label: { color: "white" },
-                    '& label.Mui-focused': {
-                      color: 'white', // Keep label text white when focused
-                    },
-                    '& .MuiOutlinedInput-root': {
-                      '& fieldset': {
-                        borderColor: 'white', // White outline
-                      },
-                      '&:hover fieldset': {
-                        borderColor: 'white', // White outline on hover
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: 'white', // White outline when focused
-                      },
-                    },
-                  }}
-                />
-              </FormGroup>
-
-              {/* Meal Type */}
-              <FormGroup
-                sx={{
-                  display: "flex",
-                  flexWrap: "nowrap",
-                  marginBottom: 2,
-                  justifyContent: "center", // Center contents
-                }}
-              >
-                <Typography sx={{ color: "white", marginRight: 2, textAlign: "left", width: "100%",fontWeight:"bold"}}>
-            Meal Type:
-          </Typography>
-                {["Breakfast", "Lunch", "Dinner", "Snack", "Teatime"].map((meal) => (
-                  <FormControlLabel
-                    key={meal}
-                    control={
-                      <Checkbox
-                  checked={formData.mealType.includes(meal)}
-                  onChange={(e) => handleCheckboxChange(e, "mealType")}
-                  value={meal}
-                  sx={{
-                    '&.MuiCheckbox-root': {
-                      position: "relative",
-                      color: "white",
-                    },
-                    '&.MuiCheckbox-root:before': {
-                      content: '""',
-                      position: "absolute",
-                      top: -2,
-                      left: -2,
-                      right: -2,
-                      bottom: -2,
-                      // border: "2px solid white", // White border effect
-                      borderRadius: "4px",
-                    },
-                    '&.Mui-checked': {
-                      color: "white",
-                    },
-                  }}
-                />
-                    }
-                    label={meal}
-                    sx={{ color: "white", marginRight: 2 }}
-                  />
-                ))}
-              </FormGroup>
-
-              {/* Calories Input */}
-              <TextField
-                label="Calories Goal"
-                type="number"
-                fullWidth
-                value={formData.calories}
-                onChange={(e) =>
-                  setFormData({ ...formData, calories: e.target.value })
-                }
-                sx={{
-                  marginBottom: 2,
-                  input: { color: "white" },
-                  label: { color: "white" },
-                  '& label.Mui-focused': {
-                    color: 'white', // Keep label text white when focused
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: 'white', // White outline
-                    },
-                    '&:hover fieldset': {
-                      borderColor: 'white', // White outline on hover
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: 'white', // White outline when focused
-                    },
-                  },
-                }}
-              />
-
-              {/* Excluded Ingredients */}
-              <TextField
-  label="Excluded Ingredients"
-  fullWidth
-  value={formData.excluded}
-  onChange={(e) =>
-    setFormData({ ...formData, excluded: e.target.value })
-  }
-  sx={{
-    marginBottom: 2,
-    input: { color: "white" },
-    label: { color: "white" },
-    '& label.Mui-focused': {
-      color: 'white', // Keep label text white when focused
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'white', // White outline
-      },
-      '&:hover fieldset': {
-        borderColor: 'white', // White outline on hover
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: 'white', // White outline when focused
-      },
-    },
-  }}
-/>
-
-
-              {/* Submit Button */}
+     {/* Form Section */}
 <Box
   sx={{
+    width: "100%", // Full width for form section on smaller screens
+    maxWidth: "40%", // Limits width for larger screens
+    zIndex: 2,
+    padding: 4,
     display: "flex",
-    justifyContent: "center",
-    marginTop: 2,
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "center", // Aligns the form to the right
+    marginLeft: "auto", // Aligns form to the right
   }}
 >
-  <Button
-    variant="contained"
-    type="submit"
-    sx={{
-      backgroundColor: "white",
-      color:"#2b6777 ",
-      
-
-      "&:hover": {
-        backgroundColor: "#efefef",
-      },
+  <motion.div
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5 }}
+    whileHover={{
+      scale: 1.05,
+      borderRadius: "12px",
     }}
   >
-    Generate Meal Plan
-  </Button>
+    <Container
+      sx={{
+        padding: 5,
+        color: "white",
+        paddingTop: 3, // Adds padding from the top
+        backgroundColor: "#2b6777",
+        borderRadius: "12px",
+        justifyContent: "center",
+        boxShadow: "0 8px 8px rgba(0, 0, 0, 0.25)",
+        border: "1px solid rgba(255, 255, 255, 0.18)",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center", // Centers all input fields within the form
+      }}
+    >
+      {/* Form Heading */}
+      <Typography
+        variant="subtitle1"
+        sx={{
+          color: "white",
+          marginBottom: 2,
+          textAlign: "center",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          fontStyle: "italic",
+          fontFamily: "Jelligun",
+          fontSize: "1.7rem",
+        }}
+      >
+        Taste Meets Health
+        <RestaurantIcon sx={{ fontSize: 24, color: "white", marginLeft: 1, marginRight: 1 }} />
+        Design Your Ideal Meal Plan!
+      </Typography>
+
+      <form onSubmit={handleSubmit} style={{ width: "100%", textAlign: "center" }}>
+
+      {/*Diet Type Dropdown */}
+      <MultiSelectDropdown
+        label="Diet Type"
+        options={[
+          "balanced",
+          "high-fiber",
+          "high-protein",
+          "low-carb",
+          "low-fat",
+          "low-sodium",
+        ]}
+        selected={formData.diet}
+        setSelected={(value) => setFormData({ ...formData, diet: value })}
+        required // Make this field required
+      />
+
+
+        {/* Health Conditions Dropdown */}
+        <MultiSelectDropdown
+          label="Health Conditions"
+          options={[
+            "alcohol-cocktail",
+            "alcohol-free",
+            "celery-free",
+            "crustacean-free",
+            "dairy-free",
+            "DASH",
+            "egg-free",
+            "fish-free",
+            "fodmap-free",
+            "gluten-free",
+            "immuno-supportive",
+            "keto-friendly",
+            "kidney-friendly",
+            "kosher",
+            "low-fat-abs",
+            "low-potassium",
+            "low-sugar",
+            "lupine-free",
+            "Mediterranean",
+            "mollusk-free",
+            "mustard-free",
+            "no-oil-added",
+            "paleo",
+            "peanut-free",
+            "pescatarian",
+            "pork-free",
+            "red-meat-free",
+            "sesame-free",
+            "shellfish-free",
+            "soy-free",
+            "sugar-conscious",
+            "sulfite-free",
+            "tree-nut-free",
+            "vegan",
+            "vegetarian",
+            "wheat-free",
+          ]}
+          selected={formData.health}
+          setSelected={(value) => setFormData({ ...formData, health: value })}
+          required // Make this field required
+        />
+
+        {/* Cuisine Type Dropdown */}
+        <MultiSelectDropdown
+          label="Cuisine Type"
+          options={[
+            "American",
+            "Asian",
+            "British",
+            "Caribbean",
+            "Central Europe",
+            "Chinese",
+            "Eastern Europe",
+            "French",
+            "Indian",
+            "Italian",
+            "Japanese",
+            "Kosher",
+            "Mediterranean",
+            "Mexican",
+            "Middle Eastern",
+            "Nordic",
+            "South American",
+            "South East Asian",
+          ]}
+          selected={formData.cuisineType}
+          setSelected={(value) => setFormData({ ...formData, cuisineType: value })}
+          required // Make this field required
+        />
+
+
+        {/* Meal Type Section  */}
+        <FormGroup
+          sx={{
+            display: "flex",
+            flexWrap: "nowrap",
+            marginBottom: 2,
+            justifyContent: "center", // Center contents
+          }}
+        >
+          <Typography sx={{ color: "white", marginRight: 2, textAlign: "left", width: "100%", fontWeight: "bold" }}>
+            Meal Type:
+          </Typography>
+          {["Breakfast", "Lunch", "Dinner", "Snack", "Teatime"].map((meal) => (
+            <FormControlLabel
+              key={meal}
+              control={
+                <Checkbox
+                  checked={formData.mealType.includes(meal)} // Change mealTypes to mealType
+                  onChange={() => {
+                    const currentIndex = formData.mealType.indexOf(meal); // Change mealTypes to mealType
+                    const newMealTypes = [...formData.mealType]; // Change mealTypes to mealType
+
+                    if (currentIndex === -1) {
+                      newMealTypes.push(meal);
+                    } else {
+                      newMealTypes.splice(currentIndex, 1);
+                    }
+                    setFormData({ ...formData, mealType: newMealTypes }); // Change mealTypes to mealType
+                  }}
+                  sx={{
+                    color: "white", // Color of the checkbox when unchecked
+                    '&.Mui-checked': {
+                      color: "white", // Color of the checkbox when checked
+                    },
+                  }}
+                />
+              }
+              label={meal}
+              sx={{
+                color: "white",
+                marginRight: 2,
+                '&.MuiFormControlLabel-root': {
+                  marginBottom: 0,
+                },
+              }}
+            />
+          ))}
+        </FormGroup>
+
+        {/* Calories Input */}
+        <TextField
+          label="Calories"
+          type="number"
+          fullWidth
+          value={formData.calories}
+          onChange={(e) => setFormData({ ...formData, calories: e.target.value })}
+          required
+          sx={{
+            marginBottom: 2,
+            input: { color: "white" },
+            label: { color: "white" },
+            '& label.Mui-focused': {
+              color: 'white', // Keep label text white when focused
+            },
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: 'white', // White outline
+              },
+              '&:hover fieldset': {
+                borderColor: 'white', // White outline on hover
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: 'white', // White outline when focused
+              },
+            },
+          }}
+        />
+
+        {/* Exclude Ingredients */}
+        <TextField
+          label="Excluded Ingredients"
+          type="text"
+          fullWidth
+          value={formData.excluded} // Match the state key
+          onChange={(e) => {
+            const inputValue = e.target.value;
+
+            // Regular expression to allow letters, commas, and spaces only
+            const regex = /^[a-zA-Z\s,]*$/;
+
+            // Check if input matches the regex
+            if (regex.test(inputValue)) {
+              setFormData({ ...formData, excluded: inputValue }); // Update state only if valid
+            }
+          }} // Update state on change
+          required // Make this field required
+          sx={{
+            marginBottom: 2,
+            input: { color: "white" },
+            label: { color: "white" },
+            '& label.Mui-focused': {
+              color: 'white', // Keep label text white when focused
+            },
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: 'white', // White outline
+              },
+              '&:hover fieldset': {
+                borderColor: 'white', // White outline on hover
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: 'white', // White outline when focused
+              },
+            },
+          }}
+        />
+
+        {/* Submit Button */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: 2,
+          }}
+        >
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{
+              backgroundColor: "white",
+              color: "#2b6777",
+              "&:hover": {
+                backgroundColor: "#efefef",
+              },
+            }}
+          >
+            Generate Meal Plan
+          </Button>
+        </Box>      
+      </form>
+    </Container>
+  </motion.div>
 </Box>
-
-            </form>
-          </Container>
-        </motion.div>
-      </Box>
-
-
     </Box>
   );
 };
