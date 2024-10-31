@@ -10,7 +10,7 @@ const Navbar = () => {
     <AppBar
       position="static"
       sx={{
-        backgroundColor: "#2b6777", // Adjusted to match previous navbar style
+        backgroundColor: "#2b6777", 
         color: "#ffffff",
         boxShadow: "none",
         padding: "0 20px",
@@ -35,7 +35,7 @@ const Navbar = () => {
             mx: 1,
             color: "white",
             textTransform: "capitalize",
-            fontSize: "1rem",
+            fontSize: "1.1rem",
             padding: "8px 16px",
             transition: "background-color 0.3s ease",
             fontWeight: "bold",
@@ -51,7 +51,7 @@ const Navbar = () => {
             mx: 1,
             color: "white",
             textTransform: "capitalize",
-            fontSize: "1rem",
+            fontSize: "1.1rem",
             padding: "8px 16px",
             transition: "background-color 0.3s ease",
             fontWeight: "bold",
@@ -67,7 +67,7 @@ const Navbar = () => {
             mx: 1,
             color: "white",
             textTransform: "capitalize",
-            fontSize: "1rem",
+            fontSize: "1.1rem",
             padding: "8px 16px",
             transition: "background-color 0.3s ease",
             fontWeight: "bold",
@@ -83,7 +83,7 @@ const Navbar = () => {
             color: "white",
             borderColor: "white",
             textTransform: "capitalize",
-            fontSize: "1rem",
+            fontSize: "1.1rem",
             padding: "8px 16px",
             fontWeight: "bold",
             borderRadius: "20px",
