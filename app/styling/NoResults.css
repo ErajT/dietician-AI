@@ -1,0 +1,37 @@
+html, body {
+    height: 100%; /* Use min-height if you expect the content to exceed the viewport height */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  
+    
+    
+  }
+
+  .no-result {
+    align-items: center;
+    align-content: center;
+    margin-top: 15vh;
+  }
+.no-results-container {
+    text-align: center; /* Center-align text and video */
+    margin: 2vh; /* Add some margin */
+    
+  }
+  
+  .no-results-video {
+    max-width: 10%; /* Make video responsive */
+    height: 10%; /* Maintain aspect ratio */
+  }
+
+  .custom-typography {
+    font-size: 2rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    align-items: center;
+    align-content: center;
+    margin-left: 30vw;
+    margin-top: 9vh;
+    
+  }
+  

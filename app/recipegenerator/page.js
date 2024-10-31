@@ -1,85 +1,79 @@
 "use client";
+import { useRouter } from 'next/navigation'; // Import the router
+import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState } from 'react';
+import { ReactTyped } from 'react-typed';
 import SearchBar from '../components/searchbar';
-import CardExample from '../components/placeholder'; 
-import '../styling/recipegenerator.css';
+import '../styling/recipepage.css'; // Make sure to style the video here
+import { Typography } from '@mui/material';
 
 export default function RecipeGeneratorPage() {
   const [searchClicked, setSearchClicked] = useState(false);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false); 
-  const [recipes, setRecipes] = useState([]);
+  const router = useRouter(); // Initialize the router
 
   const handleSearch = (query) => {
-    console.log('Search Query:', query);
-
-    setSearchClicked(true);
-    setError(false);
-    setLoading(true);
-
-    const postData = async () => {
-      try {
-        const response = await fetch('/api/recipegenerator', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({dish: query})
-        });
-
-        const jsonData = await response.json();
-        
-        // Save the received recipes in state to render dynamically
-        setRecipes(jsonData.message || []);   
-        // console.log('Data received from API:', jsonData);   
-        
-      } catch (error) {
-        console.error('There was an error with the POST request:', error);
-        setError(true);
-      }
-      finally {
-        setLoading(false); 
-      }
-    };
-    
-    
-    postData(); // Fetch the data after defining the function
+    setSearchClicked(true); // Set searchClicked to true
+    router.push(`/recipegenerator/reciperesults?dish=${query}`); // Navigate with the search query
   };
 
-
   return (
-    <div>
-      <div className="overlay">
-        <h1 className="recipe-generator">Recipe Generator</h1>
-        <h3 className="recipe-subheading">Quick & Easy Recipes</h3>
-        <SearchBar onSearch={handleSearch} />
-      </div>
-      {searchClicked && (
-        <div className="recipe-cart-background">
-          {loading ? (
-            <div>Loading recipes...</div>
-          ) : error ? (
-            <div>Failed to load recipes. Please try again later.</div>
-          ) : (
-            <div className="cart-search-bar">
-              <div className="all-carts row">
-                {recipes.length > 0 ? recipes.map((recipe, index) => (
-                  <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4" key={index}>
-                    <CardExample
-                      name={recipe.name}
-                      image={recipe.image || '/images/default-recipe.jpg'}
-                      cuisineType={recipe.cuisineType}
-                      calories={recipe.calories}
-                      ingredients={recipe.ingredients}
-                    />
-                  </div>
-                )) : (
-                  <div>No recipes found.</div>
-                )}
-              </div>
+    <div className="app-container">
+      {!searchClicked && (
+        <div className="recipe-background" style={{ backgroundColor: 'transparent' }}>
+          {/* Background video */}
+          <video autoPlay muted loop playsInline className="background-video">
+            <source src="/images/bg2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="gradient-overlay"></div>
+
+          {/* Overlay content */}
+         
+          <div className="content-overlay" style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            height: '90vh', 
+            width:'100%',
+            marginTop:'-3rem'
+            
+        
+            
+          }}>
+                    <h1 
+          className="recipe-generator" 
+          style={{ fontFamily: 'Jelligun, cursive',
+           
+            alignItems: 'left',
+            fontSize:'7rem',
+            fontWeight:'bold',
+            marginLeft:'-10rem',
+            
+          }}
+        >
+          <ReactTyped
+            strings={["Recipe Generator"]}
+            typeSpeed={100}
+            backSpeed={100}
+            showCursor={true}
+            cursorChar="_"
+            loop
+          />
+        </h1>
+
+        <Typography 
+          variant="h5" 
+          component="h3" 
+          className="recipe-subheading" 
+          style={{ fontFamily: 'Jelligun, cursive',fontSize:'3rem' }}
+        >
+          Quick & Easy Recipes
+        </Typography>
+           
+            <SearchBar onSearch={handleSearch} loading={false} />
             </div>
-          )}
+         
         </div>
       )}
     </div>

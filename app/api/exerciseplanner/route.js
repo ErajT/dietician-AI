@@ -66,6 +66,7 @@ export async function POST(req, res) {
     }));
 
     // Return formatted data with YouTube URLs and titles
+    // console.log(exercisesWithYouTube)
     return NextResponse.json({
       status: "Success",
       exercises: exercisesWithYouTube,
