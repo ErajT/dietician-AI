@@ -30,6 +30,7 @@ const ExerciseDetailsPage = () => {
     const query = new URLSearchParams(window.location.search);
     const exercise = query.get('exercise') ? JSON.parse(decodeURIComponent(query.get('exercise'))) : null;
     const videoId = decodeURIComponent(query.get('videoId') || '');
+    console.log(exercise)
 
     if (exercise && videoId) {
       setExerciseDetails({
@@ -95,7 +96,7 @@ const Container = styled.div`
   min-height: 100vh;
   height: 100vh;
   padding: 40px;
-  // background-image: url('/detailsbg.png'); /* Ensure the path is correct */
+  background-image: url('/images/la.jpg'); /* Ensure the path is correct */
   background-size: cover;
   overflow: hidden;
   background-position: center;
