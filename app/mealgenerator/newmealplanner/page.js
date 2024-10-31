@@ -20,7 +20,7 @@ import {
 import { motion } from "framer-motion";
 import '../globals.css';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
-import HexagonGallery from "../bganimation/HexagonGallery"; // Adjust path as needed
+import CircleGallery from "../bganimation/CircleGallery"; // Adjust path as needed
 import MultiSelectDropdown from '../components/MultiSelectDropdown'; // Adjust path as needed
 
 // Background Images
@@ -94,7 +94,7 @@ const MealGeneratorPage = () => {
 
     >
       {/* Hexagon Gallery Background */}
-      <HexagonGallery />
+      <CircleGallery />
 
       {/* Heading */}
       <Typography
@@ -396,10 +396,25 @@ const MealGeneratorPage = () => {
             variant="contained"
             type="submit"
             sx={{
+              padding: 1,
+              width: "12.7rem",          // Width in rem
+              height: "3.2rem",           // Height in rem
+              borderRadius: "30rem",    // Full semicircle shape
               backgroundColor: "white",
               color: "#2b6777",
+              fontFamily: "Jelligun",
+              fontSize: "1.8rem",
+              fontWeight: "bold",
+              textAlign:"center",
+              textTransform: "none",    // Prevents all caps
               "&:hover": {
-                backgroundColor: "#efefef",
+                backgroundColor: "white",
+                transform: "scale(1.05)",
+                boxShadow: `
+                0px 0px 20px 5px rgba(43, 103, 119, 0.6),   // Stronger shadow with increased blur and spread
+                0px 0px 15px 5px rgba(255, 255, 255, 0.4)   // White neon glow on top
+              `,
+
               },
             }}
           >

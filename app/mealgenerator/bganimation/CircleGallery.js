@@ -1,7 +1,7 @@
 import React from 'react';
-import './HexagonGallery.css';
+import './CircleGallery.css';
 
-const hexagons = [
+const circles = [
   { id: 1, imgSrc: '/images/meal9.jpg', quote: 'Food is essential to life. Enjoy it.' },
   { id: 2, imgSrc: '/images/meal2.jpg', quote: 'Cooking is love made visible.' },
   { id: 3, imgSrc: '/images/meal7.jpg', quote: 'Good food is good mood.' },
@@ -10,23 +10,23 @@ const hexagons = [
   { id: 6, imgSrc: '/images/meal6.jpg', quote: 'The only thing I like better than talking about food is eating.' },
   { id: 7, imgSrc: '/images/meal12.jpg', quote: 'A recipe has no soul. You as the cook must bring soul to the recipe.' },
   { id: 8, imgSrc: '/images/meal11.jpg', quote: 'Life is a combination of magic and pasta.' },
-  { id: 9, imgSrc: '/images/meal3.jpg', quote: 'Life is a combination of flavors and spices.' } // New hexagon
+  { id: 9, imgSrc: '/images/meal3.jpg', quote: 'Life is a combination of flavors and spices.' } // New circle
 ];
 
-const HexagonGallery = () => {
+const CircleGallery = () => {
   return (
-    <div className="hexagon-gallery">
-      {hexagons.map((hexagon) => (
-        <div key={hexagon.id} className="hexagon">
+    <div className="circle-gallery">
+      {circles.map((circle) => (
+        <div key={circle.id} className="circle">
           <div
-            className="hexagon-image"
-            style={{ backgroundImage: `url(${hexagon.imgSrc})` }}
+            className="circle-image"
+            style={{ backgroundImage: `url(${circle.imgSrc})` }}
           ></div>
-          <div className="quote">{hexagon.quote}</div>
+          <div className="quote">{circle.quote}</div>
         </div>
       ))}
     </div>
   );
 };
 
-export default HexagonGallery;
+export default CircleGallery;

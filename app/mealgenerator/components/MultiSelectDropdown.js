@@ -5,17 +5,9 @@ const MultiSelectDropdown = ({ label, options, selected, setSelected, required }
   const [open, setOpen] = useState(false);
 
   const handleChange = (event) => {
-    setSelected(event.target.value);
+    const value = event.target.value; // Get selected values from event
+    setSelected(value); // Set selected to the new array of values
     setOpen(false);
-  };
-
-  const handleDelete = (chipToDelete, event) => {
-    event.stopPropagation();
-    setSelected((prevSelected) => {
-      const updatedSelection = prevSelected.filter((chip) => chip !== chipToDelete);
-      console.log("Updated selection:", updatedSelection); // Debug log
-      return updatedSelection;
-    });
   };
 
   return (
@@ -23,7 +15,7 @@ const MultiSelectDropdown = ({ label, options, selected, setSelected, required }
       <TextField
         select
         label={label}
-        value={selected}
+        value={selected} // Ensure this is an array
         onChange={handleChange}
         SelectProps={{
           multiple: true,
@@ -36,14 +28,11 @@ const MultiSelectDropdown = ({ label, options, selected, setSelected, required }
                 <Chip
                   key={value}
                   label={value}
-                  onDelete={(event) => handleDelete(value, event)}
+                  // Removed the onDelete prop to prevent deletion
                   sx={{
                     color: 'white',
                     backgroundColor: 'transparent',
                     border: '0.5px solid white',
-                    '& .MuiChip-deleteIcon': {
-                      color: 'white',
-                    },
                   }}
                 />
               ))}
@@ -65,7 +54,7 @@ const MultiSelectDropdown = ({ label, options, selected, setSelected, required }
         }}
       >
         {options
-          .filter((option) => !selected.includes(option))
+          .filter((option) => !selected.includes(option)) // Only show options that are not selected
           .map((option) => (
             <MenuItem key={option} value={option}>
               {option}
@@ -75,7 +64,5 @@ const MultiSelectDropdown = ({ label, options, selected, setSelected, required }
     </Box>
   );
 };
-
-
 
 export default MultiSelectDropdown;

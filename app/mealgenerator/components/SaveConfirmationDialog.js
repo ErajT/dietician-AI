@@ -49,17 +49,28 @@ const SaveConfirmationDialog = ({ open, onClose }) => {
           variant="contained" 
           color="secondary" 
           sx={{
-            paddingX: 3,
-            paddingY: 1,
-            fontSize: '1.3rem',
-            fontWeight: 'bold',
-            fontFamily: 'Jelligun, cursive',
-            backgroundColor: 'white',
-            color: '#2b6777',
-            borderRadius: '10px',
-            '&:hover': {
-              backgroundColor: 'white'
-            }
+            padding: 1,
+            width: "9rem",          // Width in rem
+            height: "2.5rem",           // Height in rem
+            borderRadius: "30rem",    // Full semicircle shape
+            backgroundColor: "white",
+            color: "#2b6777",
+            fontFamily: "Jelligun",
+            fontSize: "2.3rem",
+            fontWeight: "bold",
+            display: "flex",            // Enables flexbox
+            alignItems: "center",       // Centers content vertically
+            justifyContent: "center",
+            textTransform: "none",    // Prevents all caps
+            "&:hover": {
+              backgroundColor: "white",
+              transform: "scale(1.05)",
+              boxShadow: `
+              0px 0px 20px 5px rgba(43, 103, 119, 0.6),   // Stronger shadow with increased blur and spread
+              0px 0px 15px 5px rgba(255, 255, 255, 0.4)   // White neon glow on top
+            `,
+
+            },
           }}
         >
           Close
