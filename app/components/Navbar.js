@@ -88,6 +88,8 @@ const Navbar = () => {
             fontWeight: "bold",
             borderRadius: "20px",
             ml: 2,
+            backgroundColor :"#f0f8f7",
+            color :"#2b6777",
             '&:hover': {
               backgroundColor: "rgba(255, 255, 255, 0.2)",
               borderColor: "white",

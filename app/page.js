@@ -156,8 +156,8 @@ const TextWrapper = styled.div`
     opacity: 0;
     animation: fadeIn 0.5s ease forwards;
     animation-delay: calc(var(--delay) * 0.1s);
-    animation-fill-mode: forwards; /* Keeps the final state */
-    animation-iteration-count: 2; /* Runs only once */
+    animation-fill-mode: forwards; 
+    animation-iteration-count: 2; 
   }
 
   @keyframes fadeIn {
@@ -257,7 +257,7 @@ const Heading = styled.h2`
   margin-top: -10px;
   margin-bottom: 60px;
   color: #2b6777;
-  font-family: "Jelligun", cursive; // Use the custom font here
+  font-family: "Jelligun", cursive; 
   font-weight: bold;
 `;
 
