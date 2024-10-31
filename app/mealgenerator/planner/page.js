@@ -72,13 +72,29 @@ const PlannerPage = ({ videoUrl }) => {
     fetchMealPlan();
   }, [searchParams]);
 
+  // const saveMealPlan = () => {
+  //   localStorage.setItem('savedMealPlan', JSON.stringify(mealPlan));
+  //   setOpenDialog(true);
+  // };
+
   const saveMealPlan = () => {
-    localStorage.setItem('savedMealPlan', JSON.stringify(mealPlan));
-    setOpenDialog(true);
+    try {
+      localStorage.setItem('savedMealPlan', JSON.stringify(mealPlan));
+      setOpenDialog(true);
+    } catch (error) {
+      console.error("Error saving meal plan:", error);
+      alert("There was an issue saving your meal plan. Please try again.");
+    }
   };
+  
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
+  };
+
+  const handleCardClick = (meal) => {
+    setSelectedMeal(meal);
+    setOpen(true);
   };
 
   if (loading) {
@@ -183,9 +199,9 @@ const PlannerPage = ({ videoUrl }) => {
             gap: 2,
           }}
         >
-          {mealsForActiveDay && mealsForActiveDay.length > 0 ? (
+          {mealsForActiveDay  ? (
             <Grid container spacing={3} justifyContent="center" sx={{ marginBottom: 0 }}> {/* Remove margin below grid */}
-              {mealsForActiveDay.map((meal, index) => (
+              {Object.values(mealsForActiveDay).map((meal, index) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
                   <div className="flip-card">
                     <div className="flip-card-inner">
@@ -193,7 +209,7 @@ const PlannerPage = ({ videoUrl }) => {
                         <CardActionArea sx={{ height: '100%' }}>
                           <CardMedia
                             component="img"
-                            image="/images/food.jpg"
+                            image={meal.image || "no image available"}
                             alt={meal.name}
                             sx={{ objectFit: 'contain', width: '100%', height: '100%' }}
                           />
@@ -233,7 +249,7 @@ const PlannerPage = ({ videoUrl }) => {
                               lineHeight: 1,
                             }}
                           >
-                            <span style={{ fontWeight: 'normal' }}>Cuisine:</span> {meal.cuisine || 'Sample Cuisine'}
+                            <span style={{ fontWeight: 'normal' }}>Cuisine:</span> {meal.cuisineType ? meal.cuisineType.join(', ') : 'Sample Cuisine'}
                           </Typography>
                           <Typography
                             variant="body2"
@@ -272,8 +288,8 @@ const PlannerPage = ({ videoUrl }) => {
             </Grid>
           ) : (
             <Typography sx={{ fontFamily: 'Jelligun, cursive', fontSize: '2rem', textAlign: 'center' }}>
-              No meals available for {activeDay}.
-            </Typography>
+            No meals available for {activeDay}.
+          </Typography>
           )}
 
             {/* Save Meal Plan Button */}

@@ -8,6 +8,7 @@ import AOS from "aos";
 import { FaUser, FaRocket, FaChartLine, FaStar, FaComments, FaHeadset } from "react-icons/fa";
 import  { createGlobalStyle } from "styled-components";
 import Link from 'next/link';
+import "./mealgenerator/globals.css";
 
 const waveAnimation = keyframes`
   0% { transform: translateX(0); }

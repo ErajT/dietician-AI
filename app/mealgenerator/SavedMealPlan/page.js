@@ -97,7 +97,7 @@ const SavedMealPlanPage = () => {
         ) : mealsForActiveDay && mealsForActiveDay.length > 0 ? (
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', minHeight: '80vh', gap: 2, marginTop: '2rem' }}>
             <Grid container spacing={3} justifyContent="center">
-              {mealsForActiveDay.map((meal, index) => (
+            {Object.values(mealsForActiveDay).map((meal, index) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
                   <div className="flip-card">
                     <div className="flip-card-inner">
@@ -105,7 +105,7 @@ const SavedMealPlanPage = () => {
                         <CardActionArea sx={{ height: '100%' }}>
                           <CardMedia
                             component="img"
-                            image={meal.image || '/images/food.jpg'}
+                            image={meal.image || "no image available"}
                             alt={meal.name}
                             sx={{ objectFit: 'contain', width: '100%', height: '100%' }}
                           />
@@ -136,7 +136,6 @@ const SavedMealPlanPage = () => {
                               {meal.name}
                             </Typography>
                           </div>
-
                           <Typography
                             variant="body2"
                             sx={{
@@ -146,7 +145,7 @@ const SavedMealPlanPage = () => {
                               lineHeight: 1,
                             }}
                           >
-                            <span style={{ fontWeight: 'normal' }}>Cuisine:</span> {meal.cuisine || 'Sample Cuisine'}
+                            <span style={{ fontWeight: 'normal' }}>Cuisine:</span> {meal.cuisineType ? meal.cuisineType.join(', ') : 'Sample Cuisine'}
                           </Typography>
                           <Typography
                             variant="body2"
@@ -167,8 +166,8 @@ const SavedMealPlanPage = () => {
                             className="details-link"
                             sx={{
                               fontFamily: 'Jelligun, cursive',
-                              fontSize: '1.7rem',
-                              // color: '#0070f3',
+                              fontSize: '1.5rem',
+                              color: '#0070f3',
                               textDecoration: 'none',
                               position: 'relative',
                               marginTop: 'auto',
