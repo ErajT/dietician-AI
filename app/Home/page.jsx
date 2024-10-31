@@ -1,377 +1,415 @@
-// "use client";
-// import styled, { createGlobalStyle } from "styled-components";
-// import { useState, useEffect, useRef } from "react";
-// import { FaCommentDots, FaTimes } from "react-icons/fa";
-// import { motion, AnimatePresence } from "framer-motion";
-// import Tilt from "react-parallax-tilt";
-// import Particles from "react-tsparticles";
-
-// // Global styles
-// const GlobalStyle = createGlobalStyle`
-//   body {
-//     margin: 0;
-//     font-family: 'Poppins', sans-serif;
-//     background-color: #e0e0e0;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: flex-start;
-//     min-height: 100vh;
-//     perspective: 1500px;
-//     overflow: hidden;
-//     padding: 40px 20px;
-//   }
-// `;
-
-// // Particle Background
-// const ParticleBackground = styled(Particles)`
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   top: 0;
-//   left: 0;
-//   z-index: -1;
-// `;
-
-// // Main container for images and text
-// const Container = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   gap: 40px;
-//   padding: 20px;
-// `;
-
-// // Grid for the images (3 top, 3 bottom)
-// const ImageGrid = styled.div`
-//   display: grid;
-//   grid-template-columns: repeat(3, 1fr);
-//   gap: 20px;
-//   width: 100%;
-//   justify-items: center;
-// `;
-
-// // Image container, blurred except for the active one
-// const ImageContainer = styled(Tilt)`
-//   width: 250px;
-//   height: 350px;
-//   position: relative;
-//   cursor: pointer;
-//   border-radius: 20px;
-//   overflow: hidden;
-//   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-//   padding: 10px;
-//   filter: ${(props) => (props.isActive ? "none" : "blur(1px)")};
-//   transition: transform 0.5s ease-in-out, filter 0.5s ease-in-out;
-
-//   &:hover {
-//     transform: translateY(-5px) scale(1.05);
-//   }
-// `;
-// // Styled Image
-// const StyledImage = styled.img`
-//   width: 100%;
-//   height: 100%;
-//   object-fit: cover;
-//   transition: transform 0.5s ease;
-
-//   &:hover {
-//     transform: scale(1.1);
-//   }
-// `;
-
-// // Tooltip for displaying text
-// const Tooltip = styled(motion.div)`
-//   position: absolute;
-//   bottom: 15px;
-//   left: 10%;
-//   transform: translateX(-50%);
-//   background-color: rgba(0, 0, 0, 0.8);
-//   border-radius: 8px;
-//   padding: 8px 12px;
-//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-//   font-size: 1rem;
-//   color: #fff;
-//   white-space: nowrap;
-//   pointer-events: none;
-//   z-index: 7; /* Ensure tooltip is visible above image */
-// `;
-
-// // Chatbot Button styled
-// const ChatbotButton = styled(motion.div)`
-//   position: fixed;
-//   bottom: 30px;
-//   right: 30px;
-//   width: 60px;
-//   height: 60px;
-//   background-color: #007bff;
-//   border-radius: 50%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   color: white;
-//   cursor: pointer;
-//   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-//   transition: all 0.3s ease-in-out;
-
-//   &:hover {
-//     background-color: #0056b3;
-//     transform: scale(1.2);
-//   }
-// `;
-
-// const Home = () => {
-//   const slides = [
-//     { image: "https://www.kitchenskip.com/wp-content/uploads/2023/02/green-goddess-salad-dressing-f.jpg", text: "Green Goddess Salad" },
-//     { image: "https://feelgoodfoodie.net/wp-content/uploads/2019/02/Mediterranean-Chopped-Salad-12.jpg", text: "Mediterranean Salad" },
-//     { image: "https://www.herwholesomekitchen.com/wp-content/uploads/2022/09/fall-cobb-salad-1-4-2.jpg", text: "Fall Cobb Salad" },
-//     { image: "https://natashaskitchen.com/wp-content/uploads/2021/06/Chicken-Salad-SQ.jpg", text: "Chicken Salad" },
-//     { image: "https://www.thespruceeats.com/thmb/QXQsH2cttRxeYKT7pjaIxJQOV9Y=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/perfect-guacamole-recipe-4161803-hero-01-0a3458e4d1f04e7e8438b0c92ecdcf7a.jpg", text: "Guacamole" },
-//     { image: "https://www.simplyrecipes.com/thmb/jbrbyoTh7kDn0qsxf4nPZQHqkws=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Classic-Margarita-LEAD-07-15b0ae2fb2c04b21909740f80e0b99ac.jpg", text: "Classic Margarita" },
-//   ];
-
-//   const [activeIndex, setActiveIndex] = useState(0);
-//   const [chatbotVisible, setChatbotVisible] = useState(false);
-//   const intervalRef = useRef(null);
-
-//   const startCycle = () => {
-//     if (!intervalRef.current) {
-//       intervalRef.current = setInterval(() => {
-//         setActiveIndex((prevIndex) => (prevIndex + 1) % slides.length);
-//       }, 4000);
-//     }
-//   };
-
-//   const stopCycle = () => {
-//     clearInterval(intervalRef.current);
-//     intervalRef.current = null;
-//   };
-
-//   const toggleChatbot = () => {
-//     setChatbotVisible(!chatbotVisible);
-//   };
-
-//   useEffect(() => {
-//     startCycle();
-//     return () => stopCycle();
-//   }, []);
-
-//   return (
-//     <>
-//       <GlobalStyle />
-//       <ParticleBackground
-//         options={{
-//           particles: {
-//             number: { value: 80 },
-//             color: { value: "#ffffff" },
-//             shape: { type: "circle" },
-//             opacity: { value: 0.5, random: true },
-//             size: { value: 3 },
-//             move: { enable: true, speed: 2 },
-//           },
-//         }}
-//       />
-//       <Container>
-//         <ImageGrid>
-//           {slides.map((slide, index) => (
-//             <ImageContainer
-//               key={index}
-//               options={{ max: 25, scale: 1.05, speed: 300 }}
-//               isActive={index === activeIndex}
-//               onMouseEnter={() => {
-//                 setActiveIndex(index);
-//                 stopCycle(); // Stop the animation on hover
-//               }}
-//               onMouseLeave={() => {
-//                 startCycle(); // Restart the animation on mouse leave
-//               }}
-//             >
-//               <StyledImage src={slide.image} alt={slide.text} />
-//               {index === activeIndex && (
-//                 <Tooltip
-//                   initial={{ opacity: 0, translateY: -10 }}
-//                   animate={{ opacity: 1, translateY: 0 }}
-//                   exit={{ opacity: 0, translateY: -10 }}
-//                   transition={{ duration: 0.3 }}
-//                 >
-//                   {slide.text}
-//                 </Tooltip>
-//               )}
-//             </ImageContainer>
-//           ))}
-//         </ImageGrid>
-//       </Container>
-
-//       <ChatbotButton
-//         whileHover={{ scale: 1.1 }}
-//         whileTap={{ scale: 0.9 }}
-//         onClick={toggleChatbot}
-//       >
-//         <FaCommentDots size={25} />
-//       </ChatbotButton>
-
-//       <AnimatePresence>
-//         {chatbotVisible && (
-//           <motion.div
-//             initial={{ opacity: 0, y: 100 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             exit={{ opacity: 0, y: 100 }}
-//             transition={{ duration: 0.3 }}
-//             style={{
-//               position: "fixed",
-//               bottom: "100px",
-//               right: "30px",
-//               background: "#fff",
-//               borderRadius: "10px",
-//               boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
-//               width: "300px",
-//               height: "400px",
-//               display: "flex",
-//               flexDirection: "column",
-//               padding: "20px",
-//             }}
-//           >
-//             <FaTimes
-//               style={{ margin: "10px", alignSelf: "flex-end", cursor: "pointer" }}
-//               size={20}
-//               onClick={toggleChatbot}
-//             />
-//             {/* Chatbot content */}
-//           </motion.div>
-//         )}
-//       </AnimatePresence>
-//     </>
-//   );
-// };
-
-// export default Home;
 "use client";
-import React from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, Container, Grid, Card, CardContent, CardActionArea } from '@mui/material';
+import React, { useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Box,
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  Avatar,
+  CardActionArea,
+  Modal,
+  TextField,
+  IconButton,
+  Fade,
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import ChatIcon from "@mui/icons-material/Chat";
+import Chatbot from "./Chatbot";
+import  { createGlobalStyle } from "styled-components";
+import Navbar from '@components/Navbar';
 
+
+const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'Jelligun';
+    src: url('/Jelligun-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: bold;
+  }
+`;
 function Home() {
-  const personalInfo = {
-    name: 'John Doe',
+  const [open, setOpen] = useState(false);
+  const [chatbotOpen, setChatbotOpen] = useState(false);
+  const [personalInfo, setPersonalInfo] = useState({
+    name: "John Doe",
     age: 28,
-    weight: '70 kg',
-    height: '175 cm'
-  };
+    weight: "70 kg",
+    height: "175 cm",
+  });
 
   const features = [
-    { title: 'Feature 1', video: '/Main.mp4', link: '/feature1' },
-    { title: 'Feature 2', video: '/video2.mp4', link: '/feature2' },
-    { title: 'Feature 3', video: '/video3.mp4', link: '/feature3' },
-    { title: 'Feature 4', video: '/video4.mp4', link: '/feature4' }
+    { title: "Meal Plan", description: "Learn more about Feature 1.", video: "/Main.mp4", link: "/feature1" },
+    { title: "Exercise Planner", description: "Discover details of Feature 2.", video: "/ex.mp4", link: "/feature2" },
+    { title: "Recipe Generator", description: "Explore Feature 3 and its benefits.", video: "/ex.mp4", link: "/feature3" },
   ];
 
-  return (
-    <Container maxWidth="" sx={{ background: '#cee2d2', minHeight: '100vh', padding: '20px' }}>
-      {/* Top Navbar */}
-      <AppBar position="static" sx={{ backgroundColor: '#cee2d2', color: '#000' }}>
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Home
-          </Typography>
-          <Button color="inherit">Dashboard</Button>
-          <Button color="inherit">Settings</Button>
-          <Button color="inherit">Help</Button>
-          <Button color="inherit" sx={{ marginLeft: 'auto' }}>
-            Logo
-          </Button>
-        </Toolbar>
-      </AppBar>
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const handleChatbotOpen = () => setChatbotOpen(true);
+  const handleChatbotClose = () => setChatbotOpen(false);
 
-      {/* Image with Personal Info */}
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPersonalInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
+  };
+
+  return (
+    <Container
+      maxWidth=""
+      sx={{
+        background: "linear-gradient(to bottom, #e0f7f3, #f0f8f7)",
+        minHeight: "100vh",
+        padding: "20px",
+        overflow: "hidden",
+      }}
+    >
+       <div>
+      <Navbar />
+      {/* Other components go here */}
+    </div>
+       {/* <AppBar 
+      position="static" 
+      sx={{ 
+        backgroundColor: "#2b6777",  // Adjusted to match previous navbar style
+        color: "#ffffff",
+        boxShadow: "none",
+        padding: "0 20px"
+      }}
+    >
+      <Toolbar>
+        <Avatar 
+          alt="Logo" 
+          src="Logo.png" 
+          sx={{ 
+            width: 70, 
+            height: 70, 
+            marginRight: 2 
+          }} 
+        />
+        
+        <Box sx={{ flexGrow: 1 }} />
+        
+        <Button 
+          color="inherit" 
+          sx={{ 
+            mx: 1, 
+            color: "white",
+            textTransform: "capitalize",
+            fontSize: "1rem",
+            padding: "8px 16px",
+            transition: "background-color 0.3s ease",
+            fontWeight: "bold",
+            fontWeight: "1000",
+            '&:hover': { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: "5px" }
+            // background-color: rgba(255, 255, 255, 0.2);
+          }}
+        >
+          Meal Plan
+        </Button>
+        
+        <Button 
+          color="inherit" 
+          sx={{ 
+            mx: 1, 
+            color: "white",
+            textTransform: "capitalize",
+            fontSize: "1rem",
+            padding: "8px 16px",
+            transition: "background-color 0.3s ease",
+            fontWeight: "bold",
+            fontWeight: "1000",
+            '&:hover': { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: "5px" }
+          }}
+        >
+          Exercise Plan
+        </Button>
+        
+        <Button 
+          color="inherit" 
+          sx={{ 
+            mx: 1, 
+            color: "white",
+            textTransform: "capitalize",
+            fontSize: "1rem",
+            padding: "8px 16px",
+            transition: "background-color 0.3s ease",
+            fontWeight: "bold",
+            fontWeight: "1000",
+            '&:hover': { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: "5px" }
+          }}
+        >
+          Recipe Generator
+        </Button>
+        <Button 
+          variant="outlined" 
+          sx={{ 
+            color: "white", 
+            borderColor: "white",
+            textTransform: "capitalize",
+            fontSize: "1rem",
+            padding: "8px 16px",
+            fontWeight: "bold",
+    fontWeight: "1000",
+    borderRadius: "20px",
+            ml: 2,
+            '&:hover': { 
+              backgroundColor: "rgba(255, 255, 255, 0.2)", 
+              borderColor: "#white" 
+            }
+          }}
+        >
+          Logout
+        </Button>
+      </Toolbar>
+    </AppBar> */}
+
       <Box
         sx={{
-          position: 'relative',
-          width: '100%',
-          height: '220px',
-          backgroundImage: 'url(/Back1.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          borderRadius: '10px',
-          marginTop: 2,
-          color: '#fff'
+          position: "relative",
+          width: "100%",
+          height: "35vh",
+          backgroundImage: "url(/Back4.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          borderRadius: "10px",
+          marginTop: 2.5,
+          color: "#fff",
         }}
       >
         <Box
           sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '20%',
-            transform: 'translate(-50%, -50%)',
-            padding: '20px',
-            borderRadius: '10px',
-            textAlign: 'center',
-            // backgroundColor: 'rgba(0, 0, 0, 0.6)'
+            position: "absolute",
+            top: "50%",
+            left: "35%",
+            transform: "translateY(-50%)",
+            padding: "20px",
+            borderRadius: "10px",
+            textAlign: "left",
           }}
         >
-          <Typography variant="h4" gutterBottom>
-            Personal Information
-          </Typography>
-          <Typography variant="body1">Name: {personalInfo.name}</Typography>
-          <Typography variant="body1">Age: {personalInfo.age}</Typography>
-          <Typography variant="body1">Weight: {personalInfo.weight}</Typography>
-          <Typography variant="body1">Height: {personalInfo.height}</Typography>
-          <Button
-            variant="contained"
-            sx={{ marginTop: 2, backgroundColor: '#000' }}
-            href="/dashboard"
-          >
-            Go to Dashboard
-          </Button>
+          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" ,}}>
+          <>
+      <GlobalStyle />
+      <Typography 
+        variant="h4" 
+        gutterBottom 
+        sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold",fontSize:"3.3rem" }}
+      >
+        Personal Information
+      </Typography>
+    </>
+            <IconButton onClick={handleOpen} sx={{ color: "#fff", marginLeft: 1 }}>
+              <EditIcon />
+            </IconButton>
+          </Box>
+          {/* <Typography variant="h6">Name: {personalInfo.name}</Typography> */}
+          <Typography 
+  variant="h6" 
+  sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold", fontSize: "2.2rem", mb: -1 }} // Adjust the margin-bottom
+>
+  Age: {personalInfo.age}
+</Typography>
+<Typography 
+  variant="h6" 
+  sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold", fontSize: "2.2rem", mb:-1 }} // Adjust the margin-bottom
+>
+  Weight: {personalInfo.weight}
+</Typography>
+<Typography 
+  variant="h6" 
+  sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold", fontSize: "2.2rem" }} // No margin needed for the last item
+>
+  Height: {personalInfo.height}
+</Typography>
+
         </Box>
       </Box>
 
-      {/* Feature Cards */}
-      <Grid container spacing={4} sx={{ marginTop: 4 }}>
-        {features.map((feature, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-            <Card
+
+<Grid container spacing={2} sx={{ marginTop: 3 }}>
+  {features.map((feature, index) => (
+    <Grid item xs={12} sm={6} md={4} key={index}>
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          width: "100%",
+          height: "200px",
+          borderRadius: "15px",
+          boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          "&:hover .cardFront": {
+            opacity: 0,
+            transform: "translateX(-100%)",
+          },
+          "&:hover .cardBack": {
+            opacity: 1,
+            transform: "translateX(0)",
+          },
+        }}
+      >
+        {/* Front Side with clickable link */}
+        <Card
+          className="cardFront"
+          sx={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            transition: "transform 0.6s ease, opacity 0.4s ease",
+            backfaceVisibility: "hidden",
+            backgroundColor: "#fff",
+            zIndex: 1,
+          }}
+        >
+          <CardActionArea href={feature.link} target="_blank" rel="noopener noreferrer">
+            <Box
+              component="video"
+              src={feature.video}
+              autoPlay
+              muted
+              loop
               sx={{
-                maxWidth: 345,
-                borderRadius: '10px',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-                overflow: 'hidden',
-                position: 'relative'
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                filter: "brightness(0.7)",
+                borderRadius: "15px 15px 0 0",
               }}
+            />
+          </CardActionArea>
+        </Card>
+
+        {/* Back Side with clickable link */}
+        <Card
+          className="cardBack"
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            transition: "transform 0.6s ease, opacity 0.4s ease",
+            transform: "translateX(100%)",
+            backgroundColor: "#2b6777",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            padding: "20px",
+            backfaceVisibility: "hidden",
+            opacity: 0,
+            zIndex: 2,
+          }}
+        >
+          <CardActionArea href={feature.link} target="_blank" rel="noopener noreferrer">
+            <CardContent sx={{ color: "#fff" }}>
+              <Typography variant="h5">{feature.title}</Typography>
+              <Typography variant="body2">{feature.description}</Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      </Box>
+    </Grid>
+  ))}
+</Grid>
+
+
+      <IconButton
+        onClick={handleChatbotOpen}
+        sx={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+          backgroundColor: "#cee2d2",
+          color: "#000",
+          borderRadius: "50%",
+          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
+          width: 80,
+          height: 80,
+        }}
+      >
+
+      </IconButton>
+
+      {chatbotOpen && <Chatbot onClose={handleChatbotClose} />}
+
+      <Modal open={open} onClose={handleClose}>
+        <Fade in={open}>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 400,
+              bgcolor: "#cee2d2",
+              borderRadius: "15px",
+              boxShadow: "0 8px 30px rgba(0, 0, 0, 0.2)",
+              p: 4,
+            }}
+          >
+            <Typography sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold",fontSize:"2.2rem" ,color:'#2b6777'}}>Edit Personal Information</Typography>
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Name"
+              name="name"
+              value={personalInfo.name}
+              onChange={handleChange}
+            />
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Age"
+              name="age"
+              value={personalInfo.age}
+              onChange={handleChange}
+            />
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Weight"
+              name="weight"
+              value={personalInfo.weight}
+              onChange={handleChange}
+            />
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Height"
+              name="height"
+              value={personalInfo.height}
+              onChange={handleChange}
+            />
+            <Button
+              variant="contained"
+              sx={{ marginTop: 2, backgroundColor: "#2b6777", color: "#fff" }}
+              onClick={handleClose}
             >
-              <CardActionArea href={feature.link}>
-                <Box
-                  component="video"
-                  src={feature.video}
-                  autoPlay
-                  muted
-                  loop
-                  sx={{
-                    width: '100%',
-                    height: '200px',
-                    objectFit: 'cover'
-                  }}
-                />
-                <CardContent
-                  sx={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    color: '#fff'
-                  }}
-                >
-                  <Typography gutterBottom variant="h5" component="div">
-                    {feature.title}
-                  </Typography>
-                  <Typography variant="body2">
-                    Description for {feature.title}. Click to learn more.
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+              Save
+            </Button>
+          </Box>
+        </Fade>
+      </Modal>
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 20,
+          right: 20,
+          width: "300px", 
+          height: "auto",
+          zIndex: 10, 
+        }}
+      >
+        <Chatbot />
+      </Box>
     </Container>
   );
 }
