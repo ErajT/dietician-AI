@@ -1,0 +1,83 @@
+.html, body {
+    height: 100%; /* Use min-height if you expect the content to exceed the viewport height */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+   
+  
+  }
+  
+.recipe-background {
+    position: relative; /* Allows content to be positioned above the video */
+    height: 100vh; /* Full viewport height */
+    width: 100%; /* Full viewport width */
+    overflow: hidden; /* Ensures no overflow issues */
+  }
+  
+  .background-video {
+    position: fixed; /* Keeps the video fixed to the background */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the background */
+    z-index: -1; /* Sends the video behind the content */
+  }
+  
+  .content-overlay {
+    position: relative; /* Positions content over the video */
+    z-index: 1; /* Ensures the content is above the video */
+    color: white; /* Adjust text color to ensure visibility */
+  }
+  
+  .app-container {
+    height: 100vh; /* Ensure the full height is used */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    text-align: center;
+    position: relative;
+    background-color: transparent;
+  }
+  
+  
+ 
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(42, 217, 106, 0.753); /* Adjust the opacity for the blackish effect */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  .gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)); /* Dark overlay */
+    z-index: 1; /* Place above the video but below the content */
+  }
+
+  .recipe-generator {
+    margin-bottom: '2%'; 
+    
+  }
+  
+  .recipe-subheading {
+    margin-bottom: 2%; 
+  }
+  
+  
+
+
+  
+  

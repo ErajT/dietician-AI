@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
 
-
-
 export async function POST(req, res) {
     try {
         // Parse the JSON body from the request
@@ -16,11 +14,10 @@ export async function POST(req, res) {
             });
         }
 
-        // Fetch data from the external API
+        // Fetch data from the external API (Edamam)
         const apiResponse = await fetch(
             `https://api.edamam.com/api/recipes/v2?q=${dish}&app_id=26b2e150&app_key=c0257cc4bd0eb717b3c2886acfaf1b01&type=public`
         );
-           
         if (!apiResponse.ok) {
             throw new Error("Edamam API not working");
         }
@@ -31,12 +28,12 @@ export async function POST(req, res) {
         const hits = data["hits"];
         // console.log(hits);
 
-
-        // Process each recipe and fetch instructions for it
-        const result = await Promise.all(hits.map(async (hit) => {
+        // Process each recipe and return the necessary details
+        const result = hits.map(hit => {
             const recipe = hit.recipe;
+      
 
-            // Prepare the entire recipe details to pass to the getRecipeInstructions function
+            // Prepare the recipe details
             const recipeDetails = {
                 name: recipe.label,
                 ingredients: recipe.ingredients?.map(ingredient => ({
@@ -49,14 +46,13 @@ export async function POST(req, res) {
                 totalTime: recipe.totalTime,
                 cuisineType: recipe.cuisineType,
                 mealType: recipe.mealType,
-                dishType: recipe.dishType
+                dishType: recipe.dishType,
+                image: recipe.image
             };
 
-            return {
-                ...recipeDetails, // Spread the recipe details object
-                image: recipe.image,
-            };
-        }));
+            return recipeDetails;
+         
+        });
 
         // Return the final result
         return NextResponse.json({
