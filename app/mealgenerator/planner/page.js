@@ -78,14 +78,15 @@ const PlannerPage = ({ videoUrl }) => {
   // };
 
   const saveMealPlan = () => {
-    try {
-      localStorage.setItem('savedMealPlan', JSON.stringify(mealPlan));
-      setOpenDialog(true);
-    } catch (error) {
-      console.error("Error saving meal plan:", error);
-      alert("There was an issue saving your meal plan. Please try again.");
-    }
+    console.log("Saving meal plan:", mealPlan); // Log meal plan structure
+    localStorage.setItem('savedMealPlan', JSON.stringify(mealPlan));
+    setOpenDialog(true);
+    
+    // Confirm saved data
+    const savedData = localStorage.getItem('savedMealPlan');
+    console.log("Confirmed saved data:", JSON.parse(savedData));
   };
+  
   
 
   const handleCloseDialog = () => {

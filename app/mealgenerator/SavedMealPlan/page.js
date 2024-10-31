@@ -16,11 +16,13 @@ const SavedMealPlanPage = () => {
 
   useEffect(() => {
     const loadedMealPlan = JSON.parse(localStorage.getItem('savedMealPlan') || '{}');
+    console.log("Loaded meal plan on SavedMealPlanPage:", loadedMealPlan); // Check structure here too
     setSavedMealPlan(loadedMealPlan);
-    setLoading(false); // Set loading to false once data is loaded
+    setLoading(false);
   }, []);
+  
 
-  const mealsForActiveDay = savedMealPlan[activeDay] || [];
+  const mealsForActiveDay = Array.isArray(savedMealPlan[activeDay]) ? savedMealPlan[activeDay] : [];
 
   return (
     <Box sx={{ minHeight: '100vh', padding: 5, fontFamily: 'Jelligun, cursive', color: '#2b6777', backgroundColor: '#e0f7f3', position: 'relative' }}>
@@ -92,12 +94,12 @@ const SavedMealPlanPage = () => {
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.3 }}
       >
-        {loading ? (
+         {loading ? (
           <VideoLoading videoUrl={'/mealwalkthrough.mp4'} comment={'Please wait while we get your Meal Plan...'} />
-        ) : mealsForActiveDay && mealsForActiveDay.length > 0 ? (
+        ) : mealsForActiveDay.length > 0 ? (
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', minHeight: '80vh', gap: 2, marginTop: '2rem' }}>
             <Grid container spacing={3} justifyContent="center">
-            {Object.values(mealsForActiveDay).map((meal, index) => (
+            {mealsForActiveDay.map((meal, index) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
                   <div className="flip-card">
                     <div className="flip-card-inner">
