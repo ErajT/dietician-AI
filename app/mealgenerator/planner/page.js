@@ -55,7 +55,7 @@ const PlannerPage = ({ videoUrl }) => {
         }
 
         const data = await response.json();
-        console.log("Meal Plan Response:", data);
+        // console.log("Meal Plan Response:", data.mealPlan);
 
         if (data.mealPlan) {
           setMealPlan(data.mealPlan);
@@ -91,6 +91,14 @@ const PlannerPage = ({ videoUrl }) => {
   }
 
   const mealsForActiveDay = mealPlan[activeDay] || [];
+  // console.log(mealsForActiveDay);
+  // if (mealsForActiveDay && mealsForActiveDay.length > 0) {
+  //   mealsForActiveDay.map((meal) => {
+  //     // console.log(meal.name);
+  //   });
+  // } else {
+  //   console.log("No meals available or mealsForActiveDay is undefined");
+  // }
 
   return (
     <Box
@@ -152,104 +160,106 @@ const PlannerPage = ({ videoUrl }) => {
             display: 'flex', 
             flexDirection: 'column',
             justifyContent: 'space-between', // Ensures button stays at the bottom
+            gap: 1,
             minHeight: '80vh', // Ensure sufficient height for meal cards and button
             marginTop: '2rem',
             paddingBottom: 0, // Remove padding below
             gap: 2,
           }}
         >
-          {mealsForActiveDay && mealsForActiveDay.length > 0 ? (
-            <Grid container spacing={3} justifyContent="center" sx={{ marginBottom: 0 }}> {/* Remove margin below grid */}
-              {mealsForActiveDay.map((meal, index) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
-                  <div className="flip-card">
-                    <div className="flip-card-inner">
-                      <Card className="flip-card-front" sx={{ width: '100%', height: '100%' }}>
-                        <CardActionArea sx={{ height: '100%' }}>
-                          <CardMedia
-                            component="img"
-                            image="/images/food.jpg"
-                            alt={meal.name}
-                            sx={{ objectFit: 'contain', width: '100%', height: '100%' }}
-                          />
-                        </CardActionArea>
-                      </Card>
-                      <Card className="flip-card-back">
-                        <CardContent
+          {mealsForActiveDay ? (
+          <Grid container spacing={3} justifyContent="center" sx={{ marginBottom: 0 }}> {/* Remove margin below grid */}
+            {Object.values(mealsForActiveDay).map((meal, index) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
+                <div className="flip-card" sx={{ width: '100%', height: '100%' }}>
+                  <div className="flip-card-inner" sx={{ width: '100%', height: '100%' }}>
+                    <Card className="flip-card-front" sx={{ width: '100%', height: '100%' }}>
+                      <CardActionArea sx={{ height: '100%' }}>
+                        <CardMedia
+                          component="img"
+                          image={meal.image || "no image available"}
+                          alt={meal.name}
+                          sx={{ objectFit: 'contain', width: '100%', height: '100%' }}
+                        />
+                      </CardActionArea>
+                    </Card>
+                    <Card className="flip-card-back">
+                      <CardContent
+                        sx={{
+                          maxHeight: '40rem',
+                          overflowY: 'auto',
+                          fontFamily: 'Jelligun, cursive',
+                          padding: 1,
+                        }}
+                      >
+                        <div className="heading-container">
+                          <Typography
+                            variant="h5"
+                            fontWeight="normal"
+                            className="heading"
+                            sx={{
+                              fontFamily: 'Jelligun, cursive',
+                              fontSize: 'inherit',
+                              marginBottom: '0.5rem',
+                              marginTop: '0rem',
+                              lineHeight: 1,
+                            }}
+                          >
+                            {meal.name}
+                          </Typography>
+                        </div>
+                        <Typography
+                          variant="body2"
                           sx={{
-                            maxHeight: '40rem',
-                            overflowY: 'auto',
+                            fontSize: '1.8rem',
                             fontFamily: 'Jelligun, cursive',
-                            padding: 1,
+                            marginBottom: '0',
+                            lineHeight: 1,
                           }}
                         >
-                          <div className="heading-container">
-                            <Typography
-                              variant="h5"
-                              fontWeight="normal"
-                              className="heading"
-                              sx={{
-                                fontFamily: 'Jelligun, cursive',
-                                fontSize: 'inherit',
-                                marginBottom: '0.5rem',
-                                marginTop: '0rem',
-                                lineHeight: 1,
-                              }}
-                            >
-                              {meal.name}
-                            </Typography>
-                          </div>
-                          <Typography
-                            variant="body2"
-                            sx={{
-                              fontSize: '1.8rem',
-                              fontFamily: 'Jelligun, cursive',
-                              marginBottom: '0',
-                              lineHeight: 1,
-                            }}
-                          >
-                            <span style={{ fontWeight: 'normal' }}>Cuisine:</span> {meal.cuisine || 'Sample Cuisine'}
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            sx={{
-                              fontSize: '1.8rem',
-                              fontFamily: 'Jelligun, cursive',
-                              marginBottom: '0',
-                              lineHeight: 1,
-                            }}
-                          >
-                            <span style={{ fontWeight: 'normal' }}>Calories:</span> {meal.calories ? Number(meal.calories).toFixed(2) : 'Sample Calories'}
-                          </Typography>
-                        </CardContent>
+                          <span style={{ fontWeight: 'normal' }}>Cuisine:</span> {meal.cuisineType ? meal.cuisineType.join(', ') : 'Sample Cuisine'}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontSize: '1.8rem',
+                            fontFamily: 'Jelligun, cursive',
+                            marginBottom: '0',
+                            lineHeight: 1,
+                          }}
+                        >
+                          <span style={{ fontWeight: 'normal' }}>Calories:</span> {meal.calories ? Number(meal.calories).toFixed(2) : 'Sample Calories'}
+                        </Typography>
+                      </CardContent>
 
-                        <Link href="/recipegenerator/recipecart" passHref>
-                          <Typography
-                            variant="caption2"
-                            className="details-link"
-                            sx={{
-                              fontFamily: 'Jelligun, cursive',
-                              fontSize: '1.5rem',
-                              color: '#0070f3',
-                              textDecoration: 'none',
-                              position: 'relative',
-                              marginTop: 'auto',
-                            }}
-                          >
-                            Get Details
-                          </Typography>
-                        </Link>
-                      </Card>
-                    </div>
+                      <Link href="/recipegenerator/recipecart" passHref>
+                        <Typography
+                          variant="caption2"
+                          className="details-link"
+                          sx={{
+                            fontFamily: 'Jelligun, cursive',
+                            fontSize: '1.5rem',
+                            color: '#0070f3',
+                            textDecoration: 'none',
+                            position: 'relative',
+                            marginTop: 'auto',
+                          }}
+                        >
+                          Get Details
+                        </Typography>
+                      </Link>
+                    </Card>
                   </div>
-                </Grid>
-              ))}
-            </Grid>
-          ) : (
-            <Typography sx={{ fontFamily: 'Jelligun, cursive', fontSize: '2rem', textAlign: 'center' }}>
-              No meals available for {activeDay}.
-            </Typography>
-          )}
+                </div>
+              </Grid>
+            ))}
+          </Grid>
+        ) : (
+          <Typography sx={{ fontFamily: 'Jelligun, cursive', fontSize: '2rem', textAlign: 'center' }}>
+            No meals available for {activeDay}.
+          </Typography>
+        )}
+
 
           {/* Save Meal Plan Button */}
           <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 0 }}> {/* Set marginTop to 0 */}
