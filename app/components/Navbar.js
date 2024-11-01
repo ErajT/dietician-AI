@@ -1,16 +1,45 @@
 import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router'; // Import useRouter for navigation
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth'; // Import Firebase auth
 
 const Navbar = () => {
+  const router = useRouter();
+  const auth = getAuth();
+
+  const handleLogout = () => {
+    // Sign out from Firebase
+    signOut(auth).then(() => {
+      // Remove user from sessionStorage
+      sessionStorage.removeItem('user');
+
+      // Navigate to the base URL
+      router.push('/');
+    }).catch((error) => {
+      console.error("Logout failed:", error);
+    });
+  };
+
+  // Track auth state
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      sessionStorage.setItem(
+        'user',
+        JSON.stringify({ userId: user.uid })
+      );
+    }
+  });
+
   return (
     <AppBar
       position="static"
       sx={{
-        backgroundColor: "#2b6777", // Adjusted to match previous navbar style
+        backgroundColor: "#2b6777",
         color: "#ffffff",
         boxShadow: "none",
         padding: "0 20px",
@@ -29,56 +58,63 @@ const Navbar = () => {
 
         <Box sx={{ flexGrow: 1 }} />
 
-        <Button
-          color="inherit"
-          sx={{
-            mx: 1,
-            color: "white",
-            textTransform: "capitalize",
-            fontSize: "1rem",
-            padding: "8px 16px",
-            transition: "background-color 0.3s ease",
-            fontWeight: "bold",
-            '&:hover': { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: "5px" },
-          }}
-        >
-          Meal Plan
-        </Button>
+        <Link href="/mealgenerator" passHref>
+          <Button
+            color="inherit"
+            sx={{
+              mx: 1,
+              color: "white",
+              textTransform: "capitalize",
+              fontSize: "1rem",
+              padding: "8px 16px",
+              transition: "background-color 0.3s ease",
+              fontWeight: "bold",
+              '&:hover': { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: "5px" },
+            }}
+          >
+            Meal Plan
+          </Button>
+        </Link>
 
-        <Button
-          color="inherit"
-          sx={{
-            mx: 1,
-            color: "white",
-            textTransform: "capitalize",
-            fontSize: "1rem",
-            padding: "8px 16px",
-            transition: "background-color 0.3s ease",
-            fontWeight: "bold",
-            '&:hover': { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: "5px" },
-          }}
-        >
-          Exercise Plan
-        </Button>
+        <Link href="/exerciseplanner" passHref>
+          <Button
+            color="inherit"
+            sx={{
+              mx: 1,
+              color: "white",
+              textTransform: "capitalize",
+              fontSize: "1rem",
+              padding: "8px 16px",
+              transition: "background-color 0.3s ease",
+              fontWeight: "bold",
+              '&:hover': { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: "5px" },
+            }}
+          >
+            Exercise Plan
+          </Button>
+        </Link>
 
-        <Button
-          color="inherit"
-          sx={{
-            mx: 1,
-            color: "white",
-            textTransform: "capitalize",
-            fontSize: "1rem",
-            padding: "8px 16px",
-            transition: "background-color 0.3s ease",
-            fontWeight: "bold",
-            '&:hover': { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: "5px" },
-          }}
-        >
-          Recipe Generator
-        </Button>
+        <Link href="/recipegenerator" passHref>
+          <Button
+            color="inherit"
+            sx={{
+              mx: 1,
+              color: "white",
+              textTransform: "capitalize",
+              fontSize: "1rem",
+              padding: "8px 16px",
+              transition: "background-color 0.3s ease",
+              fontWeight: "bold",
+              '&:hover': { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: "5px" },
+            }}
+          >
+            Recipe Generator
+          </Button>
+        </Link>
 
         <Button
           variant="outlined"
+          onClick={handleLogout} // Add logout handler
           sx={{
             color: "white",
             borderColor: "white",
@@ -102,3 +138,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

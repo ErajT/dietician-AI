@@ -8,6 +8,12 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     margin: 0;
   }
+  @font-face {
+    font-family: 'Jelligun';
+    src: url('/Jelligun-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: bold;
+  }
 
   html {
     padding: 0;
@@ -110,6 +116,7 @@ const Title = styled.h1`
   color: #2b6777;
   margin-bottom: 20px;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  fontFamily: "Jelligun, cursive"
 `;
 
 const MuscleGroup = styled.p`

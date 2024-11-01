@@ -198,7 +198,7 @@ const login = () => {
       console.log(email);
       console.log(password);
       setTimeout(() => {
-      window.location.href = '/main';
+      window.location.href = '/Home';
       }, 1500);
   } catch (error) {
       console.log(error);
@@ -242,7 +242,7 @@ const login = () => {
       setSnackbarMessage('Signup successful!');
       setSnackbarOpen(true);
       setTimeout(() => {
-      window.location.href = '/main';
+      window.location.href = '/Home';
       }, 1500);
   } catch (error) {
       console.error(error);

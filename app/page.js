@@ -775,12 +775,12 @@ export default function Home() {
           <Button className="nav-button" onClick={() => handleScroll('tracker')}>Tracker</Button>
           <Button className="nav-button" onClick={() => handleScroll('benefits')}>App Benefit</Button>
           <Button className="nav-button" onClick={() => handleScroll('reviews')}>Client Review</Button>
-          <Link href="/Home" passHref>
-      <Button variant="contained" className="action-button">
+          <Link href="/login" passHref>
+      <Button variant="contained" className="action-button" >
         Login
       </Button>
     </Link>
-    <Link href="/signup" passHref>
+    <Link href="/login" passHref>
       <Button variant="contained" className="action-button">
         Signup
       </Button>

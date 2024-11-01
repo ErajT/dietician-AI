@@ -20,14 +20,20 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "app/components/searchbar.js", "app/recipegenerator/page.js"  ],
+    "**/*.tsx",
+    "app/components/searchbar.js",
+    "app/recipegenerator/page.js"
+  ],
   "exclude": [
     "node_modules"
   ]
