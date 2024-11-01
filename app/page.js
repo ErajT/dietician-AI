@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import { Helmet } from 'react-helmet';
 import styled, { keyframes } from "styled-components";
 import * as THREE from "three";
 import { AppBar, Toolbar, Avatar, Box, Button } from "@mui/material";
@@ -758,6 +759,9 @@ export default function Home() {
 
   return (
     <Page>
+      <Helmet>
+                <title>Meal Plan Page</title>
+            </Helmet>
       <Background ref={mountRef} />
       <Navbar scrolled={scrolled}>
       <Toolbar sx={{ width: "100%" }}>

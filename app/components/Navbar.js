@@ -19,7 +19,7 @@ const Navbar = () => {
       <Toolbar>
         <Avatar
           alt="Logo"
-          src="Logo.png"
+          src="Logo14.png"
           sx={{
             width: 70,
             height: 70,

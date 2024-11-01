@@ -78,14 +78,23 @@ const PlannerPage = ({ videoUrl }) => {
   // };
 
   const saveMealPlan = () => {
-    console.log("Saving meal plan:", mealPlan); // Log meal plan structure
-    localStorage.setItem('savedMealPlan', JSON.stringify(mealPlan));
-    setOpenDialog(true);
-    
-    // Confirm saved data
-    const savedData = localStorage.getItem('savedMealPlan');
-    console.log("Confirmed saved data:", JSON.parse(savedData));
+      console.log("Saving meal plan:", mealPlan); // Log meal plan structure
+
+      // Remove existing meal plan if it exists
+      if (localStorage.getItem('savedMealPlan')) {
+          localStorage.removeItem('savedMealPlan');
+          console.log("Existing meal plan removed.");
+      }
+
+      // Save the new meal plan
+      localStorage.setItem('savedMealPlan', JSON.stringify(mealPlan));
+      setOpenDialog(true);
+
+      // Confirm saved data
+      const savedData = localStorage.getItem('savedMealPlan');
+      console.log("Confirmed saved data:", JSON.parse(savedData));
   };
+
   
   
 

@@ -1,13 +1,14 @@
 import { NextResponse } from 'next/server';
 
-const apiKey = 'AIzaSyBTaYcyfnNgv04OQvOq4FceAro7I_BKqqU';  // Replace with your YouTube API key
+// const apiKey = 'AIzaSyBTaYcyfnNgv04OQvOq4FceAro7I_BKqqU';  // Replace with your YouTube API key
+const apiKey = 'AIzaSyAVOJ9Xa0w5-yLQ6_DtcvsFvKQ5rvDGtGM'; // with cloud id
 const maxResults = 1;  // Limit to one video per exercise for clarity
 
 // Function to search YouTube by exercise name and return the video ID and title
 async function searchByKeyword(exerciseName) {
   const query = exerciseName;  // Search for the specific exercise name
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResults}&q=${query}&key=${apiKey}`;
-
+  // https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=back&key=AIzaSyBTaYcyfnNgv04OQvOq4FceAro7I_BKqqU
   try {
     const response = await fetch(url);
     const data = await response.json();
