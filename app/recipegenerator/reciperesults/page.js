@@ -1,13 +1,13 @@
-"use client";
+'use client'
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../../components/searchbar';
 import { useRouter } from 'next/navigation';
 import '../../styling/recipegenerator.css';
-import '../../styling/NoResults.css';
 import ActionAreaCard from '../../components/cards';
 import VideoLoading from '../../components/VideoLoading';
 import NoResults from '../../components/noresults';
 import Navbar from '../../components/Navbar';
+import { Typography } from '@mui/material'; // Ensure you import Typography if you're using it
 
 export default function RecipeResultsPage() {
   const router = useRouter();
@@ -44,15 +44,13 @@ export default function RecipeResultsPage() {
       }
     } catch (err) {
       console.error('Error fetching recipes:', err);
-      // Automatically navigate to the error page
-      router.push('/error');
+      router.push('/error'); // Redirect to error page if fetch fails
     } finally {
       setLoading(false);
     }
   };
 
   const handleSearch = (query) => {
-    console.log('Searching for:', query); // Log the search query
     setDishQuery(query);
     router.push(`?dish=${query}`);
     fetchRecipes(query);
@@ -70,12 +68,15 @@ export default function RecipeResultsPage() {
       )}
 
       {loading ? (
-        <div style={{ backgroundColor: 'transparent', fontFamily: 'Jelligun, cursive' }}>
-          <VideoLoading videoUrl={'/images/bg4.mp4'} comment={'Just a moment! Finding the perfect recipe for you...'} />
-        </div>
+        <VideoLoading videoUrl={'/images/bg4.mp4'} comment={'Just a moment! Finding the perfect recipe for you...'} />
       ) : recipes.length === 0 ? (
-        // Automatically navigate to the error page if no recipes are found
-        router.push('/error')
+        
+        <div className="no-result">
+          <Typography variant="h5" component="h3"  style={{ color: '#2b6777', fontFamily: "Jelligun, sans-serif", fontSize: '2.5rem', marginTop: '9rem', paddingBottom: '4rem', marginLeft: '30rem', fontWeight: 'bold' }}>
+            No recipes available for "{dishQuery}".
+          </Typography>
+         
+        </div>
       ) : (
         <div>
           <Typography variant="h5" component="h3" style={{ color: '#2b6777', fontFamily: "Jelligun, sans-serif", fontSize: '2.5rem', marginTop: '-4rem', paddingBottom: '4rem', marginLeft: '2rem', fontWeight: 'bold' }}>
@@ -84,7 +85,7 @@ export default function RecipeResultsPage() {
           <div className="recipe-cards-container">
             {recipes.map((recipe, index) => (
               <ActionAreaCard
-                key={index} // Use the index as the key
+                key={index}
                 id={Number(index)}  
                 name={recipe.name}
                 image={recipe.image}
