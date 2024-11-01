@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import styled, { keyframes } from "styled-components";
 import * as THREE from "three";
 import { AppBar, Toolbar, Avatar, Box, Button } from "@mui/material";
@@ -672,7 +672,7 @@ export default function Home() {
     
       if (window.scrollY > 50) {
         navbar.style.backgroundColor = "#2b6777"; 
-        logo.src = "LogoColored.png";
+        logo.src = "Logo14.png";
         navLinks.forEach(link => {
           link.style.color = "white";
         });
@@ -682,7 +682,7 @@ export default function Home() {
         });
       } else {
         navbar.style.backgroundColor = "transparent"; 
-        logo.src = "Logo13.png";
+        logo.src = "Logo14.png";
         navLinks.forEach(link => {
           link.style.color = ""; 
         });
@@ -759,13 +759,14 @@ export default function Home() {
 
   return (
     <Page>
-      <Helmet>
-                <title>Meal Plan Page</title>
-            </Helmet>
+      <Head>
+          <title>Meal Plan Page</title>
+          <link rel="icon" href="/path-to-your-image/favicon.ico" />
+      </Head>
       <Background ref={mountRef} />
       <Navbar scrolled={scrolled}>
       <Toolbar sx={{ width: "100%" }}>
-        <Avatar alt="Logo" src="Logo13.png" sx={{ width: 120, height: 200, marginRight: -5 ,marginTop:3}} />
+        <Avatar alt="Logo" src="Logo14.png" sx={{ width: 80, height: 80, marginRight: -5 ,marginTop:1}} />
         <Box sx={{ flexGrow: 1 }} />
         <NavLinks>
           <Button className="nav-button" onClick={() => handleScroll('main')}>Main</Button>
