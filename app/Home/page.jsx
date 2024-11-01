@@ -24,6 +24,7 @@ import  { createGlobalStyle } from "styled-components";
 import Navbar from '@components/Navbar';
 
 
+
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Jelligun';
