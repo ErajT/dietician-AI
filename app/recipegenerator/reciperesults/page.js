@@ -5,9 +5,8 @@ import { useRouter } from 'next/navigation';
 import '../../styling/recipegenerator.css';
 import ActionAreaCard from '../../components/cards';
 import VideoLoading from '../../components/VideoLoading';
-import NoResults from '../../components/noresults';
 import Navbar from '../../components/Navbar';
-import { Typography } from '@mui/material'; // Ensure you import Typography if you're using it
+import { Typography } from '@mui/material';
 
 export default function RecipeResultsPage() {
   const router = useRouter();
@@ -34,9 +33,15 @@ export default function RecipeResultsPage() {
         body: JSON.stringify({ dish: query }),
       });
 
-      const jsonData = await response.json();
-      console.log('API Response:', jsonData); 
+      // Check if the response is not successful
+      if (!response.ok) {
+        throw new Error('Failed to fetch recipes');
+      }
 
+      const jsonData = await response.json();
+      console.log('API Response:', jsonData);
+
+      // Handle only successful API response status
       if (jsonData.status === "Success") {
         setRecipes(jsonData.message);
       } else {
@@ -44,9 +49,11 @@ export default function RecipeResultsPage() {
       }
     } catch (err) {
       console.error('Error fetching recipes:', err);
-      router.push('/error'); // Redirect to error page if fetch fails
+      setLoading(false);  // Stop loading before redirect
+      router.replace('/error'); // Redirect to error page
+      return;  // Halt further execution
     } finally {
-      setLoading(false);
+      setLoading(false); // Ensure loading is stopped
     }
   };
 
@@ -70,12 +77,10 @@ export default function RecipeResultsPage() {
       {loading ? (
         <VideoLoading videoUrl={'/images/bg4.mp4'} comment={'Just a moment! Finding the perfect recipe for you...'} />
       ) : recipes.length === 0 ? (
-        
         <div className="no-result">
-          <Typography variant="h5" component="h3"  style={{ color: '#2b6777', fontFamily: "Jelligun, sans-serif", fontSize: '2.5rem', marginTop: '9rem', paddingBottom: '4rem', marginLeft: '30rem', fontWeight: 'bold' }}>
+          <Typography variant="h5" component="h3"  style={{ color: '#2b6777', fontFamily: "Jelligun, sans-serif", fontSize: '2.8rem', marginTop: '9rem', paddingBottom: '4rem', marginLeft: '27rem', fontWeight: 'bold' }}>
             No recipes available for "{dishQuery}".
           </Typography>
-         
         </div>
       ) : (
         <div>

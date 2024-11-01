@@ -64,6 +64,7 @@ const IndividualRecipe = () => {
     } catch (err) {
       console.error('Error fetching recipes:', err);
       setError(true);
+      router.push('/error')
     } finally {
       setLoading(false);
     }
