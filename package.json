@@ -27,10 +27,12 @@
     "react-lottie-player": "^2.1.0",
     "react-parallax-tilt": "^1.7.240",
     "react-slick": "^0.30.2",
+    "react-type-animation": "^3.2.0",
     "react-typed": "^2.0.12",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.13",
-    "swiper": "^11.1.14"
+    "swiper": "^11.1.14",
+    "three": "^0.170.0"
   },
   "devDependencies": {
     "typescript": "5.6.3"

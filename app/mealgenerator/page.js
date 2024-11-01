@@ -70,7 +70,7 @@ const MealGeneratorHome = () => {
 </Typography>
 <Typography
   variant="h2"
-  sx={{ fontWeight: "bold", color: "#ffffff", marginBottom: 0,fontSize:"7rem" ,marginTop:-2}}
+  sx={{ fontWeight: "bold", color: "#ffffff", marginBottom: 0.5,fontSize:"8rem" ,marginTop:-5,marginLeft:3}}
 >
   <span className="jelligun-font">
     <TypeAnimation
@@ -93,7 +93,8 @@ const MealGeneratorHome = () => {
               textAlign: "left", // Align to the left for a consistent look
               position:"fixed",
               fontFamily:"Jelligun",
-              fontSize:"2.2rem"
+              fontSize:"2.2rem",
+              marginLeft:4.9
             }}
           >
             <TypeAnimation
@@ -107,60 +108,74 @@ const MealGeneratorHome = () => {
       </Box>
 
       {/* Buttons positioned at the bottom-right */}
+      {/* Buttons positioned at the bottom-right */}
       <Box
-        sx={{
-          position: "absolute",
-          right: theme.spacing(8),
-          bottom: theme.spacing(12),
-          display: "flex",
-          gap: theme.spacing(2),
-          zIndex: 2,
-        }}
-      >
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleNewMealPlan}
-          sx={{
-            padding: 1,
-            width: "230px",
-            borderRadius: "15px",
-            backgroundColor: "#2b6777",
-            color:"white",
-            fontFamily:"Jelligun",
-            fontSize:"1.3rem",
-            fontWeight:'bold',
-            "&:hover": {
-              backgroundColor: "#2b6777",
-              transform: "scale(1.05)",
-            },
-          }}
-        >
-          Generate New Meal Plan
-        </Button>
+  sx={{
+    position: "absolute",
+    right: theme.spacing(8),
+    bottom: theme.spacing(12),
+    display: "flex",
+    gap: theme.spacing(2),
+    zIndex: 2,
+  }}
+>
+  <Button
+    variant="contained"
+    color="primary"
+    onClick={handleNewMealPlan}
+    sx={{
+      padding: 1,
+      width: "17rem",          // Width in rem
+      height: "4rem",           // Height in rem
+      borderRadius: "50rem",    // Full semicircle shape
+      backgroundColor: "#2b6777",
+      color: "white",
+      fontFamily: "Jelligun",
+      fontSize: "2rem",
+      fontWeight: "bold",
+      textAlign:"center",
+      textTransform: "none",    // Prevents all caps
+      "&:hover": {
+        backgroundColor: "#2b6777",
+        transform: "scale(1.05)",
+        boxShadow: "0px 0px 5px 5px rgba(43, 103, 119, 0.5), 0px 0px 20px 10px rgba(43, 103, 119, 0.5)",
 
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleExistingMealPlan}
-          sx={{
-            padding: 1,
-            width: "230px",
-            borderRadius: "15px",
-            backgroundColor: "#2b6777",
-            color:"white",
-            fontFamily:"Jelligun",
-            fontSize:"1.3rem",
-            fontWeight:'bold',
-            "&:hover": {
-              backgroundColor: "#2b6777",
-              transform: "scale(1.05)",
-            },
-          }}
-        >
-          View Existing Meal Plan
-        </Button>
-      </Box>
+        
+      },
+    }}
+  >
+    Generate New Meal Plan
+  </Button>
+
+  <Button
+    variant="contained"
+    color="primary"
+    onClick={handleExistingMealPlan}
+    sx={{
+      padding: 1,
+      width: "17rem",          // Width in rem
+      height: "4rem",           // Height in rem
+      borderRadius: "50rem",    // Full semicircle shape
+      backgroundColor: "#2b6777",
+      color: "white",
+      fontFamily: "Jelligun",
+      fontSize: "2rem",
+      fontWeight: "bold",
+      textAlign:"center",
+      textTransform: "none",    // Prevents all caps
+      "&:hover": {
+        backgroundColor: "#2b6777",
+        transform: "scale(1.05)",
+        boxShadow: "0px 0px 5px 5px rgba(43, 103, 119, 0.5), 0px 0px 20px 10px rgba(43, 103, 119, 0.5)",
+
+      },
+    }}
+  >
+    View Existing Meal Plan
+  </Button>
+</Box>
+
+
     </Box>
   );
 };

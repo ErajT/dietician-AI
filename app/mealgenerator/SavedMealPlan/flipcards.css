@@ -57,14 +57,14 @@
 
 .flip-card-back .details-link {
   color: white; /* Link color */
-  text-decoration: none; /* Remove underline */
+  text-decoration: none !important; /* Ensure underline is removed */
   transition: transform 0.3s ease, color 0.3s ease; /* Animation for hover */
   margin-top: 1.5rem; /* Add margin to separate from content */
 }
 
 /* Hover effect for link */
 .flip-card-back .details-link:hover {
-  transform: translateY(-5px); /* Move link up slightly on hover */
+  transform: translateY(-10px); /* Move link up slightly on hover */
   color: white; /* Change color on hover for visibility */
 }
 
