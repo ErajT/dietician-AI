@@ -1,0 +1,86 @@
+/* Circle container */
+.circle-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Correct alignment to the left */
+  gap: 30px; /* Maintain the overall gap between circles */
+  padding-left: 0;
+  position: absolute;
+  left: 0; /* Align to the left */
+  top: 140px; /* Align to the top */
+  bottom: 100px;
+  width: 35%; /* Adjust width to fit new design */
+  margin-left: 70px; /* Increased left margin */
+}
+
+@font-face {
+  font-family: 'Jelligun';
+  src: url('/jelligun-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Circle shape */
+.circle {
+  position: relative;
+  width: 250px; /* Adjusted width */
+  height: 250px; /* Adjusted height */
+  background-color: transparent;
+  margin: 0; /* Remove negative margin */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: popAnimation 2.5s ease-in-out infinite;
+  overflow: hidden; /* Ensure quotes don't overflow */
+  border-radius: 50%; /* Make it circular */
+}
+
+.circle .quote {
+  position: absolute;
+  color: whitesmoke;
+  text-align: center;
+  padding: 10px; /* Adjust padding if necessary */
+  background-color: transparent;
+  border-radius: 5px;
+  visibility: hidden; /* Hide by default */
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+  font-family: 'Jelligun';
+  font-size: 1.8rem; /* Adjust size to fit circle */
+  line-height: 1.2; /* Reduce line height for a better fit */
+  max-width: 70%; /* Adjust to prevent overflow */
+  word-wrap: break-word; /* Break long words */
+  font-weight: normal;
+}
+
+/* Show the quote text on hover */
+.circle:hover .quote {
+  visibility: visible;
+  opacity: 1; /* Correct opacity to fully visible */
+}
+
+/* Blur the image on hover */
+.circle:hover .circle-image {
+  filter: blur(3px) brightness(0.75);
+}
+
+/* Circle image */
+.circle-image {
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%; /* Clip to circle */
+  transition: filter 0.3s ease-in-out;
+}
+
+/* Keyframes for pop animation */
+@keyframes popAnimation {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}

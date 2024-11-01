@@ -7,6 +7,7 @@ import IngredientsTable from '../../components/ingredients';
 import AccordionTransition from '../../components/recipeinstruction';
 import MediaCard from '../../components/ad';
 import VideoLoading from '../../components/VideoLoading'
+import Navbar from '../../components/Navbar'
 import '../../styling/recipegenerator.css';
 
 const IndividualRecipe = () => {
@@ -100,7 +101,10 @@ const IndividualRecipe = () => {
   if (error) return <div>Error fetching recipes.</div>;
 
   return (
+    <div>
+       <Navbar />
     <div style={{ display: 'flex', justifyContent: 'left', alignItems: 'left' }}>
+     
       {recipe && (
         <div style={{
           border: '6px solid #102820',
@@ -112,6 +116,7 @@ const IndividualRecipe = () => {
           color:'white',
           marginBottom: '10%',
         }}>
+         
           <h1 style={{ display: 'flex', justifyContent: 'center' ,fontFamily: 'Jelligun, cursive',fontSize:'4rem'}}>{recipe.name}</h1>
           
           <div>
@@ -151,6 +156,7 @@ const IndividualRecipe = () => {
             </div>
           </div>
         </div>
+        
       )}
 
       <div 
@@ -180,6 +186,7 @@ const IndividualRecipe = () => {
       </div>
 
       <ResponsiveDialog open={openDialog} handleClose={() => setOpenDialog(false)} />
+    </div>
     </div>
   );
 };

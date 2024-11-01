@@ -26,3 +26,46 @@ h2 {
   font-family: "Jelligun", cursive;
   font-weight: bold;
 }
+.flip-card-inner {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card-inner:hover {
+  transform: rotateY(180deg);
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.exercise-background {
+  background-image: url('/images/pic.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* styles/globals.css */
+
+html,
+body {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  height: 100%; /* Set height to 100% */
+  width: 100%; /* Set width to 100% */
+
+}
+
+
+
+
+
+
+

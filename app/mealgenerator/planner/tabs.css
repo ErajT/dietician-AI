@@ -1,0 +1,41 @@
+/* Tabs.css */
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .tab-button {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .tab-button.active {
+    background-color: #007BFF;
+    color: white;
+  }
+  
+  .tab-content {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .meal-item {
+    margin: 10px 0;
+  }
+
+
+  .card {
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  

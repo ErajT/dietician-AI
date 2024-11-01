@@ -8,6 +8,7 @@ import ActionAreaCard from '../../components/cards';
 import { Typography } from '@mui/material';
 import VideoLoading from '../../components/VideoLoading'
 import NoResults from '../../components/noresults';
+import Navbar from '../../components/Navbar';
 
 export default function RecipeResultsPage() {
   const router = useRouter();
@@ -63,8 +64,10 @@ export default function RecipeResultsPage() {
   return (
     <div>
       {!loading && (
+       <div> <Navbar />
         <div className="search-bar-top">
           <SearchBar onSearch={handleSearch} loading={loading} />
+        </div>
         </div>
       )}
 
@@ -83,7 +86,7 @@ export default function RecipeResultsPage() {
           <NoResults /></div>
       ) : (
         <div>
-          <Typography variant="h5" component="h3" style={{ color: '#2b6777' ,fontFamily: "Jelligun, sans-serif",fontSize:'2rem' }}>
+          <Typography variant="h5" component="h3" style={{ color: '#2b6777' ,fontFamily: "Jelligun, sans-serif",fontSize:'2.5rem',marginTop:'-4rem',paddingBottom:'4rem' ,marginLeft:'2rem',fontWeight:'bold'}}>
             Recipe Results for:  {dishQuery}
           </Typography>
           <div className="recipe-cards-container">
