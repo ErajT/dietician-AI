@@ -21,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: normal;
     font-style: bold;
   }
+     
 
   html {
     padding: 0;
