@@ -172,7 +172,13 @@ const SavedMealPlanPage = () => {
                           </Typography>
                         </CardContent>
 
-                        <Link href="/recipegenerator/recipecart" passHref>
+                        <Link
+                          href={{
+                            pathname: '/recipegenerator/reciperesults',
+                            query: { dish: meal.name },
+                          }}
+                          passHref
+                        >
                           <Typography
                             variant="caption2"
                             className="details-link"
