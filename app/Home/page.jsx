@@ -21,7 +21,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import ChatIcon from "@mui/icons-material/Chat";
 import Chatbot from "./Chatbot";
 import  { createGlobalStyle } from "styled-components";
-import Navbar from '@components/Navbar';
+// import Navbar from '@components/Navbar';
+
 
 
 
@@ -69,11 +70,11 @@ function Home() {
         overflow: "hidden",
       }}
     >
-       <div>
-      <Navbar />
+       {/* <div> */}
+      {/* <Navbar /> */}
       {/* Other components go here */}
-    </div>
-       {/* <AppBar 
+    {/* </div> */}
+       <AppBar 
       position="static" 
       sx={{ 
         backgroundColor: "#2b6777",  // Adjusted to match previous navbar style
@@ -167,7 +168,7 @@ function Home() {
           Logout
         </Button>
       </Toolbar>
-    </AppBar> */}
+    </AppBar>
 
       <Box
         sx={{
