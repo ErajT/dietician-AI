@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import Spline from '@splinetool/react-spline';
 import VideoLoading from './components/VideoLoading'; // Ensure this path is correct
-import { margin, width } from '@mui/system';
 
 const ExercisePlanner = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -87,7 +86,7 @@ const ExercisePlanner = () => {
             <div style={styles.muscleOptions}>
               {muscleOptions.map((muscle, index) => (
                 <div style={styles.flipCard} key={index}>
-                  <div className="flip-card-inner" style={styles.flipCardInner}>
+                  <div className="flip-card-inner" style={styles.flipCardInner} onClick={() => handleMuscleSelect(muscle.value)}>
                     <div className="flip-card-front" style={styles.flipCardFront} onClick={() => handleMuscleSelect(muscle.value)}>
                       <img src={muscle.image} alt={muscle.name} style={styles.muscleImageBlur} />
                       <span style={styles.cardText}>{muscle.name}</span>
