@@ -15,14 +15,24 @@ const SavedMealPlanPage = () => {
   const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
-    const loadedMealPlan = JSON.parse(localStorage.getItem('savedMealPlan') || '{}');
-    console.log("Loaded meal plan on SavedMealPlanPage:", loadedMealPlan); // Check structure here too
-    setSavedMealPlan(loadedMealPlan);
-    setLoading(false);
+      const loadedMealPlan = JSON.parse(localStorage.getItem('savedMealPlan') || '{}');
+      console.log("Loaded meal plan on SavedMealPlanPage:", loadedMealPlan); // Check structure here too
+
+      // Conditional check if needed
+      if (Object.keys(loadedMealPlan).length > 0) {
+          setSavedMealPlan(loadedMealPlan);
+      } else {
+          console.warn("No saved meal plan found in localStorage.");
+      }
+      setLoading(false);
   }, []);
+
+
+
   
 
-  const mealsForActiveDay = Array.isArray(savedMealPlan[activeDay]) ? savedMealPlan[activeDay] : [];
+  const mealsForActiveDay = savedMealPlan[activeDay];
+  console.log(mealsForActiveDay);
 
   return (
     <Box sx={{ minHeight: '100vh', padding: 5, fontFamily: 'Jelligun, cursive', color: '#2b6777', backgroundColor: '#e0f7f3', position: 'relative' }}>
@@ -96,10 +106,10 @@ const SavedMealPlanPage = () => {
       >
          {loading ? (
           <VideoLoading videoUrl={'/mealwalkthrough.mp4'} comment={'Please wait while we get your Meal Plan...'} />
-        ) : mealsForActiveDay.length > 0 ? (
+        ) : mealsForActiveDay ? (
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', minHeight: '80vh', gap: 2, marginTop: '2rem' }}>
             <Grid container spacing={3} justifyContent="center">
-            {mealsForActiveDay.map((meal, index) => (
+            {Object.values(mealsForActiveDay).map((meal, index) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
                   <div className="flip-card">
                     <div className="flip-card-inner">

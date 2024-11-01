@@ -29,12 +29,12 @@ const PlannerPage = ({ videoUrl }) => {
 
       try {
         setLoading(true);
-        console.log(diet,
-          health,
-          cuisineType,
-          mealType,
-          calories,
-          excluded)
+        // console.log(diet,
+        //   health,
+        //   cuisineType,
+        //   mealType,
+        //   calories,
+        //   excluded)
         const response = await fetch(`/api/mealplanner`, {
           method: 'POST',
           headers: {
