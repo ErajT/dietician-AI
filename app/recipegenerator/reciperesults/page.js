@@ -17,12 +17,17 @@ export default function RecipeResultsPage() {
   const [dishQuery, setDishQuery] = useState("");
 
   useEffect(() => {
-    const query = new URLSearchParams(window.location.search).get('dish');
+    // const query = new URLSearchParams(window.location.search).get('dish');
+    // if (query) {
+    //   setDishQuery(query);
+    //   fetchRecipes(query);
+    // }
+    const query = new URLSearchParams(window.location.search).get('dish');;
     if (query) {
       setDishQuery(query);
       fetchRecipes(query);
     }
-  }, []);
+  }, [router.asPath]);
 
   const fetchRecipes = async (query) => {
     setLoading(true);
