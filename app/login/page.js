@@ -6,8 +6,24 @@ import {signInWithEmailAndPassword,createUserWithEmailAndPassword,onAuthStateCha
 import { auth } from '@/firebase.config';
 import {useState} from "react";
 // Styled Components
+const MainContainer = styled.div`
+  background: linear-gradient(to bottom, #e0f7f3, #f0f8f7);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Logo = styled.img`
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  width: 100px; // Adjust width as needed
+  height: auto;
+`;
+
 const Container = styled.div`
-  background-color: #f0f8f7;
+  background-color: #fof8f7;
+  //  background: linear-gradient(to bottom, #e0f7f3, #f0f8f7);
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: absolute;
@@ -180,6 +196,7 @@ const login = () => {
   const [loading, setLoading] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success"); 
 
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -253,6 +270,8 @@ const login = () => {
   }
   };
   return (
+    <MainContainer>
+      <Logo  src="/Logo15.png" alt="Logo" />
     <Container>
       <SignUpContainer signingIn={signIn}>
         <Form onSubmit={handleSignup}>
@@ -316,6 +335,7 @@ const login = () => {
         </Overlay>
       </OverlayContainer>
     </Container>
+    </MainContainer>
   );
 };
 
