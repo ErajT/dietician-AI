@@ -10,7 +10,6 @@ const circles = [
   { id: 6, imgSrc: '/images/meal6.jpg', quote: 'The only thing I like better than talking about food is eating.' },
   { id: 7, imgSrc: '/images/meal12.jpg', quote: 'A recipe has no soul. You as the cook must bring soul to the recipe.' },
   { id: 8, imgSrc: '/images/meal11.jpg', quote: 'Life is a combination of magic and pasta.' },
-  { id: 9, imgSrc: '/images/meal3.jpg', quote: 'Life is a combination of flavors and spices.' } // New circle
 ];
 
 const CircleGallery = () => {

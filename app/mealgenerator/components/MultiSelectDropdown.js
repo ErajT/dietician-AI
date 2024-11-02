@@ -23,7 +23,7 @@ const MultiSelectDropdown = ({ label, options, selected, setSelected, required }
           onOpen: () => setOpen(true),
           onClose: () => setOpen(false),
           renderValue: (selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
               {selected.map((value) => (
                 <Chip
                   key={value}
@@ -42,7 +42,7 @@ const MultiSelectDropdown = ({ label, options, selected, setSelected, required }
         required={required}
         fullWidth
         sx={{
-          marginBottom: 2,
+          marginBottom: 4,
           input: { color: 'white' },
           label: { color: 'white' },
           '& label.Mui-focused': { color: 'white' },

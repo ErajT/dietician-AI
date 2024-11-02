@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import { signOut, onAuthStateChanged } from 'firebase/auth'; // Import Firebase auth
 import { auth } from '@/firebase.config';
 
-const Navbar = () => {
+const Navbar = ({transparent}) => {
   const router = useRouter();
 
 
@@ -42,7 +42,8 @@ const Navbar = () => {
     <AppBar
       position="static"
       sx={{
-        backgroundColor: "#2b6777",
+        backgroundColor: transparent ? "transparent" : "#2b6777", 
+       
         color: "#ffffff",
         boxShadow: "none",
         padding: "0 20px",
@@ -51,7 +52,7 @@ const Navbar = () => {
       <Toolbar>
         <Avatar
           alt="Logo"
-          src="Logo14.png"
+          src="/Logo14.png"
           sx={{
             width: 70,
             height: 70,
@@ -141,5 +142,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
