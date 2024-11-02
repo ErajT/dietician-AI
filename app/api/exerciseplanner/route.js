@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
-// const apiKey = 'AIzaSyBTaYcyfnNgv04OQvOq4FceAro7I_BKqqU';  // Replace with your YouTube API key
-const apiKey = 'AIzaSyAVOJ9Xa0w5-yLQ6_DtcvsFvKQ5rvDGtGM'; // with cloud id
+const apiKey = 'AIzaSyBTaYcyfnNgv04OQvOq4FceAro7I_BKqqU';  // Replace with your YouTube API key
+// const apiKey = 'AIzaSyAVOJ9Xa0w5-yLQ6_DtcvsFvKQ5rvDGtGM'; // with cloud id
 const maxResults = 1;  // Limit to one video per exercise for clarity
 
 // Function to search YouTube by exercise name and return the video ID and title
