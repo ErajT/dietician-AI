@@ -44,6 +44,8 @@ Chart.register(
   CategoryScale,
   Tooltip
 );
+import Navbar from '@components/Navbar';
+
 
 const Dashboard = () => {
   const [bmi, setBmi] = useState(28);
@@ -129,20 +131,10 @@ const Dashboard = () => {
 
   return (
     <div style={styles.dashboard}>
-      <AppBar position="static" sx={{ backgroundColor: "#cee2d2", color: "#000" }}>
-        <Toolbar>
-          <Avatar
-            alt="Logo"
-            src="Logo.png" // Replace with your logo path
-            sx={{ width: 70, height: 70, marginRight: 2 }} // Increased size
-          />
-          <Box sx={{ flexGrow: 1 }} />
-          <Button color="inherit" sx={{ mx: 1 }}>Dashboard</Button>
-          <Button color="inherit" sx={{ mx: 1 }}>Settings</Button>
-          <Button color="inherit" sx={{ mx: 1 }}>Help</Button>
-          <Button color="inherit" sx={{ mx: 1 }}>Logo</Button>
-        </Toolbar>
-      </AppBar>
+      <div>
+<Navbar />
+{/* Other components go here */}
+</div>
       <Typography variant="h4" align="center" style={styles.pageHeading}>
         Health Dashboard
       </Typography>

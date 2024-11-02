@@ -95,8 +95,6 @@ const PlannerPage = ({ videoUrl }) => {
       console.log("Confirmed saved data:", JSON.parse(savedData));
   };
 
-  
-  
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
@@ -274,7 +272,13 @@ const PlannerPage = ({ videoUrl }) => {
                           </Typography>
                         </CardContent>
 
-                        <Link href="/recipegenerator/recipecart" passHref>
+                        <Link
+                          href={{
+                            pathname: '/recipegenerator/reciperesults',
+                            query: { dish: meal.name },
+                          }}
+                          passHref
+                        >
                           <Typography
                             variant="caption2"
                             className="details-link"
@@ -290,6 +294,7 @@ const PlannerPage = ({ videoUrl }) => {
                             Get Details
                           </Typography>
                         </Link>
+
                       </Card>
                     </div>
                   </div>

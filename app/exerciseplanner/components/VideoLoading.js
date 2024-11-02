@@ -1,10 +1,18 @@
 // components/VideoLoading.js
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, CircularProgress, Typography } from '@mui/material';
 
 const VideoLoading = ({ comment }) => {
   const videoUrl = '/exercise.mp4'; // Path to your video file in the public directory
+
+  // Disable scrolling on the body
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset'; // Reset when component unmounts
+    };
+  }, []);
 
   return (
     <Box
@@ -14,15 +22,13 @@ const VideoLoading = ({ comment }) => {
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: '100vh', // Ensure the Box takes at least the full viewport height
-        width: '100vw',     // Ensure the Box takes the full viewport width
+        minWidth: '100vw',   // Ensure the Box takes the full viewport width
         position: 'absolute', // Position it absolutely
         top: 0,
         left: 0,
-        overflow: 'hidden',
+        overflow: 'hidden', // Prevent overflowing content
         color: '#102820',
-        margin: 0,
-        padding: 0,
-        zIndex: 0,         // Make sure it is behind other components
+        zIndex: 0,          // Make sure it is behind other components
       }}
     >
       {/* Background video */}
@@ -35,8 +41,8 @@ const VideoLoading = ({ comment }) => {
           position: 'absolute',
           top: 0,
           left: 0,
-          height: '100vh', // Set height to 100vh
-          width: '100vw',  // Set width to 100vw
+          height: '100%', // Set height to 100%
+          width: '100%',  // Set width to 100%
           objectFit: 'cover', // Ensure the video covers the entire container
           zIndex: 1,
         }}

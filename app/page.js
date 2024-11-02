@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import styled, { keyframes } from "styled-components";
 import * as THREE from "three";
 import { AppBar, Toolbar, Avatar, Box, Button } from "@mui/material";
@@ -158,8 +158,8 @@ const TextWrapper = styled.div`
     opacity: 0;
     animation: fadeIn 0.5s ease forwards;
     animation-delay: calc(var(--delay) * 0.1s);
-    animation-fill-mode: forwards; /* Keeps the final state */
-    animation-iteration-count: 2; /* Runs only once */
+    animation-fill-mode: forwards; 
+    animation-iteration-count: 2; 
   }
 
   @keyframes fadeIn {
@@ -259,7 +259,7 @@ const Heading = styled.h2`
   margin-top: -10px;
   margin-bottom: 60px;
   color: #2b6777;
-  font-family: "Jelligun", cursive; // Use the custom font here
+  font-family: "Jelligun", cursive; 
   font-weight: bold;
 `;
 
@@ -672,7 +672,7 @@ export default function Home() {
     
       if (window.scrollY > 50) {
         navbar.style.backgroundColor = "#2b6777"; 
-        logo.src = "LogoColored.png";
+        logo.src = "Logo14.png";
         navLinks.forEach(link => {
           link.style.color = "white";
         });
@@ -682,7 +682,7 @@ export default function Home() {
         });
       } else {
         navbar.style.backgroundColor = "transparent"; 
-        logo.src = "Logo13.png";
+        logo.src = "Logo14.png";
         navLinks.forEach(link => {
           link.style.color = ""; 
         });
@@ -759,13 +759,14 @@ export default function Home() {
 
   return (
     <Page>
-      <Helmet>
-                <title>Meal Plan Page</title>
-            </Helmet>
+      <Head>
+          <title>Meal Plan Page</title>
+          <link rel="icon" href="/path-to-your-image/favicon.ico" />
+      </Head>
       <Background ref={mountRef} />
       <Navbar scrolled={scrolled}>
       <Toolbar sx={{ width: "100%" }}>
-        <Avatar alt="Logo" src="Logo13.png" sx={{ width: 120, height: 200, marginRight: -5 ,marginTop:3}} />
+        <Avatar alt="Logo" src="Logo14.png" sx={{ width: 80, height: 80, marginRight: -5 ,marginTop:1}} />
         <Box sx={{ flexGrow: 1 }} />
         <NavLinks>
           <Button className="nav-button" onClick={() => handleScroll('main')}>Main</Button>
@@ -774,12 +775,12 @@ export default function Home() {
           <Button className="nav-button" onClick={() => handleScroll('tracker')}>Tracker</Button>
           <Button className="nav-button" onClick={() => handleScroll('benefits')}>App Benefit</Button>
           <Button className="nav-button" onClick={() => handleScroll('reviews')}>Client Review</Button>
-          <Link href="/Home" passHref>
-      <Button variant="contained" className="action-button">
+          <Link href="/login" passHref>
+      <Button variant="contained" className="action-button" >
         Login
       </Button>
     </Link>
-    <Link href="/signup" passHref>
+    <Link href="/login" passHref>
       <Button variant="contained" className="action-button">
         Signup
       </Button>

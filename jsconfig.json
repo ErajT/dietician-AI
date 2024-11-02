@@ -8,9 +8,10 @@
 
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@components/*": ["app/components/*"]
     }
   }
 }
+
