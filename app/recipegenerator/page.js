@@ -4,6 +4,7 @@ import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ReactTyped } from 'react-typed';
 import SearchBar from '../components/searchbar';
+import Navbar from '../components/Navbar';
 import '../styling/recipepage.css'; // Make sure to style the video here
 import { Typography } from '@mui/material';
 
@@ -19,8 +20,10 @@ export default function RecipeGeneratorPage() {
   return (
     <div className="app-container">
       {!searchClicked && (
+       
         <div className="recipe-background" style={{ backgroundColor: 'transparent' }}>
           {/* Background video */}
+          
           <video autoPlay muted loop playsInline className="background-video">
             <source src="/images/bg2.mp4" type="video/mp4" />
             Your browser does not support the video tag.
@@ -36,11 +39,13 @@ export default function RecipeGeneratorPage() {
             alignItems: 'center', 
             height: '90vh', 
             width:'100%',
-            marginTop:'-3rem'
+            marginTop:'-5rem'
             
         
             
           }}>
+                      <Navbar transparent />
+
                     <h1 
           className="recipe-generator" 
           style={{ fontFamily: 'Jelligun, cursive',

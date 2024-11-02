@@ -1,18 +1,16 @@
-"use client";
+'use client'
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../../components/searchbar';
 import { useRouter } from 'next/navigation';
 import '../../styling/recipegenerator.css';
-import '../../styling/NoResults.css';
 import ActionAreaCard from '../../components/cards';
+import VideoLoading from '../../components/VideoLoading';
+import Navbar from '../../components/Navbar';
 import { Typography } from '@mui/material';
-import VideoLoading from '../../components/VideoLoading'
-import NoResults from '../../components/noresults';
 
 export default function RecipeResultsPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [recipes, setRecipes] = useState([]);
   const [dishQuery, setDishQuery] = useState("");
 
@@ -40,68 +38,70 @@ export default function RecipeResultsPage() {
         body: JSON.stringify({ dish: query }),
       });
 
-      const jsonData = await response.json();
-      console.log('API Response:', jsonData); 
+      // Check if the response is not successful
+      if (!response.ok) {
+        throw new Error('Failed to fetch recipes');
+      }
 
+      const jsonData = await response.json();
+      console.log('API Response:', jsonData);
+
+      // Handle only successful API response status
       if (jsonData.status === "Success") {
         setRecipes(jsonData.message);
-        setError(false);
       } else {
         setRecipes([]);
       }
     } catch (err) {
       console.error('Error fetching recipes:', err);
-      setError(true);
+      setLoading(false);  // Stop loading before redirect
+      router.replace('/error'); // Redirect to error page
+      return;  // Halt further execution
     } finally {
-      setLoading(false);
+      setLoading(false); // Ensure loading is stopped
     }
   };
 
   const handleSearch = (query) => {
-    console.log('Searching for:', query); // Log the search query
     setDishQuery(query);
     router.push(`?dish=${query}`);
     fetchRecipes(query);
   };
- 
 
   return (
     <div>
       {!loading && (
-        <div className="search-bar-top">
-          <SearchBar onSearch={handleSearch} loading={loading} />
+        <div>
+          <Navbar />
+          <div className="search-bar-top">
+            <SearchBar onSearch={handleSearch} loading={loading} />
+          </div>
         </div>
       )}
 
       {loading ? (
-        <div style={{ backgroundColor: 'transparent', fontFamily: 'Jelligun, cursive', }}>
-          <VideoLoading videoUrl={'/images/bg4.mp4'} comment={'Just a moment! Finding the perfect recipe for you...'} />
-        </div>
-      ): error ? (<div className="no-result">
-        <Typography variant="h5" component="h3" className="custom-typography">Oops!There seems to be a network issue.</Typography>
-     
-       <NoResults /></div>
+        <VideoLoading videoUrl={'/images/bg4.mp4'} comment={'Just a moment! Finding the perfect recipe for you...'} />
       ) : recipes.length === 0 ? (
         <div className="no-result">
-           <Typography variant="h5" component="h3" className="custom-typography">Oops!No recipes available for {dishQuery}.</Typography>
-        
-          <NoResults /></div>
+          <Typography variant="h5" component="h3"  style={{ color: '#2b6777', fontFamily: "Jelligun, sans-serif", fontSize: '2.8rem', marginTop: '9rem', paddingBottom: '4rem', marginLeft: '27rem', fontWeight: 'bold' }}>
+            No recipes available for "{dishQuery}".
+          </Typography>
+        </div>
       ) : (
         <div>
-          <Typography variant="h5" component="h3" style={{ color: '#2b6777' ,fontFamily: "Jelligun, sans-serif",fontSize:'2rem' }}>
-            Recipe Results for:  {dishQuery}
+          <Typography variant="h5" component="h3" style={{ color: '#2b6777', fontFamily: "Jelligun, sans-serif", fontSize: '2.5rem', marginTop: '-4rem', paddingBottom: '4rem', marginLeft: '2rem', fontWeight: 'bold' }}>
+            Recipe Results for: {dishQuery}
           </Typography>
           <div className="recipe-cards-container">
             {recipes.map((recipe, index) => (
               <ActionAreaCard
-              key={index} // Use the index as the key
-              id={Number(index)}  
+                key={index}
+                id={Number(index)}  
                 name={recipe.name}
                 image={recipe.image}
                 cuisine={recipe.cuisineType}
                 calories={recipe.calories}
                 dishQuery={dishQuery}
-                
               />
             ))}
           </div>

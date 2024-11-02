@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import { signOut, onAuthStateChanged } from 'firebase/auth'; // Import Firebase auth
 import { auth } from '@/firebase.config';
 
+<<<<<<< HEAD
 const Navbar = () => {
   const router = useRouter();
 
@@ -38,14 +39,22 @@ const Navbar = () => {
     }
   });
 
+=======
+const Navbar = ({ transparent }) => {
+>>>>>>> e0d98e6f835a3648d83f8e50911a78055443f64f
   return (
     <AppBar
       position="static"
       sx={{
+<<<<<<< HEAD
         backgroundColor: "#2b6777",
+=======
+        backgroundColor: transparent ? "transparent" : "#2b6777", // Make background transparent if prop is true
+>>>>>>> e0d98e6f835a3648d83f8e50911a78055443f64f
         color: "#ffffff",
         boxShadow: "none",
         padding: "0 20px",
+        transition: "background-color 0.3s ease", // Smooth transition for background color change
       }}
     >
       <Toolbar>
