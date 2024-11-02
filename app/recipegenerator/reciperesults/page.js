@@ -67,7 +67,7 @@ export default function RecipeResultsPage() {
     <div>
       {!loading && (
         <div>
-          <Navbar />
+          <Navbar  transparent={true}/>
           <div className="search-bar-top">
             <SearchBar onSearch={handleSearch} loading={loading} />
           </div>
