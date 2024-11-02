@@ -72,7 +72,7 @@ export default function RecipeResultsPage() {
     <div>
       {!loading && (
         <div>
-          <Navbar />
+          <Navbar  />
           <div className="search-bar-top">
             <SearchBar onSearch={handleSearch} loading={loading} />
           </div>
