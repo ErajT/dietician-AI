@@ -36,7 +36,7 @@ export default function ResponsiveDialog({ open, handleClose }) {
           width: '25em', // Set custom width
           borderRadius: '2em',
           height: '10em', // Set custom height
-          backgroundColor: '#cee2d2', // Set background color (light green here)
+          backgroundColor: '#2b6777', // Set background color (light green here)
           
         },
       }}
@@ -47,6 +47,7 @@ export default function ResponsiveDialog({ open, handleClose }) {
           fontSize: '2em', 
           fontWeight: 'bold',
           textAlign: 'center', 
+          color: 'white',
         }}
       >
         {"Hurray!"}
@@ -57,7 +58,7 @@ export default function ResponsiveDialog({ open, handleClose }) {
         <DialogContentText
           sx={{
             fontSize: '1em', 
-            color: '#102820 ', 
+            color: 'white', 
             textAlign: 'center', 
           }}
         >
