@@ -13,6 +13,7 @@ import "./mealgenerator/globals.css";
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
 import Drawer from '@mui/material/Drawer';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
@@ -762,6 +763,21 @@ export default function Home() {
   // const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false); 
 
+const [loginLoading, setLoginLoading] = useState(false);
+const [signupLoading, setSignupLoading] = useState(false);
+const handleLoginClick = () => {
+  setLoginLoading(true);
+  // Simulate login process
+  // Once complete, set loginLoading back to false
+};
+
+const handleSignupClick = () => {
+  setSignupLoading(true);
+  // Simulate signup process
+  // Once complete, set signupLoading back to false
+};
+
+
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -926,13 +942,27 @@ export default function Home() {
           <Button className="nav-button" onClick={() => handleScroll('tracker')}>Tracker</Button>
           <Button className="nav-button" onClick={() => handleScroll('benefits')}>App Benefit</Button>
           <Button className="nav-button" onClick={() => handleScroll('reviews')}>Client Review</Button>
-          <Button className="nav-button" onClick={() => handleScroll('footer')}>Footer</Button>
+          {/* <Button className="nav-button" onClick={() => handleScroll('footer')}>Footer</Button> */}
           <Link href="/login" passHref>
-            <Button variant="contained" className="action-button">Login</Button>
-          </Link>
-          <Link href="/signup" passHref>
-            <Button variant="contained" className="action-button">Signup</Button>
-          </Link>
+    <Button 
+      variant="contained" 
+      className="action-button" 
+      onClick={handleLoginClick} 
+      disabled={loginLoading}  // Disable button while loading
+    >
+      {loginLoading ? <CircularProgress size={24} color="inherit" /> : 'Login'}
+    </Button>
+  </Link>
+  <Link href="/login" passHref>
+    <Button 
+      variant="contained" 
+      className="action-button" 
+      onClick={handleSignupClick} 
+      disabled={signupLoading}  // Disable button while loading
+    >
+      {signupLoading ? <CircularProgress size={24} color="inherit" /> : 'Signup'}
+    </Button>
+  </Link>
         </NavLinks>
 
         <MobileMenuIcon onClick={toggleDrawer(true)}>
@@ -951,11 +981,11 @@ export default function Home() {
             <Button className="nav-button" onClick={() => handleScroll('tracker')}>Tracker</Button>
             <Button className="nav-button" onClick={() => handleScroll('benefits')}>App Benefit</Button>
             <Button className="nav-button" onClick={() => handleScroll('reviews')}>Client Review</Button>
-            <Button className="nav-button" onClick={() => handleScroll('footer')}>Footer</Button>
+            {/* <Button className="nav-button" onClick={() => handleScroll('footer')}>Footer</Button> */}
             <Link href="/login" passHref>
               <Button variant="contained" className="action-button">Login</Button>
             </Link>
-            <Link href="/signup" passHref>
+            <Link href="/login" passHref>
               <Button variant="contained" className="action-button">Signup</Button>
             </Link>
           </DrawerContent>

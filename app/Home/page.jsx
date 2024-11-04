@@ -73,7 +73,7 @@ const ChatHeader = styled.div`
   background-color: #2b6777;
   color: white;
   padding: 10px;
-  font-size: 16px;
+  font-size: 1.1rem;
   font-weight: bold;
   text-align: center;
   border-bottom: 1px solid #ddd;
@@ -84,6 +84,7 @@ const ChatContent = styled.div`
   flex-grow: 1;
   overflow-y: auto;
   background-color: #f9f9f9;
+  font-size: 1.1rem;
 `;
 
 const Message = styled.div`
@@ -95,6 +96,7 @@ const Message = styled.div`
   border-radius: 10px;
   max-width: 80%;
   margin-left: ${({ sender }) => (sender === "user" ? "auto" : "0")};
+  font-size: 1.1rem;
 `;
 
 const InputContainer = styled.div`
@@ -112,6 +114,7 @@ const ChatInput = styled.input`
   margin-right: 5px;
   background-color: #2b6777;
   color: white;
+  font-size: 1.1rem;
   // color: white;
 `;
 
@@ -138,6 +141,7 @@ const TypingIndicator = styled.div`
   font-size: 12px;
   padding: 5px;
   text-align: left;
+  font-size: 1.1rem;
 `;
 
 const LoadingIndicator = styled.div`
@@ -252,9 +256,9 @@ function Home() {
   });
 
   const features = [
-    { title: "Meal Planner", description: "Effortlessly plan and manage your meals to maintain a healthy diet.", video: "/Meal2.mp4", link: "/feature1" },
-    { title: "Exercise Planner", description: "Easily discover and manage personalized workouts to achieve your fitness goals.", video: "/ex.mp4", link: "/feature2" },
-    { title: "Recipe Generator", description: "Generate delicious recipes tailored to your culinary preferences.", video: "/Recipe.mp4", link: "/feature3" },
+    { title: "Meal Planner", description: "Effortlessly plan and manage your meals to maintain a healthy diet.", video: "/Meal2.mp4", link: "/mealgenerator" },
+    { title: "Exercise Planner", description: "Easily discover and manage personalized workouts to achieve your fitness goals.", video: "/ex.mp4", link: "/exerciseplanner" },
+    { title: "Recipe Generator", description: "Generate delicious recipes tailored to your culinary preferences.", video: "/Recipe.mp4", link: "/recipegenerator" },
   ];
 
   const handleOpen = () => setOpen(true);

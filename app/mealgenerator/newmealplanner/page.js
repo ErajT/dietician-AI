@@ -22,7 +22,7 @@ import '../globals.css';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import CircleGallery from "../bganimation/CircleGallery"; // Adjust path as needed
 import MultiSelectDropdown from '../components/MultiSelectDropdown'; // Adjust path as needed
-
+import Navbar from "../../components/Navbar";
 // Background Images
 const images = [
   "/images/meal1.jpg",
@@ -80,98 +80,135 @@ const MealGeneratorPage = () => {
   };
 
   return (
+    <div className="nav">
+      <Navbar  />
+
     <Box
-    sx={{
-      minHeight: "100vh",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "flex-start",
-      alignItems: "center", // Center the heading horizontally
-      position: "relative",
-      padding: 4,
-      backgroundColor: '#e0f7f3',
-      }}
-
-    >
-      {/* Hexagon Gallery Background */}
-      <CircleGallery />
-
-      {/* Heading */}
-      <Typography
-        variant="h4"
-        sx={{
-          color: "#2b6777",
-          marginBottom: 1,
-          textAlign: "center", // Center the text
-          marginTop: 0,
-          width: "100%", // Ensure the heading takes the full width
-          fontFamily:"Jelligun",
-          fontSize:"4rem",
-          fontWeight:"bold"
-
-        }}
-      >
-        Meal Plan Generator
-      </Typography>
-
-     {/* Form Section */}
-<Box
   sx={{
-    width: "100%", // Full width for form section on smaller screens
-    maxWidth: "40%", // Limits width for larger screens
-    zIndex: 2,
-    padding: 4,
     display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "center", // Aligns the form to the right
-    marginLeft: "auto", // Aligns form to the right
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start", // Aligns the elements at the top
+    width: "100%",
+    overflowX:"hidden",
+    // marginTop: 3,
+    background: "linear-gradient(to bottom, #e0f7f3, #f0f8f7)",
   }}
 >
-  <motion.div
-    initial={{ opacity: 0, scale: 0.8 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 0.5 }}
-    whileHover={{
-      scale: 1.05,
-      borderRadius: "12px",
+  
+
+  
+  {/* Circle Gallery */}
+  <Box sx={{ flex: 1, marginRight: 2 }}>
+    <CircleGallery />
+  </Box>
+
+
+    {/* Container for Heading and Form */}
+    <Box
+  sx={{
+    flex: 3,
+    display: "flex",
+    flexDirection: "column", // Change to "column" to stack heading and form vertically
+    alignItems: "center",
+    justifyContent: "flex-start",
+    marginLeft: 50,
+    marginTop: -2,
+    marginBottom: 20,
+    height: "100%",
+    borderRadius: "12px",
+    padding: 4,
+
+    
+  }}
+>
+
+
+  {/* Centered Heading */}
+  {/* Centered Heading */}
+  <Box
+    sx={{
+      display: "flex",
+      justifyContent: "flex-start",
+      width: "100%",
+      marginLeft:-80
     }}
   >
-    <Container
+
+    <Typography
+      variant="h4"
       sx={{
-        padding: 5,
-        color: "white",
-        paddingTop: 3, // Adds padding from the top
-        backgroundColor: "#2b6777",
-        borderRadius: "12px",
-        justifyContent: "center",
-        boxShadow: "0 8px 8px rgba(0, 0, 0, 0.25)",
-        border: "1px solid rgba(255, 255, 255, 0.18)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center", // Centers all input fields within the form
+        color: "#2b6777",
+        marginBottom: 2,
+        textAlign: "center",
+        fontFamily: "Jelligun",
+        fontSize: "6rem",
+        fontWeight: "bold",
       }}
     >
-      {/* Form Heading */}
-      <Typography
-        variant="subtitle1"
-        sx={{
-          color: "white",
-          marginBottom: 2,
-          textAlign: "center",
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontStyle: "italic",
-          fontFamily: "Jelligun",
-          fontSize: "1.7rem",
-        }}
-      >
-        Taste Meets Health
-        <RestaurantIcon sx={{ fontSize: 24, color: "white", marginLeft: 1, marginRight: 1 }} />
-        Design Your Ideal Meal Plan!
-      </Typography>
+      Meal Plan Generator
+    </Typography>
+  </Box>
+
+  {/* Form Section aligned to the right */}
+  <Box
+    sx={{
+      display: "flex",
+      justifyContent: "flex-end",
+      width: "100%", // Makes the form container span the full width of the parent Box
+      marginRight: 0, // Add space to the right
+      marginTop: 5, // Add space to the right
+      marginBottom: 5,// Added spacing between fields
+      marginLeft: -15// Added spacing between fields
+
+
+
+    }}
+  >
+    <motion.div
+  initial={{ opacity: 0, scale: 0.8 }}
+  animate={{ opacity: 1, scale: 1 }}
+  transition={{ duration: 0.5 }}
+  whileHover={{ scale: 1.05, borderRadius: "12px" }}
+>
+<Container
+  sx={{
+    padding: 5,
+    color: "white",
+    paddingTop: 3,
+    backgroundColor: "#2b6777",
+    borderRadius: "12px",
+    boxShadow: "0 8px 8px rgba(0, 0, 0, 0.25)",
+    border: "1px solid rgba(255, 255, 255, 0.18)",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
+    width: "100%", // Keeps it responsive within the parent container
+    maxWidth: "500px", // Sets a maximum width for the form container
+  }}
+>
+
+        {/* Form Heading */}
+        <Typography
+          variant="subtitle1"
+          sx={{
+            color: "white",
+            marginBottom: 2,
+            textAlign: "center",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            fontStyle: "italic",
+            fontFamily: "Jelligun",
+            fontSize: "1.7rem",
+          }}
+        >
+          Taste Meets Health
+          <RestaurantIcon sx={{ fontSize: 24, color: "white", marginLeft: 1, marginRight: 1 }} />
+          Design Your Ideal Meal Plan!
+        </Typography>
 
       <form onSubmit={handleSubmit} style={{ width: "100%", textAlign: "center" }}>
 
@@ -236,6 +273,7 @@ const MealGeneratorPage = () => {
           selected={formData.health}
           setSelected={(value) => setFormData({ ...formData, health: value })}
           required // Make this field required
+          sx={{ marginBottom: 2 }} // Added spacing between fields
         />
 
         {/* Cuisine Type Dropdown */}
@@ -264,6 +302,7 @@ const MealGeneratorPage = () => {
           selected={formData.cuisineType}
           setSelected={(value) => setFormData({ ...formData, cuisineType: value })}
           required // Make this field required
+          sx={{ marginBottom: 2 }} // Added spacing between fields
         />
 
 
@@ -297,7 +336,9 @@ const MealGeneratorPage = () => {
                     setFormData({ ...formData, mealType: newMealTypes }); // Change mealTypes to mealType
                   }}
                   sx={{
-                    color: "white", // Color of the checkbox when unchecked
+                    color: "white",
+
+                    // Color of the checkbox when unchecked
                     '&.Mui-checked': {
                       color: "white", // Color of the checkbox when checked
                     },
@@ -308,6 +349,8 @@ const MealGeneratorPage = () => {
               sx={{
                 color: "white",
                 marginRight: 2,
+                marginBottom: 4,
+
                 '&.MuiFormControlLabel-root': {
                   marginBottom: 0,
                 },
@@ -325,7 +368,7 @@ const MealGeneratorPage = () => {
           onChange={(e) => setFormData({ ...formData, calories: e.target.value })}
           required
           sx={{
-            marginBottom: 2,
+            marginBottom: 4,
             input: { color: "white" },
             label: { color: "white" },
             '& label.Mui-focused': {
@@ -389,7 +432,7 @@ const MealGeneratorPage = () => {
           sx={{
             display: "flex",
             justifyContent: "center",
-            marginTop: 2,
+            marginTop: 4,
           }}
         >
           <Button
@@ -422,11 +465,18 @@ const MealGeneratorPage = () => {
           </Button>
         </Box>      
       </form>
-    </Container>
-  </motion.div>
+
+      </Container>
+      </motion.div>
+  </Box>
 </Box>
-    </Box>
+  </Box>
+
+  </div>
+
+
   );
 };
+
 
 export default MealGeneratorPage;

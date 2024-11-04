@@ -2,40 +2,36 @@
 .circle-gallery {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Correct alignment to the left */
+  align-items: flex-start; /* Align items to the left */
   gap: 30px; /* Maintain the overall gap between circles */
   padding-left: 0;
-  position: absolute;
-  left: 0; /* Align to the left */
-  top: 140px; /* Align to the top */
-  bottom: 100px;
-  width: 35%; /* Adjust width to fit new design */
-  margin-left: 70px; /* Increased left margin */
-}
+  position: relative; /* Make the gallery positioned relative to the viewport */
+  
+  width: 40%; /* Adjust width to fit new design */
+  height: 100%;
+  margin-left: 6rem;
+  margin-top: 8rem;
+  margin-bottom: 4rem;
 
-@font-face {
-  font-family: 'Jelligun';
-  src: url('/jelligun-regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
 }
 
 /* Circle shape */
 .circle {
   position: relative;
-  width: 250px; /* Adjusted width */
-  height: 250px; /* Adjusted height */
+  width: 11rem; /* Width of the circle */
+  height: 11rem; /* Height of the circle to keep it circular */
+  max-width: 250px; /* Maximum size */
+  max-height: 250px; /* Maximum size */
   background-color: transparent;
-  margin: 0; /* Remove negative margin */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   animation: popAnimation 2.5s ease-in-out infinite;
-  overflow: hidden; /* Ensure quotes don't overflow */
   border-radius: 50%; /* Make it circular */
 }
 
+/* Circle quote styling */
 .circle .quote {
   position: absolute;
   color: whitesmoke;
@@ -47,11 +43,11 @@
   opacity: 0;
   transition: visibility 0s, opacity 0.3s ease-in-out;
   font-family: 'Jelligun';
-  font-size: 1.8rem; /* Adjust size to fit circle */
-  line-height: 1.2; /* Reduce line height for a better fit */
-  max-width: 70%; /* Adjust to prevent overflow */
+  font-size: 1.6rem; /* Adjust size to fit circle */
+  line-height: 1; /* Reduce line height for a better fit */
+  max-width: 80%; /* Adjust to prevent overflow */
   word-wrap: break-word; /* Break long words */
-  font-weight: normal;
+  overflow: hidden; /* Ensure quotes don't overflow */
 }
 
 /* Show the quote text on hover */
@@ -83,4 +79,17 @@
   50% {
     transform: scale(1.15);
   }
+}
+
+/* Alternating animation for odd and even circles */
+.circle:nth-child(odd) {
+  animation-delay: 0s; /* Odd circles pop immediately */
+  margin-left: -60px; /* Adjusted left margin */
+  margin-top: -80px; /* Adjusted top spacing */
+}
+
+.circle:nth-child(even) {
+  animation-delay: 1.25s; /* Even circles delay for alternating effect */
+  margin-left: 110px; /* Adjusted left margin for stagger */
+  margin-top: -80px; /* Adjusted top spacing */
 }

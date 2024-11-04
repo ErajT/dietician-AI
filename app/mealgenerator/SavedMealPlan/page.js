@@ -8,6 +8,7 @@ import '../globals.css';
 import Link from 'next/link';
 import './flipcards.css';
 import VideoLoading from '../components/VideoLoading';
+import Navbar from "../../components/Navbar";
 
 const SavedMealPlanPage = () => {
   const [savedMealPlan, setSavedMealPlan] = useState({});
@@ -35,14 +36,17 @@ const SavedMealPlanPage = () => {
   console.log(mealsForActiveDay);
 
   return (
-    <Box sx={{ minHeight: '100vh', padding: 5, fontFamily: 'Jelligun, cursive', color: '#2b6777', backgroundColor: '#e0f7f3', position: 'relative' }}>
-      
+    // <Box sx={{ minHeight: '100vh', padding: 5, fontFamily: 'Jelligun, cursive', color: '#2b6777', backgroundColor: '#e0f7f3', position: 'relative' }}>
+    <Box sx={{ position: 'relative', padding: 0 ,marginBottom: '7rem',backgroundColor: '#e0f7f3',height:"100vh" ,}}>
+
+      <Navbar  />
+
       {/* Back Button */}
       <Link href="/mealgenerator" passHref>
         <IconButton
           sx={{
             position: 'absolute',
-            top: '1rem',
+            top: '5.4rem',
             left: '1rem',
             backgroundColor: '#2b6777',
             color: 'white',
@@ -58,7 +62,7 @@ const SavedMealPlanPage = () => {
       </Link>
 
       {/* Page Title */}
-      <Typography variant="h4" sx={{ fontFamily: 'Jelligun, cursive', fontSize: '4rem', fontWeight: 'bold', textAlign: 'center', mb: 3 }}>
+      <Typography variant="h4" sx={{ fontFamily: 'Jelligun, cursive',color: '#2b6777', fontSize: '4rem', fontWeight: 'bold', textAlign: 'center', mb: 4,mt: 4 }}>
         Saved Meal Plan for {activeDay}
       </Typography>
       
@@ -107,8 +111,15 @@ const SavedMealPlanPage = () => {
          {loading ? (
           <VideoLoading videoUrl={'/mealwalkthrough.mp4'} comment={'Please wait while we get your Meal Plan...'} />
         ) : mealsForActiveDay ? (
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', minHeight: '80vh', gap: 2, marginTop: '2rem' }}>
-            <Grid container spacing={3} justifyContent="center">
+          <Box
+  sx={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '5rem',
+    paddingBottom: '4rem', 
+    marginLeft:'2.5rem'}}>
+            <Grid container spacing={2} justifyContent="center">
             {Object.values(mealsForActiveDay).map((meal, index) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
                   <div className="flip-card">
@@ -119,7 +130,7 @@ const SavedMealPlanPage = () => {
                             component="img"
                             image={meal.image || "no image available"}
                             alt={meal.name}
-                            sx={{ objectFit: 'contain', width: '100%', height: '100%' }}
+                            sx={{ objectFit: 'cover', width: '100%', height: '100%' }}
                           />
                         </CardActionArea>
                       </Card>

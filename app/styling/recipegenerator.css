@@ -4,8 +4,8 @@ html, body {
   height: 100%; /* Use min-height if you expect the content to exceed the viewport height */
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  /* overflow-x: hidden;
+  overflow-y: scroll; */
   background: linear-gradient(135deg, #e0f7f3 0%, #f0f8f7 100%);
 
 }
@@ -44,7 +44,7 @@ html, body {
 
 .search-bar-top {
  margin-top: 2%;
- margin-left: 45%;
+ margin-left: 30%;
 
 }
 
