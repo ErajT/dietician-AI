@@ -37,7 +37,7 @@ const SavedMealPlanPage = () => {
 
   return (
     // <Box sx={{ minHeight: '100vh', padding: 5, fontFamily: 'Jelligun, cursive', color: '#2b6777', backgroundColor: '#e0f7f3', position: 'relative' }}>
-    <Box sx={{ position: 'relative', padding: 0 ,marginBottom: '7rem',backgroundColor: '#e0f7f3',height:"100vh" ,}}>
+    <Box sx={{ height:'100vh',position: 'relative', padding: 0 ,marginBottom: '7rem',backgroundColor: '#e0f7f3',height:"120vh" ,}}>
 
       <Navbar  />
 

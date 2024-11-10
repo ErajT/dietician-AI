@@ -315,7 +315,7 @@ const login = () => {
       setSnackbarSeverity("success");
       setSnackbarOpen(true);
       setTimeout(() => {
-        window.location.href = "/Home";
+        window.location.href = "/signup";
       }, 1500);
     } catch (error) {
       console.error(error);
