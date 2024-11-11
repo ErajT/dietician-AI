@@ -4,6 +4,8 @@ import React from "react";
 import styled from "styled-components";
 import {signInWithEmailAndPassword,createUserWithEmailAndPassword,onAuthStateChanged} from "firebase/auth";
 import { auth } from '@/firebase.config';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import {useState} from "react";
 // Styled Components
 const MainContainer = styled.div`
@@ -187,6 +189,10 @@ const Paragraph = styled.p`
   margin: 20px 0 30px;
 `;
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 // Main App Component
 const login = () => {
   const [signIn, toggle] = React.useState(true);
@@ -196,7 +202,12 @@ const login = () => {
   const [loading, setLoading] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarSeverity, setSnackbarSeverity] = useState("success"); 
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') return;
+    setSnackbarOpen(false);
+  };
 
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -259,7 +270,7 @@ const login = () => {
       setSnackbarMessage('Signup successful!');
       setSnackbarOpen(true);
       setTimeout(() => {
-      window.location.href = '/Home';
+      window.location.href = '/signupform';
       }, 1500);
   } catch (error) {
       console.error(error);
@@ -335,6 +346,16 @@ const login = () => {
         </Overlay>
       </OverlayContainer>
     </Container>
+    <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </MainContainer>
   );
 };
