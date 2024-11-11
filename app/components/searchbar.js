@@ -43,7 +43,12 @@ const SearchField = ({ onSearch = () => {}, loading, className = "" }) => {
         onChange={handleInputChange}
         className="searchInput"
         InputProps={{
-          style: { borderRadius: '20rem', }, // This applies border-radius to the input element
+          style: { borderRadius: '20rem', }, 
+          '&.Mui-focused': {
+            color: 'white',          // Ensures label text stays white when focused
+          },'&.MuiFormLabel-filled': {
+        color: 'white',          // Ensures label color remains white after typing
+      },
         }}
         
         style={{ width: '40em' , backgroundColor:'white'}} 

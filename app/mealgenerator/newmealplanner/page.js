@@ -91,9 +91,11 @@ const MealGeneratorPage = () => {
     alignItems: "flex-start", // Aligns the elements at the top
     width: "100%",
     overflowX:"hidden",
-    marginTop: 3,
+    // marginTop: 3,
+    background: "linear-gradient(to bottom, #e0f7f3, #f0f8f7)",
   }}
 >
+  
 
   
   {/* Circle Gallery */}
@@ -140,7 +142,7 @@ const MealGeneratorPage = () => {
         marginBottom: 2,
         textAlign: "center",
         fontFamily: "Jelligun",
-        fontSize: "4rem",
+        fontSize: "6rem",
         fontWeight: "bold",
       }}
     >

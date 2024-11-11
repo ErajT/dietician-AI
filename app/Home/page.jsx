@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -73,7 +73,7 @@ const ChatHeader = styled.div`
   background-color: #2b6777;
   color: white;
   padding: 10px;
-  font-size: 16px;
+  font-size: 1.1rem;
   font-weight: bold;
   text-align: center;
   border-bottom: 1px solid #ddd;
@@ -84,6 +84,7 @@ const ChatContent = styled.div`
   flex-grow: 1;
   overflow-y: auto;
   background-color: #f9f9f9;
+  font-size: 1.1rem;
 `;
 
 const Message = styled.div`
@@ -95,6 +96,7 @@ const Message = styled.div`
   border-radius: 10px;
   max-width: 80%;
   margin-left: ${({ sender }) => (sender === "user" ? "auto" : "0")};
+  font-size: 1.1rem;
 `;
 
 const InputContainer = styled.div`
@@ -112,6 +114,7 @@ const ChatInput = styled.input`
   margin-right: 5px;
   background-color: #2b6777;
   color: white;
+  font-size: 1.1rem;
   // color: white;
 `;
 
@@ -138,6 +141,7 @@ const TypingIndicator = styled.div`
   font-size: 12px;
   padding: 5px;
   text-align: left;
+  font-size: 1.1rem;
 `;
 
 const LoadingIndicator = styled.div`
@@ -245,16 +249,29 @@ function Home() {
   const [open, setOpen] = useState(false);
   const [chatbotOpen, setChatbotOpen] = useState(false);
   const [personalInfo, setPersonalInfo] = useState({
-    name: "John Doe",
-    age: 28,
-    weight: "70 kg",
-    height: "175 cm",
+    name: "",
+    age: 0,
+    weight: "",
+    height: "",
   });
 
+  useEffect(() => {
+    // Get the data from local storage
+    const storedData = localStorage.getItem('formData');
+    
+    // Check if storedData exists
+    if (storedData) {
+      // Parse the JSON string
+      const parsedData = JSON.parse(storedData);
+      // Update state with parsed data
+      setPersonalInfo(parsedData);
+    }
+  }, []); // Empty dependency array ensures this runs only on mount
+
   const features = [
-    { title: "Meal Planner", description: "Effortlessly plan and manage your meals to maintain a healthy diet.", video: "/Meal2.mp4", link: "/feature1" },
-    { title: "Exercise Planner", description: "Easily discover and manage personalized workouts to achieve your fitness goals.", video: "/ex.mp4", link: "/feature2" },
-    { title: "Recipe Generator", description: "Generate delicious recipes tailored to your culinary preferences.", video: "/Recipe.mp4", link: "/feature3" },
+    { title: "Meal Planner", description: "Effortlessly plan and manage your meals to maintain a healthy diet.", video: "/Meal2.mp4", link: "/mealgenerator" },
+    { title: "Exercise Planner", description: "Easily discover and manage personalized workouts to achieve your fitness goals.", video: "/ex.mp4", link: "/exerciseplanner" },
+    { title: "Recipe Generator", description: "Generate delicious recipes tailored to your culinary preferences.", video: "/Recipe.mp4", link: "/recipegenerator" },
   ];
 
   const handleOpen = () => setOpen(true);
@@ -379,12 +396,13 @@ function Home() {
         sx={{
           position: "relative",
           width: "100%",
-          height: "35vh",
+          height: "39vh",
           backgroundImage: "url(/Back4.png)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           borderRadius: "10px",
           marginTop: 2.5,
+          marginBottom: 1.5,
           color: "#fff",
         }}
       >
@@ -403,7 +421,7 @@ function Home() {
             <Typography 
               variant="h4" 
               gutterBottom 
-              sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold", fontSize:"3.3rem" }}
+              sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold", fontSize:"2.5rem",marginTop:1 }}
             >
               Personal Information
             </Typography>
@@ -412,27 +430,36 @@ function Home() {
             </IconButton>
           </Box>
           <Typography 
-            variant="h6" 
-            sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold", fontSize: "2.2rem", mb: -1 }}
-          >
-            Age: {personalInfo.age}
-          </Typography>
-          <Typography 
-            variant="h6" 
-            sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold", fontSize: "2.2rem", mb: -1 }}
-          >
-            Weight: {personalInfo.weight}
-          </Typography>
-          <Typography 
-            variant="h6" 
-            sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold", fontSize: "2.2rem" }}
-          >
-            Height: {personalInfo.height}
-          </Typography>
+  variant="h6" 
+  sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold", fontSize: "2rem", mb: -0.2 }}
+>
+  Name: {personalInfo.name}
+</Typography>
+
+<Typography 
+  variant="h6" 
+  sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold", fontSize: "2rem", mb: 0.4 }}
+>
+  Age: {personalInfo.age}
+</Typography>
+
+<Typography 
+  variant="h6" 
+  sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold", fontSize: "1.8rem", mb: 0.4 }}
+>
+  Weight: {personalInfo.weight}
+</Typography>
+
+<Typography 
+  variant="h6" 
+  sx={{ fontFamily: "Jelligun, cursive", fontWeight: "bold", fontSize: "1.8rem" }}
+>
+  Height: {personalInfo.height}
+</Typography>
         </Box>
       </Box>
 
-      <Grid container spacing={2} sx={{ marginTop: 3 }}>
+      <Grid container spacing={2} sx={{ marginTop: 2 }}>
         {features.map((feature, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Box

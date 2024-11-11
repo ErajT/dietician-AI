@@ -7,6 +7,7 @@ import IngredientsTable from '../../components/ingredients';
 import AccordionTransition from '../../components/recipeinstruction';
 import MediaCard from '../../components/ad';
 import VideoLoading from '../../components/VideoLoading'
+import Navbar from '../../components/Navbar'
 import '../../styling/recipegenerator.css';
 
 const IndividualRecipe = () => {
@@ -63,6 +64,7 @@ const IndividualRecipe = () => {
     } catch (err) {
       console.error('Error fetching recipes:', err);
       setError(true);
+      router.push('/error')
     } finally {
       setLoading(false);
     }
@@ -100,7 +102,10 @@ const IndividualRecipe = () => {
   if (error) return <div>Error fetching recipes.</div>;
 
   return (
+    <div>
+       <Navbar />
     <div style={{ display: 'flex', justifyContent: 'left', alignItems: 'left' }}>
+     
       {recipe && (
         <div style={{
           border: '6px solid #102820',
@@ -112,6 +117,7 @@ const IndividualRecipe = () => {
           color:'white',
           marginBottom: '10%',
         }}>
+         
           <h1 style={{ display: 'flex', justifyContent: 'center' ,fontFamily: 'Jelligun, cursive',fontSize:'4rem'}}>{recipe.name}</h1>
           
           <div>
@@ -151,6 +157,7 @@ const IndividualRecipe = () => {
             </div>
           </div>
         </div>
+        
       )}
 
       <div 
@@ -163,7 +170,8 @@ const IndividualRecipe = () => {
           alignItems: 'flex-start',
           position: 'fixed',
           marginTop: '3%',
-          marginLeft: '75%',
+          marginBottom: '3%',
+          marginLeft: '80%',
           zIndex: 1000,
         }}
       >
@@ -180,6 +188,7 @@ const IndividualRecipe = () => {
       </div>
 
       <ResponsiveDialog open={openDialog} handleClose={() => setOpenDialog(false)} />
+    </div>
     </div>
   );
 };

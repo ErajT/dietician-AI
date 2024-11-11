@@ -6,6 +6,9 @@ import { TypeAnimation } from "react-type-animation";
 import { useTheme } from "@mui/material/styles";
 import './globals.css';
 import Navbar from "../components/Navbar";
+import React, { useState } from 'react';
+// import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 const MealGeneratorHome = () => {
@@ -19,6 +22,29 @@ const MealGeneratorHome = () => {
   const handleExistingMealPlan = () => {
     router.push("/mealgenerator/SavedMealPlan");
   };
+  const [loadingNew, setLoadingNew] = useState(false);
+  const [loadingExisting, setLoadingExisting] = useState(false);
+
+  const handleNewMealPlann = () => {
+    setLoadingNew(true);
+    // Simulate an async operation
+    setTimeout(() => {
+      setLoadingNew(false);
+      handleNewMealPlan();
+      // Add your logic here
+    }, 2000);
+  };
+
+  const handleExistingMealPlann = () => {
+    setLoadingExisting(true);
+    // Simulate an async operation
+    setTimeout(() => {
+      setLoadingExisting(false);
+      handleExistingMealPlan();
+      // Add your logic here
+    }, 2000);
+  };
+  
 
   return (
     <Box
@@ -74,19 +100,25 @@ const MealGeneratorHome = () => {
         }}
       >
 
-<Navbar transparent />
+{/* <Navbar transparent /> */}
+<Navbar transparent top="-10px" />
 
-        <Typography
-          variant="h5"
-          sx={{
-            color: "#ffffff",
-            fontSize: { xs: "2rem", md: "3.5rem" },
-            marginBottom: { xs: 1, md: -2 },
-          }}
-          className="jelligun-font"
-        >
-          Welcome to
-        </Typography>
+
+{/* <Navbar transparent /> */}
+
+<Typography
+  variant="h5"
+  sx={{
+    color: "#ffffff",
+    fontSize: { xs: "2rem", md: "3.5rem" },
+    marginBottom: { xs: 1, md: -2 },
+    marginTop: { xs: 9, md: 10 }, // Adjust these values as needed
+  }}
+  className="jelligun-font"
+>
+  Welcome to
+</Typography>
+
 
         {/* Centered Type Animation and Slogan */}
         <Box
@@ -147,52 +179,56 @@ const MealGeneratorHome = () => {
         }}
       >
         <Button
-          variant="contained"
-          color="primary"
-          onClick={handleNewMealPlan}
-          sx={{
-            width: { xs: "12rem", md: "17rem" },
-            height: { xs: "3rem", md: "4rem" },
-            borderRadius: "50rem",
+        variant="contained"
+        color="primary"
+        onClick={handleNewMealPlann}
+        sx={{
+          width: { xs: "12rem", md: "17rem" },
+          height: { xs: "3rem", md: "4rem" },
+          borderRadius: "50rem",
+          backgroundColor: "#2b6777",
+          color: "white",
+          fontFamily: "Jelligun",
+          fontSize: { xs: "1.5rem", md: "2rem" },
+          fontWeight: "bold",
+          textTransform: "none",
+          position: "relative",
+          "&:hover": {
             backgroundColor: "#2b6777",
-            color: "white",
-            fontFamily: "Jelligun",
-            fontSize: { xs: "1.5rem", md: "2rem" },
-            fontWeight: "bold",
-            textTransform: "none",
-            "&:hover": {
-              backgroundColor: "#2b6777",
-              transform: "scale(1.05)",
-              boxShadow: "0px 0px 5px 5px rgba(43, 103, 119, 0.5), 0px 0px 20px 10px rgba(43, 103, 119, 0.5)",
-            },
-          }}
-        >
-          Generate New Meal Plan
-        </Button>
+            transform: "scale(1.05)",
+            boxShadow: "0px 0px 5px 5px rgba(43, 103, 119, 0.5), 0px 0px 20px 10px rgba(43, 103, 119, 0.5)",
+          },
+        }}
+        disabled={loadingNew}
+      >
+        {loadingNew ? <CircularProgress size={24} sx={{ color: 'white' }} /> : "Generate New Meal Plan"}
+      </Button>
 
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleExistingMealPlan}
-          sx={{
-            width: { xs: "12rem", md: "17rem" },
-            height: { xs: "3rem", md: "4rem" },
-            borderRadius: "50rem",
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleExistingMealPlann}
+        sx={{
+          width: { xs: "12rem", md: "17rem" },
+          height: { xs: "3rem", md: "4rem" },
+          borderRadius: "50rem",
+          backgroundColor: "#2b6777",
+          color: "white",
+          fontFamily: "Jelligun",
+          fontSize: { xs: "1.5rem", md: "2rem" },
+          fontWeight: "bold",
+          textTransform: "none",
+          position: "relative",
+          "&:hover": {
             backgroundColor: "#2b6777",
-            color: "white",
-            fontFamily: "Jelligun",
-            fontSize: { xs: "1.5rem", md: "2rem" },
-            fontWeight: "bold",
-            textTransform: "none",
-            "&:hover": {
-              backgroundColor: "#2b6777",
-              transform: "scale(1.05)",
-              boxShadow: "0px 0px 5px 5px rgba(43, 103, 119, 0.5), 0px 0px 20px 10px rgba(43, 103, 119, 0.5)",
-            },
-          }}
-        >
-          View Existing Meal Plan
-        </Button>
+            transform: "scale(1.05)",
+            boxShadow: "0px 0px 5px 5px rgba(43, 103, 119, 0.5), 0px 0px 20px 10px rgba(43, 103, 119, 0.5)",
+          },
+        }}
+        disabled={loadingExisting}
+      >
+        {loadingExisting ? <CircularProgress size={24} sx={{ color: 'white' }} /> : "View Existing Meal Plan"}
+      </Button>
       </Box>
     </Box>
   );

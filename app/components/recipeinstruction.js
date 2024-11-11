@@ -51,7 +51,7 @@ export default function AccordionTransition({ instructions }) {
           <Typography>View Detailed Instructions</Typography>
         </AccordionSummary>
         <AccordionDetails style={{ backgroundColor: '#497e91', color:'white' }}>
-          <Typography component="ol">
+          <Typography component="ol" style={{ lineHeight: '2.2' }}>
             {steps.map((step, index) => (
               <li key={index}>{step}</li>
             ))}
