@@ -1,6 +1,13 @@
 "use client";
 import { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
+// import Navbar from '@components/Navbar1';
+// import Navbar from '../components/Navbar';
+import Navbar from '../../components/Navbar';
+
+
+ 
+
 
 // Global styles to reset body and html
 const GlobalStyles = createGlobalStyle`
@@ -14,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: normal;
     font-style: bold;
   }
+     
 
   html {
     padding: 0;
@@ -60,6 +68,10 @@ const ExerciseDetailsPage = () => {
     <>
       <GlobalStyles />
       <Container>
+        <div>
+      <Navbar />
+      {/* Other components go here */}
+    </div>
         <Title>{name}</Title>
         <MuscleGroup><strong>Targeted Muscle Group:</strong> {muscle}</MuscleGroup>
         <ExerciseType><strong>Exercise Type:</strong> {type}</ExerciseType>

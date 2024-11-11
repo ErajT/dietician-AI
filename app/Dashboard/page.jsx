@@ -44,6 +44,21 @@ Chart.register(
   CategoryScale,
   Tooltip
 );
+import Navbar from '../components/Navbar';
+import styled, { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'Jelligun';
+    src: url('/Jelligun-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  body {
+    font-family: 'Jelligun', sans-serif;
+  }
+`;
 
 const Dashboard = () => {
   const [bmi, setBmi] = useState(28);
@@ -129,20 +144,11 @@ const Dashboard = () => {
 
   return (
     <div style={styles.dashboard}>
-      <AppBar position="static" sx={{ backgroundColor: "#cee2d2", color: "#000" }}>
-        <Toolbar>
-          <Avatar
-            alt="Logo"
-            src="Logo.png" // Replace with your logo path
-            sx={{ width: 70, height: 70, marginRight: 2 }} // Increased size
-          />
-          <Box sx={{ flexGrow: 1 }} />
-          <Button color="inherit" sx={{ mx: 1 }}>Dashboard</Button>
-          <Button color="inherit" sx={{ mx: 1 }}>Settings</Button>
-          <Button color="inherit" sx={{ mx: 1 }}>Help</Button>
-          <Button color="inherit" sx={{ mx: 1 }}>Logo</Button>
-        </Toolbar>
-      </AppBar>
+      <div>
+<Navbar />
+{/* Other components go here */}
+</div>
+<GlobalStyle />
       <Typography variant="h4" align="center" style={styles.pageHeading}>
         Health Dashboard
       </Typography>
@@ -303,8 +309,11 @@ const styles = {
     marginTop: "20px",
     marginBottom: "20px",
     fontWeight: "bold",
-    color: "#102820",
+    color: "#2b6777",
     textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+    fontFamily: "Jelligun, cursive",
+     fontWeight: "bold",
+      fontSize:"5rem"
   },
   calorieGraph: {
     backgroundColor: "#ffffff",
@@ -348,9 +357,12 @@ const styles = {
   sectionTitle: {
     fontSize: "20px",
     fontWeight: "bold",
-    color: "#102820",
+    color: "#2b6777",
     textAlign: "center",
     flexGrow: 1,
+    fontFamily: "Jelligun, cursive",
+     fontWeight: "bold", 
+     fontSize:"3.3rem"
   },
   header: {
     display: "flex",
@@ -363,15 +375,21 @@ const styles = {
     marginRight: "10px",
   },
   bmiText: {
-    fontSize: "24px",
+    // fontSize: "24px",
     fontWeight: "bold",
     marginTop: "10px",
-    color: "#102820",
+    color: "#2b6777",
+    fontFamily: "Jelligun, cursive",
+    //  fontWeight: "bold", 
+     fontSize:"1.5rem"
   },
   indicatorText: {
-    color: "#102820",
+    color: "#2b6777",
     fontSize: "18px",
     marginBottom: "10px",
+    fontFamily: "Jelligun, cursive",
+    //  fontWeight: "bold", 
+     fontSize:"1.5rem"
   },
   trackerCard: {
     backgroundColor: "#ffffff",
@@ -411,13 +429,13 @@ const styles = {
     textAlign: "center",
     marginTop: "10px",
     fontSize: "20px",
-    color: "#102820",
+    color: "#2b6777",
   },
   motivationText: {
     textAlign: "center",
     marginTop: "20px",
     fontSize: "16px",
-    color: "#00796b",
+    color: "#2b6777",
     fontStyle: "italic",
     padding: "0 10px",
   },

@@ -361,8 +361,22 @@
 import React, { useState, useEffect } from 'react';
 import Spline from '@splinetool/react-spline';
 import VideoLoading from './components/VideoLoading'; // Ensure this path is correct
-import styled from 'styled-components';
+// import styled from 'styled-components';
+import Navbar from '../components/Navbar';
+import styled, { createGlobalStyle } from 'styled-components';
 
+
+const GlobalStyles = createGlobalStyle`
+  @font-face {
+    font-family: 'Jelligun';
+    src: url('/Jelligun-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: bold;
+  }
+  * {
+    font-family: 'Jelligun', sans-serif;
+  }
+`;
 const ExercisePlanner = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [muscle, setMuscle] = useState('');
@@ -431,7 +445,10 @@ const ExercisePlanner = () => {
 
   return (
     <Container>
+      <GlobalStyles/>
+      {/* Other components go here */}
       <Content>
+      <Navbar />
         {showHeading && <Title>Exercise Planner</Title>}
 
         {isModalOpen && (
@@ -494,6 +511,7 @@ const Container = styled.div`
   padding: 40px;
   background-color: #e0f7f3;
   overflow: hidden;
+  // min-width:100%
 `;
 
 const Content = styled.div`
@@ -503,16 +521,17 @@ const Content = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 4rem;
+  font-size: 8rem;
+  font-family: 'Jelligun', sans-serif; 
   font-weight: bold;
   color: #2b6777;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   text-align: center;
   width: 100%;
-  margin-top: 130px;
+  margin-top: 40px;
   position: relative;
-  left: 320px;
-  font-family: 'Poppins';
+  left: 300px;
+  // font-family: 'Poppins';
 `;
 
 const Modal = styled.div`
@@ -522,9 +541,10 @@ const Modal = styled.div`
 `;
 
 const ModalTitle = styled.h2`
-  font-size: 2rem;
+  font-size: 4rem;
   color: #2b6777;
   margin-bottom: 30px;
+  font-weight :bold;
 `;
 
 const MuscleOptions = styled.div`
@@ -666,6 +686,7 @@ const SplineContainer = styled.div`
   right: 0;
   height: 100vh;
   margin-left: 20px;
+  margin-bottom:-80px;
 
 ,
 `;
