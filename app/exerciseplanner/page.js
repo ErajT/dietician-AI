@@ -28,10 +28,15 @@ const ExercisePlanner = () => {
   const [error, setError] = useState('');
   const [showHeading, setShowHeading] = useState(false);
 
-  useEffect(() => {
-    document.body.style.background = isModalOpen ? '#cee2d2' : '#cee2d2';
-    setTimeout(() => setShowHeading(true), 1000);
-  }, [isModalOpen]);
+    useEffect(() => {
+      console.log("Modal State:", isModalOpen); // Branch point
+      document.body.style.background = isModalOpen ? '#cee2d2' : '#cee2d2';
+      setTimeout(() => {
+        console.log("Heading Visibility Set to True"); // Branch point
+        setShowHeading(true);
+      }, 1000);
+    }, [isModalOpen]);
+    
 
   const muscleOptions = [
     { name: 'Abdominals', value: 'abdominals', image: '/images/abdominals.jpg' },
@@ -52,6 +57,7 @@ const ExercisePlanner = () => {
   ];
 
   const handleMuscleSelect = async (muscleValue) => {
+    console.log("Muscle Selected:", muscleValue); // Branch point
     const url = `exerciseplanner/exercises?muscle=${encodeURIComponent(JSON.stringify(muscleValue))}`;
     window.location.href = url;
     setMuscle(muscleValue);
@@ -66,23 +72,24 @@ const ExercisePlanner = () => {
         body: JSON.stringify({ muscle: muscleValue }),
       });
 
+
+      console.log("API Response Status:", res.status); // Branch point
+
       if (!res.ok) {
         throw new Error("Failed to fetch data from the API");
       }
 
+      console.log("Exercises Fetched:", data.exercises); // Branch point
+
       const data = await res.json();
       setExercises(data.exercises);
     } catch (error) {
+      console.error("Error Fetching Exercises:", error.message); // Branch point
       setError(error.message);
     } finally {
       setLoading(false);
+      console.log("Loading State Set to False"); // Branch point
     }
-  };
-
-  const handleExerciseClick = (exercise) => {
-    const url = `/details?exercise=${encodeURIComponent(
-      JSON.stringify(exercise))}`;
-      router.push(url); 
   };
 
   const loadingVideoUrl = '/exercise.mp4'; 
@@ -124,24 +131,6 @@ const ExercisePlanner = () => {
 
         {loading && <VideoLoading videoUrl={loadingVideoUrl} comment="Loading exercises..." />}
         {error && <Error>{error}</Error>}
-
-        {!isModalOpen && !loading && exercises.length > 0 && (
-          <ExerciseContainer>
-            <ExerciseHeader>Exercises for {muscle}</ExerciseHeader>
-            <ExerciseGrid>
-              {exercises.map((exercise, index) => (
-                <ExerciseCard
-                  key={index}
-                  onClick={() => handleExerciseClick(exercise)}
-                >
-                  <ExerciseName>Name: {exercise.name}</ExerciseName>
-                  <ExerciseInfo>Type: {exercise.type}</ExerciseInfo>
-                  <ExerciseInfo>Muscle: {exercise.muscle}</ExerciseInfo>
-                </ExerciseCard>
-              ))}
-            </ExerciseGrid>
-          </ExerciseContainer>
-        )}
       </Content>
 
       {isModalOpen && (
@@ -185,7 +174,7 @@ const Title = styled.h1`
   width: 60%;
   margin-top: 0;
   position: relative;
-  left: 20%;
+  left: 50%;
   // font-family: 'Poppins';
 `;
 
@@ -257,15 +246,36 @@ const MuscleImageBlur = styled.img`
   height: 100%;
   border-radius: 15px;
   object-fit: cover;
-  filter: blur(2px);
+  filter: blur(1px);
+  position: relative; /* Allows pseudo-element positioning */
+  z-index: 1; /* Places the image above the gradient overlay */
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom, /* You can change direction to suit your design */
+      rgba(0, 0, 0, 0.8), /* Dark overlay for high contrast */
+      rgba(0, 0, 0, 0.4) 50%, /* Gradient transition for better visibility */
+      rgba(0, 0, 0, 0) 100% /* Fade out at the bottom */
+    );
+    border-radius: 15px; /* Matches the image border radius */
+    z-index: 1; /* Places the gradient overlay above the image */
+  }
 `;
 
 const CardText = styled.span`
   position: absolute;
-  color: #ffffff;
-  font-size: 1.4rem;
+  color: white;
+  font-size: 1.8rem;
   text-align: center;
+  z-index: 3; /* Ensures the text is on top of both the image and the gradient */
 `;
+
 
 const ExerciseContainer = styled.div`
   margin: 0 auto; /* Center content */

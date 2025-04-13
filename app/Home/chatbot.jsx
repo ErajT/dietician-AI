@@ -140,6 +140,8 @@ const Chatbot = () => {
         body: JSON.stringify({ data: input }),
       });
 
+      console.log(response);
+
       const data = await response.json();
 
       const botText =

@@ -34,6 +34,7 @@ const ExerciseDetailsPage = () => {
   });
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
     const query = new URLSearchParams(window.location.search);
     const exercise = query.get('exercise') ? JSON.parse(decodeURIComponent(query.get('exercise'))) : null;
     const videoId = decodeURIComponent(query.get('videoId') || '');
@@ -140,6 +141,8 @@ const ContainAll = styled.div`
   height: 100vh;
   width: 100vw;
   max-height: 100vh;
+   background-color: #e0f7f3
+  
 `;
 
 const Container = styled.div`

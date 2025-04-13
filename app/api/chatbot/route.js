@@ -8,7 +8,7 @@ export async function POST(req){
         const flashcards = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
-              "Authorization": `Bearer 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`,
+              "Authorization": `Bearer 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`,
              
               "Content-Type": "application/json"
             },

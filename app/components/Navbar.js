@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'; // Change this import
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Avatar from '@mui/material/Avatar';
@@ -11,6 +11,8 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
+import LinearProgress from '@mui/material/LinearProgress';
+import Snackbar from '@mui/material/Snackbar';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/firebase.config';
 import styled from 'styled-components';
@@ -46,19 +48,34 @@ const DrawerContent = styled(Box)`
   }
 `;
 
-const Navbar = ({ transparent }) => {
-  const router = useRouter();
+const Navbar = ({ transparent, top }) => {
+  const router = useRouter(); // Correct hook import
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [loading, setLoading] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  useEffect(() => {
+    setLoading(null);
+  }, [router.pathname]);
 
   const handleLogout = () => {
+    setLoading('logout');
     signOut(auth)
       .then(() => {
         sessionStorage.removeItem('user');
-        router.push('/');
+        setSnackbarOpen(true);
+        setTimeout(() => {
+          router.push('/');
+        }, 1500);
       })
       .catch((error) => {
         console.error("Logout failed:", error);
+        setLoading(null);
       });
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
   };
 
   onAuthStateChanged(auth, (user) => {
@@ -66,6 +83,11 @@ const Navbar = ({ transparent }) => {
       sessionStorage.setItem('user', JSON.stringify({ userId: user.uid }));
     }
   });
+
+  const handleNavigation = (path) => () => {
+    setLoading(path);
+    router.push(path);
+  };
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -82,6 +104,7 @@ const Navbar = ({ transparent }) => {
         color: "#ffffff",
         boxShadow: "none",
         padding: "0 20px",
+        marginTop: top ? top : 0,
       }}
     >
       <Toolbar>
@@ -90,7 +113,7 @@ const Navbar = ({ transparent }) => {
           src="/Logo14.png"
           sx={{
             width: 95,
-            height: 75,
+            height: 75, 
             marginLeft: -5, 
             marginRight: 2,
           }}
@@ -99,29 +122,51 @@ const Navbar = ({ transparent }) => {
         <Box sx={{ flexGrow: 1 }} />
 
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-        <Link href="/mealgenerator" passHref>
-  <Button
-    color="inherit"
-    sx={{
-      // fontFamily: 'Jelligun, sans-serif',
-      mx: 1,
-      color: "white",
-      textTransform: "capitalize",
-      fontSize: "1.2rem",
-      padding: "8px 16px",
-      transition: "background-color 0.3s ease",
-      fontWeight: "bold",
-      '&:hover': { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: "5px" },
-    }}
-  >
-    Meal Plan
-  </Button>
-</Link>
+          <Link href="/Home" passHref>
+            <Button
+              color="inherit"
+              onClick={handleNavigation('/Home')}
+              sx={{
+                mx: 1,
+                color: "white",
+                textTransform: "capitalize",
+                fontSize: "1.2rem",
+                padding: "8px 16px",
+                transition: "background-color 0.3s ease",
+                fontWeight: "bold",
+                '&:hover': { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: "5px" },
+              }}
+            >
+              Home
+              {loading === '/Home' && <LinearProgress color="inherit" sx={{ width: '100%', height: 2, position: 'absolute', bottom: 0 }} />}
+            </Button>
+          </Link>
+
+          <Link href="/mealgenerator" passHref>
+            <Button
+              color="inherit"
+              onClick={handleNavigation('/mealgenerator')}
+              sx={{
+                mx: 1,
+                color: "white",
+                textTransform: "capitalize",
+                fontSize: "1.2rem",
+                padding: "8px 16px",
+                transition: "background-color 0.3s ease",
+                fontWeight: "bold",
+                '&:hover': { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: "5px" },
+              }}
+            >
+              Meal Plan
+              {loading === '/mealgenerator' && <LinearProgress color="inherit" sx={{ width: '100%', height: 2, position: 'absolute', bottom: 0 }} />}
+            </Button>
+          </Link>
+
           <Link href="/exerciseplanner" passHref>
             <Button
               color="inherit"
+              onClick={handleNavigation('/exerciseplanner')}
               sx={{
-                // fontFamily: 'Jelligun, sans-serif',
                 mx: 1,
                 color: "white",
                 textTransform: "capitalize",
@@ -133,13 +178,15 @@ const Navbar = ({ transparent }) => {
               }}
             >
               Exercise Plan
+              {loading === '/exerciseplanner' && <LinearProgress color="inherit" sx={{ width: '100%', height: 2, position: 'absolute', bottom: 0 }} />}
             </Button>
           </Link>
+
           <Link href="/recipegenerator" passHref>
             <Button
               color="inherit"
+              onClick={handleNavigation('/recipegenerator')}
               sx={{
-                // fontFamily: 'Jelligun, sans-serif',
                 mx: 1,
                 color: "white",
                 textTransform: "capitalize",
@@ -151,13 +198,15 @@ const Navbar = ({ transparent }) => {
               }}
             >
               Recipe Generator
+              {loading === '/recipegenerator' && <LinearProgress color="inherit" sx={{ width: '100%', height: 2, position: 'absolute', bottom: 0 }} />}
             </Button>
           </Link>
-          <Link href="/recipegenerator" passHref>
+
+          <Link href="/Dashboard" passHref>
             <Button
               color="inherit"
+              onClick={handleNavigation('/Dashboard')}
               sx={{
-                // fontFamily: 'Jelligun, sans-serif',
                 mx: 1,
                 color: "white",
                 textTransform: "capitalize",
@@ -168,42 +217,41 @@ const Navbar = ({ transparent }) => {
                 '&:hover': { backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: "5px" },
               }}
             >
-             Dashboard
+              Dashboard
+              {loading === '/Dashboard' && <LinearProgress color="inherit" sx={{ width: '100%', height: 2, position: 'absolute', bottom: 0 }} />}
             </Button>
           </Link>
         </Box>
 
         <Button
-  variant="outlined"
-  onClick={handleLogout}
-  sx={{
-    display: { xs: 'none', md: 'flex' }, // Ensures this button is only shown on medium and larger screens
-    // fontFamily: 'Jelligun, sans-serif',
-    color: "#2b6777",
-    borderColor: "white",
-    textTransform: "capitalize",
-    fontSize: "1.2rem",
-    padding: "8px 8px",
-    fontWeight: "bold",
-    borderRadius: "20px",
-    backgroundColor: "#f0f8f7",
-    width: "90px",
-    height: "50px",
-    ml: 2,
-    alignItems: "center",
-    justifyContent: "center",
-    '&:hover': {
-      backgroundColor: "rgba(255, 255, 255, 0.2)",
-      borderColor: "white",
-      color:"white",
-    },
-  }}
->
-  Logout
-</Button>
+          variant="outlined"
+          onClick={handleLogout}
+          sx={{
+            display: { xs: 'none', md: 'flex' },
+            color: "#2b6777",
+            borderColor: "white",
+            textTransform: "capitalize",
+            fontSize: "1.2rem",
+            padding: "8px 8px",
+            fontWeight: "bold",
+            borderRadius: "20px",
+            backgroundColor: "#f0f8f7",
+            width: "90px",
+            height: "50px",
+            ml: 2,
+            alignItems: "center",
+            justifyContent: "center",
+            '&:hover': {
+              backgroundColor: "rgba(255, 255, 255, 0.2)",
+              borderColor: "white",
+              color: "white",
+            },
+          }}
+        >
+          Logout
+          {loading === 'logout' && <LinearProgress color="inherit" sx={{ width: '100%', height: 2, position: 'absolute', bottom: 0 }} />}
+        </Button>
 
-
-        {/* Menu Icon for small screens */}
         <IconButton
           edge="end"
           color="inherit"
@@ -216,22 +264,25 @@ const Navbar = ({ transparent }) => {
 
         <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
           <DrawerContent role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
-            <Link href="/mealgenerator" passHref>
-              <Button className="nav-button">Meal Plan</Button>
-            </Link>
-            <Link href="/exerciseplanner" passHref>
-              <Button className="nav-button">Exercise Plan</Button>
-            </Link>
-            <Link href="/recipegenerator" passHref>
-              <Button className="nav-button">Recipe Generator</Button>
-            </Link>
-            <Link href="/recipegenerator" passHref>
-              <Button className="nav-button">Dashboard</Button>
-            </Link>
+            <Button onClick={handleNavigation('/Home')} className="nav-button">Home</Button>
+            <Button onClick={handleNavigation('/mealgenerator')} className="nav-button">Meal Plan</Button>
+            <Button onClick={handleNavigation('/exerciseplanner')} className="nav-button">Exercise Plan</Button>
+            <Button onClick={handleNavigation('/recipegenerator')} className="nav-button">Recipe Generator</Button>
+            <Button onClick={handleNavigation('/Dashboard')} className="nav-button">Dashboard</Button>
             <Button onClick={handleLogout} className="action-button">Logout</Button>
           </DrawerContent>
         </Drawer>
       </Toolbar>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        message="Successfully logged out"
+        ContentProps={{
+          sx: { backgroundColor: "#2b6777" }
+        }}
+      />
     </AppBar>
   );
 };

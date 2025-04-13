@@ -44,7 +44,8 @@ export default function RecipeGeneratorPage() {
         
             
           }}>
-                      <Navbar transparent />
+                      {/* <Navbar transparent /> */}
+                      <Navbar transparent top="-10px" />
 
                     <h1 
           className="recipe-generator" 

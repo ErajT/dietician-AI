@@ -26,9 +26,12 @@ const IndividualRecipe = () => {
     const storedId = sessionStorage.getItem('id'); 
     setDish(storedDish); 
     setId(storedId); 
+    console.log("Stored Dish:", storedDish, "Stored Id:", storedId);
 
     if (storedDish && storedId) {
       fetchRecipes(storedDish, storedId); 
+    } else {
+      console.log("Dish or Id not found in session storage.");
     }
 
     setMediaCardAnimation(true);
@@ -45,20 +48,28 @@ const IndividualRecipe = () => {
         body: JSON.stringify({ dish: query }), 
       });
 
+      console.log("API Response: ", response);
+
+
       const jsonData = await response.json();
       if (jsonData.status === "Success") {
         const selectedRecipe = jsonData.message[Number(recipeId)]; 
+        console.log("Selected Recipe:", selectedRecipe);
         setRecipe(selectedRecipe); 
         setError(false);
 
         if (selectedRecipe.calories < 600) {
-          setOpenDialog(true); 
+          console.log("Calories less than 600, opening dialog.");
+          setOpenDialog(true);
+        } else {
+          console.log("Calories more than 600, dialog not triggered.");
         }
 
         // Fetch recipe instructions from the new API
         fetchRecipeInstructions(selectedRecipe);
 
       } else {
+        console.log("No recipe found, setting recipe to null.");
         setRecipe(null); 
       }
     } catch (err) {
@@ -81,7 +92,17 @@ const IndividualRecipe = () => {
         body: JSON.stringify(recipeData), 
       });
 
+      console.log("Instructions API Response: ", response);
+
+      if (!response.ok) {
+        console.error("Failed to fetch instructions:", response.statusText);
+        setInstructions("Could not retrieve instructions.");
+        return;
+      }
+
       const jsonData = await response.json();
+      console.log("Fetched Instructions:", jsonData);
+
       if (jsonData.status === "Success") {
         setInstructions(jsonData.message); // Store the instructions
       } else {
@@ -170,7 +191,8 @@ const IndividualRecipe = () => {
           alignItems: 'flex-start',
           position: 'fixed',
           marginTop: '3%',
-          marginLeft: '75%',
+          marginBottom: '3%',
+          marginLeft: '80%',
           zIndex: 1000,
         }}
       >

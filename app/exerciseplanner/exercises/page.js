@@ -7,35 +7,50 @@ import { FaDumbbell } from 'react-icons/fa'; // Example for a dumbbell icon
 import Navbar from '../../components/Navbar';
 
 // Global Styles
+// / Global Styles
 const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'Jelligun';
     src: url('/Jelligun-Regular.ttf') format('truetype');
     font-weight: normal;
-    font-style: normal; // Corrected from 'bold' to 'normal'
+    font-style: normal;
   }
   * {
     font-family: 'Jelligun', sans-serif;
+  }
+  body {
+    margin: 0; // Remove default body margin
+    background-color: #e0f7f3; // Set background color for the whole page
   }
 `;
 
 const Container = styled.div`
     width: 100%;
-    margin-top: 230px;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: #e0f7f3;
+    padding-top: 100px; // Add padding to ensure navbar is visible
+    margin-top:180px;
+`;
+
+const NavbarContainer = styled.div`
+    width: 100%;
+    background-color: #004d4d; // Example background color for navbar
+    position: fixed;
+    top: 0;
+    z-index: 1000; // Ensure it's on top
 `;
 
 const DetailsContainer = styled.div`
     background-color: #e0f7f3;
     padding: 20px;
     width: 100%;
-    max-width: 1200px; // Limit max width for larger screens
+    max-width: 1200px;
 `;
+
 
 const TitleContainer = styled.div`
     background-color: #e0f7f3;
@@ -130,7 +145,11 @@ const DetailsPage = () => {
         const params = new URLSearchParams(window.location.search);
         const muscleFromQuery = params.get('muscle');
         if (muscleFromQuery) {
+            console.log("muscle found in query params");
             setMuscle(decodeURIComponent(muscleFromQuery.replace(/"/g, '')));
+        }
+        else{
+            console.log("muscle not found in query params");
         }
     }, [router.query]);
 
@@ -146,11 +165,19 @@ const DetailsPage = () => {
                     });
 
                     if (!res.ok) {
+                        console.log("Failed to fetch data from the API");
                         throw new Error("Failed to fetch data from the API");
                     }
 
+                    
                     const data = await res.json();
+                    if(data.exercises != null && data.exercises != undefined){
+                    console.log("exercises fetched successfully: ", data.exercises);
                     setExercises(data.exercises);
+                    }
+                    else{
+                        console.log("Error fetching exercises")
+                    }
                 } catch (error) {
                     setError(error.message);
                 } finally {
@@ -173,17 +200,20 @@ const DetailsPage = () => {
     }
 
     const handleExerciseClick = (exercise) => {
+        console.log("clicked on exercise: ", exercise)
         const url = `details?exercise=${encodeURIComponent(
             JSON.stringify(exercise)
           )}&videoId=${encodeURIComponent(exercise.videoId)}`;
-        window.location.href = url; // Redirect to the details page
+        // window.location.href = url; // Redirect to the details page
     };
 
     return (
         <>
             <GlobalStyles />
             <Container>
+            <NavbarContainer>
                 <Navbar/>
+                </NavbarContainer>
                 <DetailsContainer>
                     <TitleContainer>
                         <TitleImage src={"/exercisepage1.png"} alt="Left Icon" />
