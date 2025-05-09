@@ -1,0 +1,95 @@
+/* Circle container */
+.circle-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the left */
+  gap: 30px; /* Maintain the overall gap between circles */
+  padding-left: 0;
+  position: relative; /* Make the gallery positioned relative to the viewport */
+  
+  width: 40%; /* Adjust width to fit new design */
+  height: 100%;
+  margin-left: 6rem;
+  margin-top: 8rem;
+  margin-bottom: 4rem;
+
+}
+
+/* Circle shape */
+.circle {
+  position: relative;
+  width: 11rem; /* Width of the circle */
+  height: 11rem; /* Height of the circle to keep it circular */
+  max-width: 250px; /* Maximum size */
+  max-height: 250px; /* Maximum size */
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: popAnimation 2.5s ease-in-out infinite;
+  border-radius: 50%; /* Make it circular */
+}
+
+/* Circle quote styling */
+.circle .quote {
+  position: absolute;
+  color: whitesmoke;
+  text-align: center;
+  padding: 10px; /* Adjust padding if necessary */
+  background-color: transparent;
+  border-radius: 5px;
+  visibility: hidden; /* Hide by default */
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+  font-family: 'Jelligun';
+  font-size: 1.6rem; /* Adjust size to fit circle */
+  line-height: 1; /* Reduce line height for a better fit */
+  max-width: 80%; /* Adjust to prevent overflow */
+  word-wrap: break-word; /* Break long words */
+  overflow: hidden; /* Ensure quotes don't overflow */
+}
+
+/* Show the quote text on hover */
+.circle:hover .quote {
+  visibility: visible;
+  opacity: 1; /* Correct opacity to fully visible */
+}
+
+/* Blur the image on hover */
+.circle:hover .circle-image {
+  filter: blur(3px) brightness(0.75);
+}
+
+/* Circle image */
+.circle-image {
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%; /* Clip to circle */
+  transition: filter 0.3s ease-in-out;
+}
+
+/* Keyframes for pop animation */
+@keyframes popAnimation {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+/* Alternating animation for odd and even circles */
+.circle:nth-child(odd) {
+  animation-delay: 0s; /* Odd circles pop immediately */
+  margin-left: -60px; /* Adjusted left margin */
+  margin-top: -80px; /* Adjusted top spacing */
+}
+
+.circle:nth-child(even) {
+  animation-delay: 1.25s; /* Even circles delay for alternating effect */
+  margin-left: 110px; /* Adjusted left margin for stagger */
+  margin-top: -80px; /* Adjusted top spacing */
+}
