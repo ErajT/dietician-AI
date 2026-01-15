@@ -182,7 +182,7 @@ const PlannerPage = ({ videoUrl }) => {
 
 
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 5 }}>
-      <Box sx={{ display: 'flex', marginBottom: 5 }}>
+      <Box sx={{ display: 'flex', marginBottom: 2 }}>
         {Object.keys(mealPlan).map((day) => (
           <motion.div
             key={day}

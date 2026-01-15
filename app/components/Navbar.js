@@ -49,7 +49,6 @@ const DrawerContent = styled(Box)`
 `;
 
 const Navbar = ({ transparent }) => {
->>>>>>>>> Temporary merge branch 2
   const router = useRouter();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [loading, setLoading] = useState(null);
@@ -101,16 +100,10 @@ const Navbar = ({ transparent }) => {
     <AppBar
       position="static"
       sx={{
-<<<<<<<<< Temporary merge branch 1
         backgroundColor: transparent ? "transparent" : "#2b6777", 
-       
-=========
-        backgroundColor: transparent ? "transparent" : "#2b6777",
->>>>>>>>> Temporary merge branch 2
         color: "#ffffff",
         boxShadow: "none",
         padding: "0 20px",
-        marginTop: top ? top : 0,
       }}
     >
       <Toolbar>
@@ -293,8 +286,5 @@ const Navbar = ({ transparent }) => {
   );
 };
 
-<<<<<<<<< Temporary merge branch 1
 export default Navbar;
-=========
-export default Navbar;
->>>>>>>>> Temporary merge branch 2
+

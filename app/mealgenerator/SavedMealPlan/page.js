@@ -62,12 +62,12 @@ const SavedMealPlanPage = () => {
       </Link>
 
       {/* Page Title */}
-      <Typography variant="h4" sx={{ fontFamily: 'Jelligun, cursive',color: '#2b6777', fontSize: '4rem', fontWeight: 'bold', textAlign: 'center', mb: 4,mt: 4 }}>
+      <Typography variant="h4" sx={{ fontFamily: 'Jelligun, cursive',color: '#2b6777', fontSize: '4rem', fontWeight: 'bold', textAlign: 'center', mb: 2,mt: 4 }}>
         Saved Meal Plan for {activeDay}
       </Typography>
       
       {/* Day Selector Buttons */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 5 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
         {Object.keys(savedMealPlan).map((day) => (
           <motion.div
             key={day}
@@ -82,7 +82,7 @@ const SavedMealPlanPage = () => {
               sx={{
                 width: "7rem",
                     height: "3rem",
-                    marginTop: 2.5,
+                    marginTop: 1,
                     marginRight: 1,
                     borderRadius: '50px',
                     transition: 'transform 0.2s ease-in-out',
@@ -116,8 +116,8 @@ const SavedMealPlanPage = () => {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '5rem',
-    paddingBottom: '4rem', 
+    marginTop: '0.5rem',
+    paddingBottom: '2rem', 
     marginLeft:'2.5rem'}}>
             <Grid container spacing={2} justifyContent="center">
             {Object.values(mealsForActiveDay).map((meal, index) => (
